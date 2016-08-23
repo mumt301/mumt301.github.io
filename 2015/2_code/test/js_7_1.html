@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>JavaScript class 7</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./css/main_2.css">
+	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="//jquery.com/jquery-wp-content/themes/jquery/css/base.css?v=1">
+	<link rel="stylesheet" href="//jquery.com/jquery-wp-content/themes/jquery.com/style.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<!-- 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+
+	<style>
+		/* 		#draggable { width: 150px; height: 150px; padding: 0.5em; } */
+	</style>
+
+</head>
+
+
+
+<div id="container">
+
+	<body id="body">
+		<h1>JavaScript class 7</h1>
+
+		<div id="draggable1">
+			<h2>jQuery</h2>
+		</div>
+		<p>
+			jQuery is a feature-rich JavaScript library, aimed to simplify many operations in JS, in particular
+		</p>
+		<h2>
+		 DOM manipulation
+		</h2>
+		<div>
+			Get the <code>button</code> element with the class "continue" and change its HTML to 'Next Step...'
+		</div>
+		<td class="code">
+			<pre><div class="container"><div class="line"><code>$( <span class="string">&quot;button.continue&quot;</span> ).html( <span class="string">&quot;Next Step...&quot;</span> )</code></div></div></pre>
+		</td>
+
+		<h2>
+			Event handling
+		</h2>
+		<div>
+			Show the <code>#banner-message</code> element that is hidden with <code>display:none</code> in its CSS when any button in <code>#button-container</code> is clicked.
+		</div>
+		<td class="code">
+			<pre><div class="container"><div class="line"><code><span class="keyword">var</span> hiddenBox = $( <span class="string">&quot;#banner-message&quot;</span> );</code></div></div><div class="container"><div class="line"><code>$( <span class="string">&quot;#button-container button&quot;</span> ).on( <span class="string">&quot;click&quot;</span>, <span class="keyword">function</span>( event ) {</code></div></div><div class="container"><div class="line"><code>  hiddenBox.show();</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+		</td>
+		<h2>
+			Ajax (Asynchronous JavaScript and XML)
+		</h2>
+		<div>
+			Call a local script on the server <code>/api/getWeather</code> with the query parameter <code>zipcode=97201</code> and replace the element <code>#weather-temp</code>&apos;s html with the returned text.
+		</div>
+		<td class="code">
+			<pre><div class="container"><div class="line"><code>$.ajax({</code></div></div><div class="container"><div class="line"><code>  url: <span class="string">&quot;/api/getWeather&quot;</span>,</code></div></div><div class="container"><div class="line"><code>  data: {</code></div></div><div class="container"><div class="line"><code>    zipcode: <span class="number">97201</span></code></div></div><div class="container"><div class="line"><code>  },</code></div></div><div class="container"><div class="line"><code>  success: <span class="keyword">function</span>( data ) {</code></div></div><div class="container"><div class="line"><code>    $( <span class="string">&quot;#weather-temp&quot;</span> ).html( <span class="string">&quot;&lt;strong&gt;&quot;</span> + data + <span class="string">&quot;&lt;/strong&gt; degrees&quot;</span> );</code></div></div><div class="container"><div class="line"><code>  }</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+		</td>
+
+
+		<div id="check">
+
+			<p>
+				For HTTP calls, check
+				<a href="http://api.jquery.com/jquery.getjson/">http://api.jquery.com/jquery.getjson/</a>
+			</p>
+		</div>
+
+		
+			<form id="imageQuery">
+			Would you like to retrive images of?
+			<input type="text" name="imageTag">
+			<input type="button" onclick="fetchImages()" value="Go!">
+		</form>	
+		
+		
+
+		<div id="images"></div>
+
+		<script>
+			function fetchImages() {
+				var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+				var formData = document.getElementById('imageQuery');
+				var tagset = formData.elements['imageTag'].value;
+				$("#images").empty();
+
+				$.getJSON( flickerAPI, {
+					tags: tagset,
+					tagmode: "any",
+					format: "json"
+				})
+					.done(function( data ) {
+						$.each( data.items, function( i, item ) {
+							$( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+							if ( i == 20 ) {
+								return false;
+							}
+						});
+					});
+			};
+		</script>
+
+
+
+
+
+
+
+
+		<!-- 		ECHONEST BIOGRAPHIES -->
+
+		<form id="artist">
+			Artist name?
+			<input type="text" name="name">
+			<input type="button" onclick="fetchData()" value="Search for a biography of this artist!">
+			<p>
+				(The API key in the code is just for testing purposes and it may be non functional. Don't forget to add your own to the code.)
+			</p>
+		</form>
+
+		<p id="results"></p>
+
+		<script>
+			var apiKey = 'SIKZGGF4TKV8DL8TE'; // USE_YOUR_OWN_ECHONEST_API_KEY_HERE';
+
+			function fetchData() {
+				var x = document.getElementById("artist");
+				artist = x.elements["name"].value;
+				
+				
+				var url = 'http://developer.echonest.com/api/v4/artist/biographies';
+				var args = {
+					format: 'json',
+					api_key: apiKey,
+					name: artist,
+					license: 'cc-by-sa',
+					results: 2
+				};
+
+				$.getJSON(url, args,
+					function(data) {
+						console.log(data);
+						$("#results").empty();
+						$("#results").append(data.response.biographies[0].text);
+					}
+				)
+			}
+		</script>
+
+
+
+
+		<!-- 		
+		SOUNDCLOUD TEST
+		<p>
+			Find all tracks with the genre 'punk' that have a tempo greater than 120 bpm.
+		</p>
+		<p id="response_SC">	</p>
+		<script src="http://connect.soundcloud.com/sdk.js"></script>
+		<script>
+		SC.initialize({
+		  client_id: 'YOUR_CLIENT_ID'
+		});
+
+		// find all tracks with the genre 'punk' that have a tempo greater than 120 bpm.
+		track_list = SC.get('/tracks', { genres: 'electronic', 
+						   bpm: { from: 120 } },
+						   function(tracks) {
+							console.log('a: '+tracks);
+							return tracks;
+							}
+							);
+			
+		console.log('b: '+track_list)
+/* 		document.getElementById("response_SC").innerHTML=xmlDoc; */
+		</script>			
+		 -->
+
+
+
+</div>
+</body>
+
+<script>
+	$(function() {
+		$("#draggable1").draggable();
+		$("#draggable2").draggable();
+	});
+</script>
+
+
+<script>
+	$(document).ready(function() {
+		$("check").click(function() {
+			$(this).hide();
+		});
+	});
+</script>
+
+
+
+
+</html>

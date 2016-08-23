@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>A8</title>
+    <link rel="stylesheet" href="./css/a8.css">
+    <script src="./js/jquery-1.11.3.js"></script>
+</head>
+
+<body>
+
+    <h3>Retrieve similar artists' info for:</h3>
+    <form id="form">
+        <input type="text" name="artistName" id="name">
+        <input type="button" name="clickButton" onclick="fetchSimilar()" value="DO IT">
+    </form>
+
+    <h1 id="header" align="center"></h1>
+    <div id="a1" class="division"></div>
+    <div id="a2" class="division"></div>
+    <div id="a3" class="division"></div>
+    <div id="a4" class="division"></div>
+    <div class="logos">
+        <a href="http://the.echonest.com">
+        <img src="img/echonest.png" width=160px>
+        </a>
+        <a href="http://www.last.fm">
+        <img src="img/lastfm_black.png" width=40px>
+        </a>
+    </div>
+
+    <script>
+        function fetchSimilar(){
+            var artistname = $("#form #name").val();
+            var lastfmapiKey = '57ee3318536b23ee81d6b27e36997cde';
+            var url = "https://ws.audioscrobbler.com/2.0/";
+            var args = {
+                method: "artist.getSimilar",
+                api_key: lastfmapiKey,
+                format: "json",
+                artist: artistname,
+                autocorrect: 1,
+                limit: 4
+                };
+            $.getJSON(url, args, 
+                      function(data) {
+                        var name = Array();
+                        var imgURL = Array();
+                        var artistCorrected; 
+                        similarArtists = data.similarartists.artist
+                        for ( a = 0; a < similarArtists.length ; a ++ ) {
+                            artistCorrected = data.similarartists['@attr'].artist; // corrected name of artist query
+                            thisArtist = similarArtists[a];
+                            mbid = thisArtist['mbid'];
+                            name = thisArtist['name'];
+                            imgURL =  thisArtist['image'][2]['#text'];
+                            thisdiv = ["#a", a + 1].join("");
+                            bio = getBio(mbid, thisdiv);
+
+                            $("#header").html([artistCorrected,"relates to"].join(" "));
+                            $(thisdiv).empty();
+                            $(thisdiv).append("<h3>" + name + "</h3>");            
+                            $(thisdiv).append ('<img src="' + imgURL + '" align="center" style="padding:0px 10px 5px 0px"> ' + '<br>');
+                        }
+                    }
+                )
+
+        function getBio(mbid, thisdiv) {
+            var url = 'http://developer.echonest.com/api/v4/artist/biographies';
+            var apiKey = 'SIKZGGF4TKV8DL8TE';
+            var bio;
+            var thisdiv = thisdiv;
+            var args = {
+                format: 'json',
+                api_key: apiKey,
+                id: ["musicbrainz:artist:", mbid].join(""),
+                license: 'cc-by-sa',
+                results: 1
+            };
+            $.getJSON(url, args,
+                function(data) {
+                    bio = data.response.biographies[0].text;
+                    $(thisdiv).append(bio);
+                }
+            );
+        }
+    }
+    </script>
+
+</body>
+</html>
