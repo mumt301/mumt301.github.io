@@ -1,2 +1,2 @@
 # mumt301.github.io
-Public MUMT301 website
+Awesome Public MUMT301 website
