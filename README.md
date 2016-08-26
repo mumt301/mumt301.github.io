@@ -1,2 +1,4 @@
 # mumt301.github.io
-Awesome Public MUMT301 website
+You can check the awesome public MUMT301 website at
+
+http://mumt301.github.io
