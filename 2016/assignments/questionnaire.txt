@@ -47,13 +47,12 @@ Example: if we were writing a piece of software that took ingredients of a recip
 
 13. For delivering the homework you will:
 
-	1. Create another folder named mumt301 inside your home directory in the server
-	2. Within the folder you just created, create a new one named assignments
-	3. Move the file questionnaire.txt to the assignments folder you just made
-	4. Rename the file questionnaire.txt to assignment1.txt
-	5. Answer the questions
+	1. Create another folder named www inside your home directory in the server
+	2. Move the file questionnaire.txt to the www folder you just made
+	3. Rename the file questionnaire.txt to assignment1.txt
+	4. If you did everything correctly, you should be able to see the file in a web browser by typing its URL
+	http://132.206.14.130/yourusername/assignment1.txt 
 
-In the next assignment you will move this file to its final destination into your home folder at the music.mcgill.ca server
 
 
 
