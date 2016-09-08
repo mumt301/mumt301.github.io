@@ -1,5 +1,6 @@
-.DS_Store
-syllabus.fdb_latexmk
-syllabus.fls
-syllabus.log
-syllabus.synctex.gz
+**.DS_Store
+**.fdb_latexmk
+**.fls
+**.log
+**.aux
+**.synctex.gz
