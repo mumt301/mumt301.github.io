@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/main.css">
     <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
 </head>
 
 <body id="body">
@@ -388,6 +389,7 @@ for (row = 0; row < beatles_releases.length; row++) {
             function discography() {
                 var table = document.createElement('table'),
                     tr, td, row, col;
+                table.id = "discography_table"
                 for (row = 0; row < beatles_releases.length; row++) {
                     tr = document.createElement('tr');
                     var release_data = Object.keys(beatles_releases[row]);
@@ -402,7 +404,7 @@ for (row = 0; row < beatles_releases.length; row++) {
             }
     </script>
     <div class="center">
-        <a href="./index.html">MUMT301-2016 Home</a> 
+        <a href="../index.html">MUMT301-2016 Home</a> 
     </div>
 </body>
 
