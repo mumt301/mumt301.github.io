@@ -102,43 +102,6 @@
                 'img': 'http://pthumb.lisimg.com/image/8148297/130full.jpg'
             }]
 
-                function discography() {
-                    var table = document.createElement('table');
-                    // Create the table header
-
-                    header = ['Album Name', 'Release Year', 'Label', 'Cover']
-                    tr = document.createElement('tr');
-                    for (h = 0; h < header.length; h++) {
-                        th = document.createElement('th');
-                        tr.appendChild(th);
-                        th.innerHTML = header[h];    
-                    }
-                    table.appendChild(tr);
-
-
-                    // Create the table content
-                        for (row = 0; row < beatles_releases.length; row++) {
-                        // console.log(row, ', ', beatles_releases[row]);
-                        tr = document.createElement('tr');
-                        var release_keys = Object.keys(beatles_releases[row]);
-                        for (col = 0; col < release_keys.length; col++) {
-                            td = document.createElement('td');
-                            tr.appendChild(td);
-                            if (col != 3) {
-                                td.innerHTML = beatles_releases[row][release_keys[col]];
-                            } else {
-                                var img = document.createElement('img');
-                                img.setAttribute('src', beatles_releases[row][release_keys[col]]);
-                                td.appendChild(img);
-                            }
-
-
-                        }
-                        table.appendChild(tr);
-
-                    }
-                document.getElementById("discography_table").appendChild(table);    
-                }
 
                 function discography() {
                     // Create a Table element and append it to the DOM
