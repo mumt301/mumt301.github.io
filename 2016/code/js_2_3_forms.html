@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Intro to JavaScript</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/main.css">
-    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 
 <body id="body">
@@ -133,6 +133,10 @@
         <p id="retrievedResult">
         </p>
         <script>
+
+
+
+
             function queryData() {
                 var x = document.getElementById("query");
                 userName = x.elements["name"].value;
@@ -140,23 +144,51 @@
                 console.log(userName, artistName);
                 document.getElementById("queryResult").innerHTML =
                     userName + ", the biography you want for " + artistName + " is:"
-                queryURL = "http://developer.echonest.com/api/v4/artist/biographies?api_key=OZJYYPJWGOM3EUILR&name=" + artistName + "&format=xml&results=10&start=0"
-                retrievedData = httpGet(queryURL)
-                document.getElementById("retrievedResult").innerHTML = retrievedData;
+                queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=14cf98aa1958c4d8ef3f6bf5509464e8&format=xml"
+                
+                retrievedData = httpGet(queryURL);
+
+                parsedPage = miniPage(retrievedData);
+                
+                document.getElementById('retrievedResult').innerHTML = '';
+                document.getElementById('retrievedResult').appendChild(parsedPage);
+
             }
 
             function httpGet(theUrl) {
                 var xmlHttp = null;
                 xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", theUrl, false);
-                xmlHttp.send(null);
-                return xmlHttp.responseText;
+                xmlHttp.send();
+                return xmlHttp.responseXML;
             }
+
+
+            function miniPage(retrievedData) {
+                image = document.createElement('img');
+                imageLink = retrievedData.getElementsByTagName('image')[3].innerHTML;
+                image.src = imageLink;
+                image.style = 'float: left;'
+                
+
+                bio = document.createElement('p');
+                bioContent = retrievedData.getElementsByTagName('content')[0].innerHTML;
+                bio.innerHTML = bioContent;
+
+                mp = document.createElement('div');
+                mp.id = 'bioContainer';
+                mp.appendChild(image);
+                mp.appendChild(bio);
+                return mp;
+            }
+
+
+
         </script>
 
         <br>
         <div class="center">
-            <a href="./index.html">MUMT301-2015 Home</a> 
+            <a href="../index.html">MUMT301-2016 Home</a> 
         </div>
 
     </div>
