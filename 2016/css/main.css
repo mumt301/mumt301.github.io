@@ -39,15 +39,17 @@ h1 {
 	font-size: 2em;
 }
 
+h2 {
+  width: 100%;
+  margin: auto; 
+  font-size: 2em;
+}
+
 h6 {
 	font-size: 10px;
 }
 
-h2 {
-  width: 75%;
-  margin: auto; 
-  font-size: 2em;
-}
+
 
 code {
 	color: blue;
