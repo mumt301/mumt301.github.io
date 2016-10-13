@@ -14,14 +14,11 @@
     <h1 id="title">Forms and inputs</h1>	
     <div id="container">
         <p>
-            HTML forms are used to pass data to a server. An HTML form can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more. A form can also contain select lists, textarea, fieldset, legend, and label elements.
-        </p>
-        <p>
-            Forms' syntax uses the <code>form</code> tag to create an HTML form, and the <code>input</code> element is used to select user information.
-        </p>
-        <p>
-            A simple example of an input text field would be:
-        </p>
+            HTML forms are used to pass data to a server. An HTML form can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more.</p> 
+        <p>A form can contain different types of elements (e.g., text, password fields, radio buttons, check buttons, ...)</p>
+        <p>Forms' syntax uses the <code>form</code> tag to create an HTML form, and the <code>input</code> element is used to select user information.</p>
+        <p>The user-entered data gets stored in the <code>name</code> variable</p>
+        <p>A simple example of an input text field would be:</p>
 
         <code><pre>
                 &ltform&gt
@@ -49,8 +46,8 @@
         <code><pre>
 &ltform&gt
 	User name: &ltinput type="text" name="name"&gt
-	&ltinput type="radio" name="sex" value="male"&gt Male
-	&ltinput type="radio" name="sex" value="female"&gt Female&ltbr&gt
+	&ltinput type="radio" name="sex" value="male"&gtMale
+	&ltinput type="radio" name="sex" value="female"&gtFemale&ltbr&gt
 	Password: &ltinput type="password" name="pwd"&gt&ltbr&gt
 	Artist name: &ltinput type="text" name="artist"&gt&ltbr&gt
 	&ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names&ltbr&gt
@@ -80,7 +77,7 @@
         <h2>
 			Using the data from forms in JavaScript
 		</h2>
-        We usually want to use the data a user has entered in a form. To accomplishing this, we follow the same procedure explained before. In other words, we first create the form:
+        We usually want to use the data a user has entered in a form. To accomplish this, we first create the form:
         <code><pre>
 &ltform id="query"&gt
 	User name: &ltinput type="text" name="name"&gt
@@ -93,10 +90,24 @@
 	&ltinput type="button" onclick="queryData()" value="Retrieve"&gt
 &lt/form&gt
 		</pre></code>
-        When the user press the "Retrieve" button, the <code>queryData()</code> function is called. If we want to know the name of the user and the name of the artist about which the user wants to retrieve some information, we can parse it from the data
-        passed from the HTML form to the function.
+        <p>and then we create a function to retrieve the data from within the elements attached to the DOM.
+        </p>
+        <p>For example, if we want to use the name of the user and the name of the artist from the previous form:</p>
+        <p>1. When the user press the "Retrieve" button, the <code>queryData()</code> function is called. 
+        </p>
 
-        <code><pre>&ltscript&gt
+<!--         <form id="query">
+            User name:
+            <input type="text" name="name">
+            <br>Artist name:
+            <input type="text" name="artist"><br>
+            <input type="button" onclick="queryData()" value="Retrieve">
+        </form> -->
+
+        <p>2. We then parse the values from the elements in the DOM</p>
+        <p>3. And we finally do something with those values. For example, we render them into the web browser</p>
+
+<!--         <code><pre>&ltscript&gt
 	function queryData(){
 		var x = document.getElementById("query");
 		userName = x.elements["name"].value;
@@ -111,7 +122,12 @@
 
         <code><pre>&ltp id="queryResult"&gt&lt/p&gt
 		</pre></code>
-        Finally, a working version of the code:
+ -->
+        <p> In-class assignment: create a form for asking the name of a user and the name of an artist for which she or he is looking for information</p>
+        <p>The resulting information should  print
+
+
+<!--         <p>Finally, a working version of the code:</p>
 
         <form id="query">
             User name:
@@ -131,7 +147,9 @@
         </p>
 
         <p id="retrievedResult">
-        </p>
+        </p> -->
+
+
         <script>
 
 
