@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>In-class assignment</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <style>
+        #highlight1 {
+            color: #ffffff;
+        }
+        #highlight2 {
+            color: #9900ff;
+    </style>
+</head>
+<body>
+	<h1>Hello, type your name and the name of an artist you love</h1>
+
+	<form id="query">
+		<h2>User name:
+			<input type="text" name="userName">
+		</h2>
+		<h2>Artist name:
+			<input type="text" name="artistName">
+		</h2>
+		<input type="button" onclick="queryParser()" value="Submit!">
+	</form>
+
+
+        <h1 id="parsedResult">
+        </h1>
+
+
+	<script>
+	function queryParser(){
+		var x = document.getElementById("query");
+		userName = x.elements["userName"].value;
+		artistName = x.elements["artistName"].value;
+		console.log(userName, artistName);
+		document.getElementById("parsedResult").innerHTML = 
+			userName + ", the artist you love is " + artistName 
+		}
+	</script>
+</body>
+</html>
+
+
+<!-- <span id="highlight1">  </span> <span id="highlight2">  </span> -->
