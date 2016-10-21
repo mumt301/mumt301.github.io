@@ -105,17 +105,39 @@
 
                 function discography() {
                     // Create a Table element and append it to the DOM
-
+                    var table = document.createElement('table');
                     // Create the table header
-
+                    for (row = 0; row < beatles_releases.length; row++) {
+                        // console.log(row);
+                        tr = document.createElement('tr');
+                        var release_keys = Object.keys(beatles_releases[row]);
+                        // console.log(release_keys);
+                        for (col = 0; col < release_keys.length; col++) {
+                            td = document.createElement('td');
+                            tr.appendChild(td);
+                            if (col != 3) {
+                                td.innerHTML = beatles_releases[row][release_keys[col]];    
+                            } else {
+                                var img = document.createElement('img');
+                                img.setAttribute('src', beatles_releases[row][release_keys[col]]);
+                                // console.log(img);
+                                td.appendChild(img);
+                            }
+                            
+                        }
+                    table.appendChild(tr);
+                    }
+                    
                     // Create the table content
-
+                    console.log(table);
                     // Append the table to the discography table element
-                
+                document.getElementById("discography_table").appendChild(table);
                 }
-
 
         </script>
 </body>
-
 </html>
+
+
+
+
