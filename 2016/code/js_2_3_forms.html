@@ -14,46 +14,68 @@
     <h1 id="title">Forms and inputs</h1>	
     <div id="container">
         <p>
-            HTML forms are used to pass data to a server. An HTML form can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more.</p> 
-        <p>A form can contain different types of elements (e.g., text, password fields, radio buttons, check buttons, ...)</p>
-        <p>Forms' syntax uses the <code>form</code> tag to create an HTML form, and the <code>input</code> element is used to select user information.</p>
-        <p>The user-entered data gets stored in the <code>name</code> variable</p>
+            HTML forms are used to collect user input. HTML forms can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more.</p> 
+
+        <p>Forms' syntax uses the <code>form</code> tag to create an HTML form, then</p>
+        <ul>
+            <li>the <code>input</code> element is used to select user information,</li>
+            <li>the <code>type</code> attribute to specify the type of data, and</li>
+            <li>the <code>name</code> attribute stores the user-entered data</li>
+        </ul>
+
+        
+          
+        
+        
         <p>A simple example of an input text field would be:</p>
 
         <code><pre>
-                &ltform&gt
-                    &ltp&gt
-                        User name: &ltinput type="text" name="name"&gt
-                    &lt/p&gt
-                    &ltp&gt
-                        Artist name: &ltinput type="text" name="artist"&gt
-                    &lt/p&gt
-                &lt/form&gt
-		</pre></code>
+        &ltform&gt
+            &ltp&gt
+                User name:
+                &ltinput type="text" name="userName"&gt
+            &lt/p&gt
+            &ltp&gt
+                Artist name:
+                &ltinput type="text" name="artistName"&gt
+            &lt/p&gt
+        &lt/form&gt
+        </pre></code>
         <form>
             <p>
                 User name:
-                <input type="text" name="name">
+                <input type="text" name="userName">
             </p>
             <p>
                 Artist name:
-                <input type="text" name="artist">
+                <input type="text" name="artistName">
             </p>
         </form>
-        <p>
-            There are also other available fields:
-        </p>
+
+
+
+        <p>A form can contain different types of elements (e.g., text, password fields, radio buttons, check buttons, ...)</p>
+
+
         <code><pre>
-&ltform&gt
-	User name: &ltinput type="text" name="name"&gt
-	&ltinput type="radio" name="sex" value="male"&gtMale
-	&ltinput type="radio" name="sex" value="female"&gtFemale&ltbr&gt
-	Password: &ltinput type="password" name="pwd"&gt&ltbr&gt
-	Artist name: &ltinput type="text" name="artist"&gt&ltbr&gt
-	&ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names&ltbr&gt
-	&ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names 
-&lt/form&gt
-		</pre></code>
+        &ltform&gt
+            User name:
+            &ltinput type="text" name="name"&gt
+            &ltinput type="radio" name="sex" value="male"&gtMale
+            &ltinput type="radio" name="sex" value="female"&gtFemale
+            &ltbr&gtPassword:
+            &ltinput type="password" name="pwd"&gt
+            &ltbr&gtArtist name:
+            &ltinput type="text" name="artist"&gt
+            &ltbr&gt
+            &ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names
+            &ltbr&gt
+            &ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names
+        &lt/form>
+        </pre></code>
+
+
+
 
         <form>
             User name:
@@ -78,22 +100,36 @@
         <h2>
 			Using the data from forms in JavaScript
 		</h2>
-        We usually want to use the data a user has entered in a form. To accomplish this, we first create the form:
+        We usually want to use the data a user entered into a form. To accomplish this, we first create the form:
+
         <code><pre>
 &ltform id="query"&gt
-	User name: &ltinput type="text" name="name"&gt
+	User name: &ltinput type="text" name="userName"&gt
 	&ltinput type="radio" name="sex" value="male"&gt Male
 	&ltinput type="radio" name="sex" value="female"&gt Female&ltbr&gt
 	Password: &ltinput type="password" name="pwd"&gt&ltbr&gt
-	Artist name: &ltinput type="text" name="artist"&gt&ltbr&gt
+	Artist name: &ltinput type="text" name="artistName"&gt&ltbr&gt
 	&ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names&ltbr&gt
 	&ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names&ltbr&gt
-	&ltinput type="button" onclick="queryData()" value="Retrieve"&gt
 &lt/form&gt
 		</pre></code>
-        <p>and then we create a function to retrieve the data from within the elements attached to the DOM.
+
+        <p> we add to the form a button that, when clicked, calls a function
+        <code><pre>
+        &ltinput type="button" onclick="queryData()" value="Retrieve"&gt
+        </pre></code>
+
+        <p>and then we call a function which can retrieve the data from within the elements attached to the DOM.
         </p>
-        <p>For example, if we want to use the name of the user and the name of the artist from the previous form:</p>
+        <code><pre>
+        var x = document.getElementById("query");
+        userName = x.elements["userName"].value;
+        artistName = x.elements["artistName"].value;
+        </pre></code>
+
+        <p>and then we finally can do something with that data.</p>
+
+        <p>For example, if we want to use the user name and the artist name from the previous form:</p>
         <p>1. When the user press the "Retrieve" button, the <code>queryData()</code> function is called. 
         </p>
 
@@ -105,8 +141,8 @@
             <input type="button" onclick="queryData()" value="Retrieve">
         </form> -->
 
-        <p>2. We then parse the values from the elements in the DOM</p>
-        <p>3. And we finally do something with those values. For example, we add them as the content of some of element of the DOM</p>
+        <p>2. We then get the values from the elements in the DOM</p>
+        <p>3. And we finally do something with those values. For example, we add them as the content of some of element of the DOM or we create a request to another server.</p>
 
 <!--         <code><pre>&ltscript&gt
 	function queryData(){
