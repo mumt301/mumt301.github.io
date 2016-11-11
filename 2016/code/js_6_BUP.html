@@ -1,106 +1,107 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+	<head>
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
 
 
-<body id="body">
-	<h1 id="title">Music APIs</h1>
-	<div id="container">
-		<h2>Exercise</h2> 
-		<p>Use a form to get an artist's name, and display a number of recordings for that artist using
-		<a href="https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2">the Musicbrainz API</a>.</p>
-		<h3>Steps</h3>
-		<p><b>1. Create the basic structure of the page</b></p>
-		<p>1.1 Head and body
-		<p><b>2. Create the form to enter the artist name</b><p>
-		<p>2.1 A text field is needed</p>
-		<p>2.2 A submit button is also needed</p>
-		<p><b>3. Retrieve the artist name data from the form</b>b</p>
-		<p>3.1 A JS function should be called when the user press the submit button</p>
-		<p>3.2 Create a variable with the form's data</p>
-		<p>3.3 Retrieve the artist name and store it into a variable</p>
-		<p>3.4 Print the artist name into the console</p>
-		<p><b>4. Check the MusicBrainz API call for getting information about an Artist</b></p>
-		<p>4.1 Create variables for the web service root and the resource access</p>
-		<p>4.2 Create the text string with all elements of the query (use .join(""))</p>
-		<p>4.3 Print the query string in the JS console. Test it in the browser</p>
-		<p><b>5. Use the httpGet function we saw in class last week to create the query and get the resource from MusicBrainz</b></p>
-		<p>5.1 Try it first in the JS console</p>
-		<p>5.2 Use it in your code. Create a variable to store the response of the query</p>
-		<p>5.3 Print the query response to the console</p>
-		<p>5.4 Examine the response in the console. Assuming the first artist is the one the user is looking for, how to access its MBID?</p>
-		<p>5.5 Retrieve the artist's MBID, store it into a variable, and print it to the console</p>
-		<p><b>6. Check MB API for getting a list of recordings from an Artist</b></p>
-		<p>6.1 Create the query using a similar method to 4.2</p>
-		<p>6.2 Print the recordings query to the console</p>
-		<p>6.3 Get the recordings from MB (same procedure as 5.)</p>
-		<p>6.4 Print the response to console and check how you can retrieve all recording titles</p>
-		<p>6.5 Create a loop to retrieve all recording titles <a href="http://www.w3schools.com/js/js_loop_for.asp">check for loops in javascript in w3schools</a></p>
-		<p>6.6 Print the recording title to the console</p>
-		<p><b>7. Print the results to the browser</b></p>
-		<p>7.1 Create a placeholder for the data, maybe a div element</p>
-		<p>7.2 Create a variable for storing the text output to be appended to the placeholder</p>
-		<p>7.3 In each iteration of the loop append the title to the variable</p>
-		<p>7.4 After the for loop finishes, change the placeholder innerHTML value with the variable</p>
-		<form id="form">
-			<p>Enter artist name</p>
-			<input type="text" name="artistName">
-			<input type="button" value="Submit!" onclick=queryArtist()>
-		</form>
-		<div id="recordingsOutput"></div>
+	<body id="body">
+		<h1 id="title">Music APIs</h1>
+		<div id="container">
+			<h2>Exercise</h2> 
+			<p>Use a form to get an artist's name, and display a number of recordings for that artist using
+			<a href="https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2">the Musicbrainz API</a>.</p>
+			<h3>Steps</h3>
+			<p><b>1. Create the basic structure of the page</b></p>
+			<p>1.1 Head and body
+			<p><b>2. Create the form to enter the artist name</b><p>
+			<p>2.1 A text field is needed</p>
+			<p>2.2 A submit button is also needed</p>
+			<p><b>3. Retrieve the artist name data from the form</b>b</p>
+			<p>3.1 A JS function should be called when the user press the submit button</p>
+			<p>3.2 Create a variable with the form's data</p>
+			<p>3.3 Retrieve the artist name and store it into a variable</p>
+			<p>3.4 Print the artist name into the console</p>
+			<p><b>4. Check the MusicBrainz API call for getting information about an Artist</b></p>
+			<p>4.1 Create variables for the web service root and the resource access</p>
+			<p>4.2 Create the text string with all elements of the query (use .join(""))</p>
+			<p>4.3 Print the query string in the JS console. Test it in the browser</p>
+			<p><b>5. Use the httpGet function we saw in class last week to create the query and get the resource from MusicBrainz</b></p>
+			<p>5.1 Try it first in the JS console</p>
+			<p>5.2 Use it in your code. Create a variable to store the response of the query</p>
+			<p>5.3 Print the query response to the console</p>
+			<p>5.4 Examine the response in the console. Assuming the first artist is the one the user is looking for, how to access its MBID?</p>
+			<p>5.5 Retrieve the artist's MBID, store it into a variable, and print it to the console</p>
+			<p><b>6. Check MB API for getting a list of recordings from an Artist</b></p>
+			<p>6.1 Create the query using a similar method to 4.2</p>
+			<p>6.2 Print the recordings query to the console</p>
+			<p>6.3 Get the recordings from MB (same procedure as 5.)</p>
+			<p>6.4 Print the response to console and check how you can retrieve all recording titles</p>
+			<p>6.5 Create a loop to retrieve all recording titles <a href="http://www.w3schools.com/js/js_loop_for.asp">check for loops in javascript in w3schools</a></p>
+			<p>6.6 Print the recording title to the console</p>
+			<p><b>7. Print the results to the browser</b></p>
+			<p>7.1 Create a placeholder for the data, maybe a div element</p>
+			<p>7.2 Create a variable for storing the text output to be appended to the placeholder</p>
+			<p>7.3 In each iteration of the loop append the title to the variable</p>
+			<p>7.4 After the for loop finishes, change the placeholder innerHTML value with the variable</p>
+			<form id="form">
+				<p>Enter artist name</p>
+				<input type="text" name="artistName">
+				<input type="button" value="Submit!" onclick=queryArtist()>
+			</form>
+			<div id="recordingsOutput"></div>
 
-		<script>
-			function queryArtist() {
-				// Retrieve data from form
-				formData = document.getElementById('form');
-				artistName = formData.elements['artistName'].value;
-				
-				// Create query to Musicbrainz
-				webServiceroot = "http://musicbrainz.org/ws/2";
-				resource = "/artist?query=";
-				artistQuery = [webServiceroot, resource, artistName].join("");
+			<script>
+				function queryArtist() {
+					// Retrieve data from form
+					formData = document.getElementById('form');
+					artistName = formData.elements['artistName'].value;
+					
+					// Create query to Musicbrainz
+					webServiceroot = "http://musicbrainz.org/ws/2";
+					resource = "/artist?query=";
+					artistQuery = [webServiceroot, resource, artistName].join("");
 
-				// Get data from MusicBrainz
-				response = httpGet(artistQuery);
+					// Get data from MusicBrainz
+					response = httpGet(artistQuery);
 
-				// Parse response to get artist ID
-				artistMbid = response.getElementsByTagName('artist')[0]['id'];
+					// Parse response to get artist ID
+					artistMbid = response.getElementsByTagName('artist')[0]['id'];
 
-				// Get recordings of the specific artist ID
-				resource = "/recording?artist=";
-				recordingsQuery = [webServiceroot, resource, artistMbid, "&limit=100"].join("");
-				response = httpGet(recordingsQuery);
-				recordings = response.getElementsByTagName('recording');
+					// Get recordings of the specific artist ID
+					resource = "/recording?artist=";
+					recordingsQuery = [webServiceroot, resource, artistMbid, "&limit=100"].join("");
+					response = httpGet(recordingsQuery);
+					recordings = response.getElementsByTagName('recording');
 
-				// Create element to store the results
-				outputDiv = document.createElement('div');
+					// Create element to store the results
+					outputDiv = document.createElement('div');
 
-				// Iterate through all recordings and parse the titles
-				for (r = 0; r < recordings.length; r++) {
-					title = recordings[r].getElementsByTagName('title')[0].innerHTML;
+					// Iterate through all recordings and parse the titles
+					for (r = 0; r < recordings.length; r++) {
+						title = recordings[r].getElementsByTagName('title')[0].innerHTML;
 
-					// Append each parsed title to the DOC
-					outputTxtstring = [r + 1, title].join(". ");
-					paragraphString = document.createElement('p');
-					paragraphString.innerHTML = outputTxtstring;
-					outputDiv.appendChild(paragraphString);
+						// Append each parsed title to the DOC
+						outputTxtstring = [r + 1, title].join(". ");
+						paragraphString = document.createElement('p');
+						paragraphString.innerHTML = outputTxtstring;
+						outputDiv.appendChild(paragraphString);
+					}
+
+					// Select the element to be filled with the data and append it
+					outputRecordings = document.getElementById('recordingsOutput')
+					outputRecordings.innerHTML = "";
+					outputRecordings.appendChild(outputDiv);
 				}
 
-				// Select the element to be filled with the data and append it
-				outputRecordings = document.getElementById('recordingsOutput')
-				outputRecordings.innerHTML = "";
-				outputRecordings.appendChild(outputDiv);
-			}
+				function httpGet(theURL) {
+					var xmlHttp = new XMLHttpRequest();
+					xmlHttp.open("GET", theURL, false);
+					xmlHttp.send();
+					return xmlHttp.responseXML;
+				}
 
-			function httpGet(theURL) {
-				var xmlHttp = new XMLHttpRequest();
-				xmlHttp.open("GET", theURL, false);
-				xmlHttp.send();
-				return xmlHttp.responseXML;
-			}
-
-		</script>
-</body>
+			</script>
+	</body>
 </html>
