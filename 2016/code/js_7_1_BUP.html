@@ -171,6 +171,28 @@
 	};
 
 
+	// IMAGES
+	function fetchImages() {
+		var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+		var formData = $("#imageQuery").serializeArray();
+		var tagset = formData[0].value;
+		
+
+		$.getJSON( flickerAPI, {
+			tags: tagset,
+			tagmode: "any",
+			format: "json"
+		})
+			.done(function( data ) {
+				$("#images").empty();
+				$.each( data.items, function( i, item ) {
+					console.log(item);
+					$( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+				});
+			});
+	};
+
+
 
 
 
