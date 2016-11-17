@@ -28,6 +28,7 @@
 		<p>It is aimed to simplify many operations in JS</p>
 		<p>A library is a set of tools, which makes programmer's life easier</p>
 		<p>Libraries must be loaded in order to be used</p>
+
 		
 		<h2 id="draggable2">DOM manipulation</h2>
 
@@ -39,6 +40,10 @@
 		</td>
 
 		<button class="continue">Prepare the rocket</button><div id="hoverId"></div>
+
+		<p><a href="http://jqueryui.com/demos/" target="_blank">UI demos and documentation</a></p>
+		<p><a href="http://www.w3schools.com/jquery/default.asp" target="_blank">More examples and documentation</a></p>
+
 		<h2>
 			Event handling
 		</h2>
@@ -56,7 +61,7 @@
 			Ajax (Asynchronous JavaScript and XML)
 		</h2>
 		<div>
-			Call a local script on the server <code>/api/getWeather</code> with the query parameter <code>city</code> and replace the element <code>#weather-temp</code>&apos;s html with the returned text.
+			Call the OpenWeather service with the query parameter <code>city</code> and replace the element <code>#weatherId</code> with the returned weather conditions for the given city.
 		</div>
 
 
@@ -113,7 +118,7 @@
 	
 	// CHANGING ELEMENTS
 	$("button.continue").click(function() {
-		$("button.continue").html("Rocket launched ...")
+		$("button.continue").html("Rocket launched ...");
 		});
 
 
@@ -151,7 +156,7 @@
 
 		$.getJSON(url, args,
 			function(data) {
-				var weatherDescription = data.weather[0].description
+				var weatherDescription = data.weather[0].description;
 				$( "#weatherId" ).html(weatherDescription + ' in ' + city);
 			})
 	};
