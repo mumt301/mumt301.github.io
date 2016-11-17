@@ -35,8 +35,9 @@ body {
 
 h1 {
 	width: 75%;
-	margin: auto;	
+	/*margin: auto;	*/
 	font-size: 4em;
+  text-align: left;
 }
 
 h2 {
