@@ -201,9 +201,8 @@
 					var spotifyId = data.artists.items[0].id;
 					$.getJSON(url.concat(spotifyId), 
 						function(data) {
-							$("#genres").empty();
 							$.each( data.genres, function( i, genre ) {
-							$("<p>").html(genre).appendTo("#genres");
+							$("<p>").html(genre).appendTo("#genres")
 							})
 					})
 			})
