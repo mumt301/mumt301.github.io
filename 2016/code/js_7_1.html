@@ -85,13 +85,13 @@
 
 
 		<h2>
-			Example: Retrieve genres from Spotify for a given artist
+			Retrieving genres from Spotify for a given artist
 		</h2>
 
 
 		<form id="artistForm">
 			<input type="text" name="name">
-			<input type="button" onclick="fetchData()" value="Retrieve data!">
+			<input type="button" onclick="fetchGenres()" value="Retrieve genres!">
 		</form>
 
 		<div id="genres"></div>
@@ -209,7 +209,7 @@
 			})
 		}
 
-		function fetchData() {
+		function fetchGenres() {
 			var artistForm = $("#artistForm").serializeArray();
 			var artistName = artistForm[0].value;
 			var spotifyId = artistSpotifyGenres(artistName);
