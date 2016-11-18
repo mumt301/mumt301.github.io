@@ -72,7 +72,7 @@
 			</p>
 		</div>
 
-		<p>How can we retrieve images from Flickr by using tags from its community?</p>
+		<h2>Retrieving images from Flickr by using tags from its community</h2>
 		<p><a href="https://www.flickr.com/services/feeds/docs/photos_public/">Check the Flickr API!</a></p>
 		
 		<form id="imageQuery">Would you like to retrieve images of?
@@ -83,101 +83,144 @@
 		<div id="images"></div>
 
 
+
+		<h2>
+			Example: Retrieve genres from Spotify for a given artist
+		</h2>
+
+
+		<form id="artistForm">
+			<input type="text" name="name">
+			<input type="button" onclick="fetchData()" value="Retrieve data!">
+		</form>
+
+		<div id="genres"></div>
+
 	</div>
-</body>
 
-<script>
 
-	// DRAGGABLE ELEMENTS
-	$( "#draggable1" ).draggable();
-	$( "#draggable2" ).draggable();
 
-	// ONE HANDLER, MANY EVENTS
-	$( "#draggable1" ).on({
-	    mouseenter: function() {
-	        $("#draggable1").css( "color", "red" );
-	    },
-	    mouseleave: function() {
-	        $("#draggable1").css( "color", "black" );
-	    }
-	});	
-	
-	// CHANGING ELEMENTS
-	$("button.continue").click(function() {
-		$("button.continue").html("Rocket launched ...")
+
+
+
+	<script>
+
+		// DRAGGABLE ELEMENTS
+		$( "#draggable1" ).draggable();
+		$( "#draggable2" ).draggable();
+
+		// ONE HANDLER, MANY EVENTS
+		$( "#draggable1" ).on({
+		    mouseenter: function() {
+		        $("#draggable1").css( "color", "red" );
+		    },
+		    mouseleave: function() {
+		        $("#draggable1").css( "color", "black" );
+		    }
+		});	
+		
+		// CHANGING ELEMENTS
+		$("button.continue").click(function() {
+			$("button.continue").html("Rocket launched ...")
+			});
+
+
+		// CLICKED PARAGRAPH}
+		$( "p" ).on( "click", function() {
+	    console.log( "<p> was clicked" );
+		});
+
+		$( "#button2" ).on({
+		    mouseenter: function() {
+		        $("#hover2").html( "Hovered over the button" );
+		    },
+		    mouseleave: function() {
+		        $("#hover2").html( "Mouse left the button" );
+		    },
+		    click: function() {
+		        $("#hover2").html( "Clicked on the button" );
+		    }
 		});
 
 
-	// CLICKED PARAGRAPH}
-	$( "p" ).on( "click", function() {
-    console.log( "<p> was clicked" );
-	});
+		// WEATHER
+		$( "#weatherButton" ).click(function() {
+			var formData = $("#weatherForm").serializeArray()
+			var city = formData[0]['value']
+			var weatherResponse = fetchWeather(city);
+		})
+		
+		function fetchWeather(city) {
+			var url = "http://api.openweathermap.org/data/2.5/weather";
+			var args = {
+				APPID: "84333ed1e3b5de0a85ebd078cd8f713c",
+				q: city
+			}
 
-	$( "#button2" ).on({
-	    mouseenter: function() {
-	        $("#hover2").html( "Hovered over the button" );
-	    },
-	    mouseleave: function() {
-	        $("#hover2").html( "Mouse left the button" );
-	    },
-	    click: function() {
-	        $("#hover2").html( "Clicked on the button" );
-	    }
-	});
+			$.getJSON(url, args,
+				function(data) {
+					var weatherDescription = data.weather[0].description
+					$( "#weatherId" ).html(weatherDescription + ' in ' + city);
+				})
+		};
 
 
-	// WEATHER
-	$( "#weatherButton" ).click(function() {
-		var formData = $("#weatherForm").serializeArray()
-		var city = formData[0]['value']
-		var weatherResponse = fetchWeather(city);
-	})
-	
-	function fetchWeather(city) {
-		var url = "http://api.openweathermap.org/data/2.5/weather";
-		var args = {
-			APPID: "84333ed1e3b5de0a85ebd078cd8f713c",
-			q: city
+		// IMAGES
+		function fetchImages() {
+			var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+			var formData = $("#imageQuery").serializeArray();
+			var tagset = formData[0].value;
+			
+
+			$.getJSON( flickerAPI, {
+				tags: tagset,
+				tagmode: "any",
+				format: "json"
+			})
+				.done(function( data ) {
+					$("#images").empty();
+					$.each( data.items, function( i, item ) {
+						console.log(item);
+						$( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+					});
+				});
+		};
+
+
+		// artistSpotify Genres
+		function artistSpotifyGenres(artistName) {
+			var url = "https://api.spotify.com/v1/search"
+			var args = {
+				type: "artist",
+				q: artistName,
+			};
+
+			$.getJSON(url, args,
+				function(data) {
+					var url = "https://api.spotify.com/v1/artists/"
+					var spotifyId = data.artists.items[0].id;
+					$.getJSON(url.concat(spotifyId), 
+						function(data) {
+							$("#genres").empty();
+							$.each( data.genres, function( i, genre ) {
+							$("<p>").html(genre).appendTo("#genres");
+							})
+					})
+			})
 		}
 
-		$.getJSON(url, args,
-			function(data) {
-				var weatherDescription = data.weather[0].description
-				$( "#weatherId" ).html(weatherDescription + ' in ' + city);
-			})
-	};
+		function fetchData() {
+			var artistForm = $("#artistForm").serializeArray();
+			var artistName = artistForm[0].value;
+			var spotifyId = artistSpotifyGenres(artistName);
 
-
-	// IMAGES
-	function fetchImages() {
-		var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-		var formData = $("#imageQuery").serializeArray();
-		var tagset = formData[0].value;
-		
-
-		$.getJSON( flickerAPI, {
-			tags: tagset,
-			tagmode: "any",
-			format: "json"
-		})
-			.done(function( data ) {
-				$("#images").empty();
-				$.each( data.items, function( i, item ) {
-					console.log(item);
-					$( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
-				});
-			});
-	};
+		}
+		</script>
 
 
 
 
-
-
-</script>
-
-
-
+</body>
 
 
 
