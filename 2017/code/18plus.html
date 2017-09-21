@@ -8,25 +8,35 @@
         }
 
         body {
-            color: #ffdd11;
-            background-color: #dd0000;
+            color: #ffc500;
+            background-color: #db0024;
             line-height: 50px;
             text-align: left;
         }
         h1 {
             font-size: 100px;
-            color: #ffdd00;
+            color: #ffc500;
             
         }
         .bio {
+            position:absolute;
             font-size: 100px;
+            z-index:1;
         }
+
+        .imageholder {
+            position: relative;
+            z-index:-1;
+        }
+
         .discography {
             font-size: 50px;
-            color: #ffdd11;
+            color: #ffc500;
             position: absolute;
             top: 60%;
         }
+
+
 
         img {
             width: 85%;
@@ -38,25 +48,31 @@
 
         ul li {
             font-size: 40px;
-            /*list-style-type: none; */
         }
-        #discography_box {
-            position: absolute;
-        }
+
+
         #highlight1 {
-            color: #ffffff;
+            color: #ff3900;
         }
         #highlight2 {
             color: #9900ff;
         }
+        #highlight3 {
+            color: #610044;
+        }
+        #highlight4 {
+            color: #9f0037;
+        }
+
+
     </style>
 </head>
 
 <body>
     <h1>18+</h1>    
     <p class="bio">
-    American band consisting of <span id="highlight1"> musicians </span> and <span id="highlight2"> visual artists </span> Justin Swinburne and Samia Mirza </p>
-    <div class="holder">
+    American band consisting of <span id="highlight3">musicians</span> and <span id="highlight4">visual artists</span> <span id="highlight1">Justin Swinburne</span> and <span id="highlight2"> Samia Mirza </span> </p>
+    <div class="imageholder">
         <img src="../img/18_plus_2.jpg">
         <img src="../img/18_plus_2.jpg" style="left:10px">
         <img src="../img/18_plus_2.jpg" style="left:15px">
@@ -73,7 +89,7 @@
                 <li>Collect (2016)</li>
             </ul>
     </div>
-    <iframe width="0" height="0" src="http://www.youtube.com/embed/videoseries?list=PL2ySFw5-RHDaqZ2iGrX-DRD9ZINBO-1gp&autoplay=1" frameborder="0" allowfullscreen></iframe>
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/videoseries?list=PL2ySFw5-RHDaqZ2iGrX-DRD9ZINBO-1gp&autoplay=1" frameborder="0" allowfullscreen></iframe>
 </body>
 </html>
 
