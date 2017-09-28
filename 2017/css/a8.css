@@ -1,0 +1,42 @@
+body {
+  font-family: Georgia;
+  color: #ffdd11;
+  background-color: #dd0000;
+  text-align: center;
+}
+
+h1 {
+  font-size: 120px;
+  font-family: Georgia;
+  color: #ffdd00;
+  line-height: 50px;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+form {
+    display: inline; 
+}
+
+.division{
+  font-family: Georgia;
+  text-align: left;
+  width:24%;
+  /*height:100px;*/
+  float:left;
+
+  padding-top: 0px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+
+.logos{
+  bottom:0;
+  right:0%;
+  position:fixed;
+}
