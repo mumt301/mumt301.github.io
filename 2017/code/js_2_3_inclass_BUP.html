@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>In-class assignment</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <style>
+        body {
+            font-family: Georgia;
+            color: #ffdd11;
+            background-color: #dd0000;
+            line-height: 50px;
+            text-align: left;
+        }    
+        #highlight1 {
+            color: #9900ff;
+        }
+        #highlight2 {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+	<h1>Hello, type your name and the name of one artist you love</h1>
+	<br>
+
+	<form id="query">
+		<h1>User name:
+			<input type="text" name="userName">
+			Artist name:
+			<input type="text" name="artistName">
+		<input type="button" onclick="queryParser()" value="Submit!">
+		</h1>
+	</form>
+
+
+        <h1 id="parsedResult">
+        </h1>
+
+        <h1 id="retrievedResult">
+        </h1>
+
+	<script>
+	function queryParser(){
+		var x = document.getElementById("query");
+		uN = x.elements["userName"].value;
+		aN = x.elements["artistName"].value;
+		console.log(uN, aN);
+
+		// document.getElementById("parsedResult").innerHTML = 
+			// uN + ", the artist you love is " + aN 
+
+		
+		var userName = document.createElement('span');
+		userName.setAttribute('id', 'highlight1');
+		userName.innerHTML = uN;
+		var artistName = document.createElement('span');
+		artistName.setAttribute('id', 'highlight2');
+		artistName.innerHTML = aN;
+
+		var pR = document.getElementById("parsedResult");
+		pR.innerHTML = "";
+		var messageText = document.createTextNode(", one artist you love is ");
+
+		pR.appendChild(userName);
+		pR.appendChild(messageText);
+		pR.appendChild(artistName);
+
+
+		bioButton = document.createElement('form');
+		inputButton = document.createElement('input');
+		inputButton.setAttribute("type", "button");
+		inputButton.setAttribute("value", "Retrieve Bio");
+		inputButton.setAttribute("onclick", "queryData()");
+		bioButton.appendChild(inputButton);
+		pR.appendChild(bioButton);
+
+
+		}
+
+
+
+    function queryData() {
+        var x = document.getElementById("query");
+        userName = x.elements["userName"].value;
+        artistName = x.elements["artistName"].value;
+        console.log(userName, artistName);
+        queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=14cf98aa1958c4d8ef3f6bf5509464e8&format=xml"
+        
+        retrievedData = httpGet(queryURL);
+
+        parsedPage = miniPage(retrievedData);
+        
+        document.getElementById('retrievedResult').innerHTML = '';
+        document.getElementById('retrievedResult').appendChild(parsedPage);
+
+    }
+
+    function httpGet(theUrl) {
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false);
+        xmlHttp.send();
+        return xmlHttp.responseXML;
+    }
+
+
+    function miniPage(retrievedData) {
+        image = document.createElement('img');
+        imageLink = retrievedData.getElementsByTagName('image')[3].innerHTML;
+        image.src = imageLink;
+        image.style = 'float: left;'
+        
+
+        bio = document.createElement('p');
+        bio.setAttribute('id', 'highlight2');
+        bioContent = retrievedData.getElementsByTagName('content')[0].innerHTML;
+        bio.innerHTML = bioContent;
+
+        mp = document.createElement('div');
+        mp.id = 'bioContainer';
+        mp.appendChild(image);
+        mp.appendChild(bio);
+        return mp;
+    }
+
+
+
+	</script>
+</body>
+</html>
+
+
+<!-- <span id="highlight1">  </span> <span id="highlight2">  </span> -->
