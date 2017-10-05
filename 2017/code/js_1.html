@@ -1,17 +1,9 @@
 <!DOCTYPE html>
-<html class="no-js">
 
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/main.css">
-    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js">
-    </script>
-
-    
+    <title>Javascript 1</title>
+    <link rel="stylesheet" href="../css/main.css">    
 </head>
 
 <body id="body">
@@ -46,7 +38,7 @@
             </p>
             <p>
                 but it also can change HTML attributes:
-                <a href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_lightbulb"> W3 example</a>
+                <a href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_lightbulb" target="_blank"> W3 example</a>
             </p>
             <p>
                 and HTML styles (CSS):
@@ -61,7 +53,7 @@
 			The <code>&ltscript&gt</code> tag
 		</h2>
         <p>
-            The lines between <code>&ltscript&gt</code> and <code>&ltscript&gt</code> contain the JavaScript code, and the browser will interpret the code between the <code>&ltscript&gt</code> and <code>&ltscript&gt</code> tags as JavaScript.
+            The lines between <code>&ltscript&gt</code> and <code>&lt/script&gt</code> contain the JavaScript code, and the browser will interpret the code between them as JavaScript.
         </p>
         <p>
             Each line of JavaScript ends with a semicolon
@@ -91,7 +83,7 @@
 			Writing to The Console
 		</h2>	
         <p>
-            If your browser supports debugging, you can use the <code>console.log()</code> method to display JavaScript values in the browser.
+            If your browser supports debugging (most of them support it), you can use the <code>console.log()</code> method to display JavaScript values and messages in the browser.
         </p>
         <p>
             Check Chrome's JavaScript console!!!! (CMD+Option+J in Mac OSX)
@@ -239,32 +231,36 @@
         <h2>
 			JavaScript Events
 		</h2>
-        <p>
-        HTML events are actions that happen to HTML elements.<br>
-        For example:<br>
-        </p>
-        <ul>
-            <li>An HTML finished loading</li>
-            <li>An HTML input field was changed</li>
-            <li>An HTML button was clicked</li>
-        </ul>
         <br>JavaScript can be used to execute code when events are detected
         <br>
+        <p>These events are actions that happen to HTML elements. For example:</p>
+        <ul>
+            <li>An HTML element finished loading</li>
+            <a href="https://www.w3schools.com/jsref/event_onload.asp" target="_blank">
+            <code>&ltelement onload="myScript()"&gt</code></a>
+            <li>An HTML input field was changed</li>
+            <a href="https://www.w3schools.com/jsref/event_onchange.asp" target="_blank">
+            <code>&ltselect onchange="myFunction()"&gt</code></a>
+            <li>An HTML button was clicked</li>
+            <a href="https://www.w3schools.com/jsref/event_onclick.asp" target="_blank">
+            <code>&ltbutton type="button" onclick="otherScript()"&gt</code></a>
+        </ul>
+        
         <p>Click the button to display how many minutes there are left to finish this class</p>
         <button onclick="displayMinutes()">Minutes to finish this class?</button>
         <p id="demoMinutes"></p>
 
         <script>
             function displayMinutes() {
-                finishClassUTC = 1506641898;
+                finishClassUTC = 1507245900;
                 document.getElementById("demoMinutes").innerHTML =  Math.round((finishClassUTC - Date.now() / 1000) / 60) + " minutes to finish. Hurry up!";
             }
         </script>
 
-        <p>The list of possible events can be found <a href="http://www.w3schools.com/jsref/dom_obj_event.asp">here</a>
+        <p>The list of possible events can be found <a href="http://www.w3schools.com/jsref/dom_obj_event.asp" target="_blank">here</a>
         </p>
 
-        <h2><a href="./js_2.html">The Document Object Model</a></h2>
+        <h2>The Document Object Model</h2>
         <ul>
         <li>The Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document</li>
         <br>
@@ -274,7 +270,8 @@
         <br>
         <div style="text-align:center"> <img src="../img/dom.gif" ></div>
         <br>
-        <li>With the object model, JavaScript gets all the power it needs to create <a href="http://www.w3schools.com/js/js_htmldom_document.asp">dynamic HTML</a></li>
+        <li>With the object model, JavaScript gets all the power it needs to create <a href="http://www.w3schools.com/js/js_htmldom_document.asp" target="_blank">dynamic HTML.</a>
+        By doing so, we can select elements from the DOM, change their attributes, and append new elements to it</li>
         <br>
         </ul>
 
@@ -324,6 +321,7 @@
 for (row = 0; row < beatles_releases.length; row++) {
 ... do something ...}
 	</pre></code>
+
         <!-- 	Hey MUMT301er! You found where the code where the Beatles' discography function is called -->
         <button type="button" onclick="discography()">Show me part of The Beatles' discography</button>
     </div>
@@ -331,6 +329,10 @@ for (row = 0; row < beatles_releases.length; row++) {
     <div id="discography_table">
         <br>
     </div>
+
+    <p>But, how to insert images from the record covers?</p>
+    <p><a href="beatles.html">Check the code using div elements instead of table</a><p>
+
 
 
     <script>
@@ -411,9 +413,8 @@ for (row = 0; row < beatles_releases.length; row++) {
         /* Alternatively, you can use <div> instead of <table> to achieve a similar resut */
 
             function discography() {
-                var table = document.createElement('table'),
-                    tr, td, row, col;
-                table.id = "discography_table"
+                var table = document.createElement('table');
+                table.id = "beatles_table"
                 for (row = 0; row < beatles_releases.length; row++) {
                     tr = document.createElement('tr');
                     var release_data = Object.keys(beatles_releases[row]);
@@ -426,6 +427,7 @@ for (row = 0; row < beatles_releases.length; row++) {
                 }
                 document.getElementById("discography_table").appendChild(table);
             }
+
 
 
 
