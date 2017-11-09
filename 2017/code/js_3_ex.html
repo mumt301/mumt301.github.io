@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Music APIs</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/main.css">
+	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<style>
+		table,
+		tr,
+		th,
+		td {
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+			font-size: 15px;
+			border: 2px solid green;
+			border-collapse: collapse;
+			font-family: "Lucida Grande";
+			background-color: #ffffff;
+		}
+		
+		tr,
+		td {
+			font-style: bold;
+			padding: 5px;
+		}
+		
+		th {
+			background-color: #a7c942;
+			color: #ffffff;
+		}
+		
+		.center {
+			margin: auto;
+		}
+	</style>
+</head>
+
+<body id="body">
+	<h1 id="title">Music APIs</h1>
+	<div id="container">
+		<h2>In-class exercise</h2> 
+		<p>Let the user enter the name of a song. The system should return a list of existing recordings in the <a href="https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2">the Musicbrainz API </a>for that song.</p>
+		
+
+		<!-- form for getting user's data		 -->
+
+		<p>Steps:</p>
+		<ol>
+		<li>Create form to retrieve user's data</li>
+		<li>Parse the data from the form to extract the recording's name</li>
+		<li>Determine the MusicBrainz call you have to make to retrieve the list of recordings</li>
+		<li>Make the HTTP request call. You can make use of the httpGet function in this page</li>
+		<li>Parse the returned array </li>
+		<li>Render the data into the Web browser (using divs would be nice)</li>
+		<li>Style the results</li>
+		</ol>
+
+
+
+</body>
+
+</html>
