@@ -44,7 +44,7 @@
 	<h1 id="title">Music APIs</h1>
 	<div id="container">
 		<h2>In-class exercise</h2> 
-		<p>Let the user enter the name of a song. The system should return a list of existing recordings in the <a href="https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2">the Musicbrainz API </a>for that song.</p>
+		<p>Create a webpage that returns the MusicBrainz ID (MBID) for a given user-entered artist.</p>
 		
 
 		<!-- form for getting user's data		 -->
@@ -52,13 +52,58 @@
 		<p>Steps:</p>
 		<ol>
 		<li>Create form to retrieve user's data</li>
-		<li>Parse the data from the form to extract the recording's name</li>
-		<li>Determine the MusicBrainz call you have to make to retrieve the list of recordings</li>
+		<li>Parse the data from the form to extract the name of the artist</li>
+		<li>Determine the MusicBrainz call you have to make to retrieve artists MBIDs</li>
 		<li>Make the HTTP request call. You can make use of the httpGet function in this page</li>
-		<li>Parse the returned array </li>
+		<li>Parse the response from the server </li>
 		<li>Render the data into the Web browser (using divs would be nice)</li>
 		<li>Style the results</li>
 		</ol>
+
+
+
+		<form id="artist">
+			Artist name?
+			<input type="text" name="artist">
+			<input type="button" onclick="queryArtist()" value="Search for MBID for artist!">
+		</form>
+
+		<p id="mbid"></p>
+
+		<script>
+			function httpGet(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send();
+				return xmlHttp.responseXML;
+			}
+
+
+			function queryArtist() {
+				
+				// getting the data from the form
+				var artistNameUser = document.getElementById("artist");
+				artistName = artistNameUser.elements["artist"].value;
+				console.log(artistName);
+
+				// Create the MB call to retrieve the MBID
+				mbBaseURL = "https://musicbrainz.org/ws/2/";
+				mbResource = "artist?query=";
+				queryURL = mbBaseURL + mbResource + artistName;
+				console.log(queryURL);
+
+				// Create the HTTP request 
+				retrievedData = httpGet(queryURL);
+				console.log(retrievedData)
+
+				artistData = retrievedData.getElementsByTagName("artist")[0];
+				artistMBID = artistData.id;
+				console.log(artistMBID);
+
+				document.getElementById("mbid").innerHTML = artistMBID;
+
+			}
+		</script>
 
 
 
