@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Music APIs</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/main.css">
+	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<style>		
+		.div-table {
+			display: table;         
+			width: auto;         
+			margin: auto;
+			background-color: #eee;         
+			border: 1px solid #666666;         
+			border-spacing: 5px; 
+			font-size: 16px;
+		}
+		.div-table-row {
+			display: table-row;
+			width: auto;
+			clear: both;
+		}
+		.div-table-col {
+			float: left; 
+			display: table-column;         
+			width: 400px;         
+			background-color: #ccc;  
+		}
+
+	</style>
+</head>
+
+<body id="body">
+	<div id="container">
+		<h1 id="title">Music APIs</h1>
+		<h2>Assignment 6 Recap</h2> 
+		<p>Retrieve all albums for a given user-entered artist</p>
+		
+		<form id="artist">
+			Artist name?
+			<input type="text" name="artist">
+			<input type="button" onclick="albumdiscographyRetriever()" value="Retrieve albums!">
+		</form>
+
+		<div id="releasesOutput" class="div-table"></div>
+
+		<script>
+			function httpGet(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send();
+				return xmlHttp.responseXML;
+			}
+
+			function queryArtist(artistName) {
+				// Create the MB call to retrieve the MBID
+				mbBaseURL = "https://musicbrainz.org/ws/2/";
+				mbResource = "artist?query=";
+				queryURL = mbBaseURL + mbResource + artistName;
+				// console.log(queryURL);
+
+				// Create the HTTP request 
+				retrievedData = httpGet(queryURL);
+				// console.log(retrievedData);
+
+				artistData = retrievedData.getElementsByTagName("artist")[0];
+				artistMBID = artistData.id;
+				console.log(artistMBID);
+				return artistMBID;
+			}
+
+			function queryReleasegroup(artistMBID) {
+				// Create the MB call to retrieve the release-group albums
+				// http://musicbrainz.org/ws/2/release-group?artist=f467181e-d5e0-4285-b47e-e853dcc89ee7&type=album
+				// console.log(artistMBID)
+				mbBaseURL = "https://musicbrainz.org/ws/2/";
+				mbResource = "release-group?artist=";
+				resourceType = "&type=album";
+				queryURL = mbBaseURL + mbResource + artistMBID + resourceType;
+				// console.log(queryURL);
+
+				// Create the HTTP request 
+				albumData = httpGet(queryURL);
+				// console.log(albumData);
+				return albumData;
+
+			}
+
+			function albumdiscographyRetriever() {
+				// Emptying the div-table
+				document.getElementById('releasesOutput').innerHTML = "";
+				// getting the data from the form
+				var artistNameUser = document.getElementById("artist");
+				artistName = artistNameUser.elements["artist"].value;
+				// console.log(artistName);
+
+				// retrieving MBID
+				artistMBID = queryArtist(artistName);
+
+				// retrieving albumDiscography
+				albumData = queryReleasegroup(artistMBID);
+
+				// Parsing the results
+				releaseGroup = albumData.getElementsByTagName('release-group')
+
+				for (var r = 0; r < releaseGroup.length; r++) {
+					// console.log(releases[r]);
+					albumTitle = releaseGroup[r].getElementsByTagName('title')[0].innerHTML
+					albumreleaseDate = releaseGroup[r].getElementsByTagName('first-release-date')[0].innerHTML
+
+					// creating the table  row
+					tableRow = document.createElement('div')
+					tableRow.setAttribute('class', 'div-table-row')
+
+					// creating the table column
+					tableCol = document.createElement('div')
+					tableCol.setAttribute('class', 'div-table-col')
+					tableCol.innerHTML = albumTitle
+					tableRow.appendChild(tableCol)
+
+					tableCol = document.createElement('div')
+					tableCol.setAttribute('class', 'div-table-col')
+					tableCol.innerHTML = albumreleaseDate
+					tableRow.appendChild(tableCol)
+
+					// Appending the row to the table
+					document.getElementById('releasesOutput').appendChild(tableRow);
+				}
+			}
+		</script>
+		<div class="center">
+			<a href="../index.html">Home</a>
+			<a href="./js_4_1.html">In-class assignment with the Musicbrainz API</a>
+		</div>
+
+</body>
+</html>
+
