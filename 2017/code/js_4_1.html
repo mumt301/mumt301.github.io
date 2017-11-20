@@ -17,17 +17,23 @@
 			border: 1px solid #666666;         
 			border-spacing: 5px; 
 			font-size: 16px;
+			text-align: center;
+			vertical-align: middle;
+
 		}
 		.div-table-row {
 			display: table-row;
 			width: auto;
+			height:auto;
 			clear: both;
+			/*text-align: center;*/
 		}
 		.div-table-col {
 			float: left; 
 			display: table-column;         
-			width: 400px;         
-			background-color: #ccc;  
+			width: 300px;         
+			background-color: #ccc;
+			/*text-align: center;*/
 		}
 
 	</style>
@@ -35,26 +41,18 @@
 
 <body id="body">
 	<div id="container">
+		<!-- <h1 id="title">Music APIs</h1> -->
 		<h2>Assignment 6 Redux</h2> 
-		<p>Retrieve all albums for a given user-entered artist, create a link to the MusicBrainz page for that its release-group, show just the year of the release year, and the album cover.</p>
+		<p>Retrieve all albums for a given user-entered artist, show just the year of the release year, create a link to the MusicBrainz page for that its release-group, and display the album cover.</p>
 		
-		<form id="artist">
+		<form id="artist" class="center">
 			Artist name?
 			<input type="text" name="artist">
 			<input type="button" onclick="albumdiscographyRetriever()" value="Retrieve albums!">
 		</form>
+		<p></p>
 
-		<div id="releasesOutput" class="div-table"></div>
-
-		<div>
-			<p>Steps</p>
-			<ul>
-				<li>Work in pairs!</li>
-				<li>Parse the date to show just the year</li>
-				<li>Create a link on the album name to the MusicBrainz release-group page</li>
-				<li>Display each album cover using CoverArtArchive API</li>
-			</ul>
-		</div>
+      <div id="releasesOutput" class="div-table"></div>
 
 		<script>
 			function httpGet(theUrl) {
@@ -64,7 +62,9 @@
 				return xmlHttp.responseXML;
 			}
 
+
 			function queryArtist(artistName) {
+
 				// Create the MB call to retrieve the MBID
 				mbBaseURL = "https://musicbrainz.org/ws/2/";
 				mbResource = "artist?query=";
@@ -73,12 +73,15 @@
 
 				// Create the HTTP request 
 				retrievedData = httpGet(queryURL);
-				// console.log(retrievedData);
+				// console.log(retrievedData)
 
 				artistData = retrievedData.getElementsByTagName("artist")[0];
 				artistMBID = artistData.id;
-				console.log(artistMBID);
-				return artistMBID;
+				// console.log(artistMBID);
+				return artistMBID
+
+				// document.getElementById("mbid").innerHTML = artistMBID;
+
 			}
 
 			function queryReleasegroup(artistMBID) {
@@ -93,14 +96,38 @@
 
 				// Create the HTTP request 
 				albumData = httpGet(queryURL);
-				// console.log(albumData);
-				return albumData;
+				// console.log(albumData)
+				return albumData
 
 			}
 
 			function albumdiscographyRetriever() {
-				// Emptying the div-table
-				document.getElementById('releasesOutput').innerHTML = "";
+				// Cleaning the table before writing to it
+				outputTable = document.getElementById('releasesOutput');
+				while (outputTable.hasChildNodes()) {
+					outputTable.removeChild(outputTable.firstChild);
+				}
+
+				// Formatting table header 
+             	tableRow = document.createElement('div');
+             	tableRow.setAttribute('class', 'div-table-row');
+
+             	tableCol1 = document.createElement('div');
+             	tableCol1.setAttribute('class', 'div-table-col');
+             	tableCol1.innerHTML = "Release Name";
+             	tableCol2 = document.createElement('div');
+             	tableCol2.setAttribute('class', 'div-table-col');
+             	tableCol2.innerHTML = "Year of Release";
+             	tableCol3 = document.createElement('div');
+             	tableCol3.setAttribute('class', 'div-table-col');
+             	tableCol3.innerHTML = "Cover Art";
+
+             	tableRow.appendChild(tableCol1);
+             	tableRow.appendChild(tableCol2);
+             	tableRow.appendChild(tableCol3);
+
+             	document.getElementById('releasesOutput').append(tableRow);
+
 				// getting the data from the form
 				var artistNameUser = document.getElementById("artist");
 				artistName = artistNameUser.elements["artist"].value;
@@ -114,33 +141,75 @@
 
 				// Parsing the results
 				releaseGroup = albumData.getElementsByTagName('release-group')
+				console.log(releaseGroup)
 
 				for (var r = 0; r < releaseGroup.length; r++) {
 					// console.log(releases[r]);
 					albumTitle = releaseGroup[r].getElementsByTagName('title')[0].innerHTML
 					albumreleaseDate = releaseGroup[r].getElementsByTagName('first-release-date')[0].innerHTML
+					albumreleaseYear = albumreleaseDate.split('-')[0]
 
 					// creating the table  row
 					tableRow = document.createElement('div')
 					tableRow.setAttribute('class', 'div-table-row')
 
-					// creating the table column
+					// creating the table columns
 					tableCol = document.createElement('div')
 					tableCol.setAttribute('class', 'div-table-col')
-					tableCol.innerHTML = albumTitle
+					// tableCol.innerHTML = albumTitle
+
+					// creating an link to the album's page
+					releasegroupMBID = releaseGroup[r].getAttribute('id')
+					releasegroupLink = "https://musicbrainz.org/release-group/" + releasegroupMBID
+					
+					// creating the anchor link 
+					albumLink = document.createElement('a');
+					albumLink.setAttribute('class', "div-table-col");
+					albumLink.setAttribute('target', "_blank");
+					albumLink.setAttribute('href', releasegroupLink);
+					albumLink.innerHTML = releaseGroup[r].getElementsByTagName('title')[0].innerHTML;
+					tableCol.append(albumLink)
+					tableRow.append(tableCol)
+
+					// Creating second column for year
+					tableCol = document.createElement('div')
+					tableCol.setAttribute('class', 'div-table-col')
+					tableCol.innerHTML = albumreleaseYear
 					tableRow.appendChild(tableCol)
 
+
+					// Creating third column for cover art
 					tableCol = document.createElement('div')
 					tableCol.setAttribute('class', 'div-table-col')
-					tableCol.innerHTML = albumreleaseDate
+					// Fecthing the release group cover 
+					releaseGroupImageURL = "https://coverartarchive.org/release-group/" + releasegroupMBID + "/front-250";
+					// <img src="url">
+					releaseGroupImage = document.createElement('img');
+					releaseGroupImage.setAttribute('src', releaseGroupImageURL);
+
+
+					tableCol.appendChild(releaseGroupImage);
 					tableRow.appendChild(tableCol)
 
 					// Appending the row to the table
-					document.getElementById('releasesOutput').appendChild(tableRow);
+					document.getElementById('releasesOutput').append(tableRow);
+
+					// 
+
 				}
+
 			}
+
+
 		</script>
 
+
+
 </body>
+
 </html>
 
+<!-- In-class Exercise -->
+<!-- Print just the year -->
+<!-- Add a link to the album's page on MusicBrainz -->
+<!-- Adding album pictures -->
