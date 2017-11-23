@@ -15,23 +15,22 @@
 
 <body id="body">
     <div id="container">
-        <!-- <h1 id="title">Music APIs</h1> -->
         <h2>JS libraries</h2>      
         <p>You can import JS libraries and use pre-written functionalities</p>
         <p>That allows us to do not need to reinvent the wheel and start coding on top of what other people have already written</p>
         <p>For example, we can import a library that already has functionality to generate a sine wave and use it at will</p>
         <p>From within the HTML code, we can load the library by providing a local link or an Internet link. For example, we can load the Pizzicato JS library directly from the web:</p>
-        <code>script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js</code>
-        <p>Then we can instantiate a sine wave on the browser by just doing
+        <code>&lt;script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js&gt;</code>
+        <p>Then we can instantiate a sine wave on the browser by just doing<br>
 
             <code>
-                var sineWave = new Pizzicato.Sound({
-                    source: 'wave', 
-                    options: {
-                    frequency: 440
-                    }
-                });
-
+                var sineWave = new Pizzicato.Sound({<br>
+                    source: 'wave', <br>
+                    options: {<br>
+                    frequency: 440<br>
+                    }<br>
+                });<br>
+                <br>
                 sineWave.play();
             </code>
 
