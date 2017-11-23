@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>JS libraries</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js></script>
+    <style>     
+    </style>
+</head>
+
+<body id="body">
+    <div id="container">
+        <!-- <h1 id="title">Music APIs</h1> -->
+        <h2>JS libraries</h2>      
+        <p>You can import JS libraries and use pre-written functionalities</p>
+        <p>That allows us to do not need to reinvent the wheel and start coding on top of what other people have already written</p>
+        <p>For example, we can import a library that already has functionality to generate a sine wave and use it at will</p>
+        <p>From within the HTML code, we can load the library by providing a local link or an Internet link. For example, we can load the Pizzicato JS library directly from the web:</p>
+        <code>script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js</code>
+        <p>Then we can instantiate a sine wave on the browser by just doing
+
+            <code>
+                var sineWave = new Pizzicato.Sound({
+                    source: 'wave', 
+                    options: {
+                    frequency: 440
+                    }
+                });
+
+                sineWave.play();
+            </code>
+
+
+
+
+        <h2>In-class assignment</h2> 
+        <p>Using the Pizzicato Javascript library, create a web-based theremin</p>
+        <p>The theremin should be controled by the position of the mouse within a zone of the screen (you can use a div for this). The theremin should generate sound only when the mouse is inside this zone.</p>
+        <p>Horizontal axis will control the frequency of the theremin, and the vertical axis the level</p>
+
+
+        <p>Steps:</p>
+        <ol>
+        <li>Create a container box (using a div and a css for setting the size)</li>
+        <li>Create two functions: one that will be called when the mouse is inside the div and another one that will be called when the mouse is out of the div. You may want to use the events 'onmousemove' and 'onmouseleave'</li>
+        <li>Add functionality to get mouse position from within the playback zone. Check the mouse events: event.clientX and event.clientY</li>
+        <li>Load the Pizzicato JS library in your code</li>
+        <li>Instantiate the sineWave</li>
+        <li>Control the sound level and frequency with the mouse position. Check the ranges.</li>
+        <li>Add the ability to stop the sound if mouse is outside of the playback zone</li>
+        <li>Add a delay</li>
+        </ol>
+    </div>
+
+    <script>
+        var sineWave = new Pizzicato.Sound({ 
+            source: 'wave', 
+            options: {
+                frequency: 440
+            }
+        });
+
+        // sineWave.play();
+</script>
+</body>
+</html>
