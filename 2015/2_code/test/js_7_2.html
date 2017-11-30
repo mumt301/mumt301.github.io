@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>JavaScript class 7</title>
+	<link rel="stylesheet" href="./css/main_2.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body id="body" class="center">
+	<div id="container">
+		<h2>
+			Exercise: biography and picture retriever
+		</h2>
+
+
+		<form id="artist">
+			<input type="text" name="name">
+			<input type="button" onclick="fetchPicture()" value="Retrieve data!">
+		</form>
+
+		<p id="results"></p>
+		<p id="pic"></p>
+
+		<script>
+			var apiKey = 'SIKZGGF4TKV8DL8TE'; // USE_YOUR_OWN_ECHONEST_API_KEY_HERE';
+
+			function fetchData() {
+				var x = document.getElementById("artist");
+				var artist = x.elements["name"].value;
+				var url = 'http://developer.echonest.com/api/v4/artist/biographies';
+				var args = {
+					format: 'json',
+					api_key: apiKey,
+					name: artist,
+					license: 'cc-by-sa',
+					results: 1
+				};
+				// 				JSON CALL
+				$.getJSON(url, args,
+					function(data) {
+						$("#results").append("<p align='left'>" + data.response.biographies[0].text + "</p>");
+// 						$("#results").append("<br>");
+						$("#results").append("Site: " + data.response.biographies[0].site);
+					}
+				)
+			}
+		</script>
+
+		<script>
+			var lastfmapiKey = '57ee3318536b23ee81d6b27e36997cde'; // USE_YOUR_OWN_LASTFM_API_KEY_HERE';
+
+			function fetchPicture() {
+				var x = document.getElementById("artist");
+				var artistname = x.elements["name"].value;
+				var url = 'http://ws.audioscrobbler.com/2.0/';
+				var args = {
+					method: 'artist.getinfo',
+					api_key: lastfmapiKey,
+					artist: artistname,
+					format: 'json'
+				};
+				/* 			console.log(url + args) */
+				$.getJSON(url, args,
+					function(data) {
+						console.log(data);
+						$("#results").empty();
+						imageLink = data.artist.image[3]["#text"]
+						console.log('<img src="' + imageLink + '" align="left">')
+						$("#results").append('<img src="' + imageLink + '" align="left" style="padding:0px 15px 0px 0px"> ')
+						fetchData()
+					})
+			}
+		</script>
+		<div>
+	<a href="http://the.echonest.com/">
+		<img src="./img/echonest.png" width=100px>
+		</a>
+		<a href="http://www.last.fm/">
+		<img src="./img/lastfm.png" width=80px>
+		</a>
+			
+		</div>
+	
+	</div>
+</body>
+
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>JavaScript class 4</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./css/main.css">
+	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
+<body id="body">
+	<h1 id="title">JavaScript class 4</h1>
+	<div id="container">
+
+		<h2>
+			Using the data from forms in JavaScript
+		</h2> We usually want to use the data a user has entered in a form. To accomplishing this, we follow the same procedure explained last class. In other words, we first create the form:
+		<code><pre>
+&ltform id="query"&gt
+	User name: &ltinput type="text" name="name"&gt
+	Artist name: &ltinput type="text" name="artist"&ltbr&gt
+	&ltinput type="button" onclick="queryData()" value="Retrieve data"&gt
+&lt/form&gt
+		</pre></code> When the user press the "Retrieve" button, the <code>queryData()</code> function is called. If we want to know the name of the user and the name of the artist about which the user wants to retrieve some information, we can parse it from
+		the data passed from the HTML form to the function.
+
+		<code><pre>&ltscript&gt
+	function queryData(){
+		var x = document.getElementById("query");
+		userName = x.elements["name"].value;
+		artistName = x.elements["artist"].value;
+		console.log(userName, artistName);
+		document.getElementById("queryResult").innerHTML = 
+			userName + ", you are asking for information about " + artistName
+		}
+&lt/script&gt
+		</pre></code> This script prints the values of <code>userName</code> and <code>artistName</code> into the HTML element with ID <code>queryResult</code>, and so we create it:
+
+		<code><pre>&ltp id="queryResult"&gt&lt/p&gt
+		</pre></code> Finally, a working version of the code:
+
+		<form id="query">
+			User name:
+			<input type="text" name="name"> Artist name:
+			<input type="text" name="artist">
+			<br>
+			<input type="button" onclick="queryData()" value="Retrieve">
+		</form>
+
+		<p id="queryResult">
+		</p>
+
+		<p id="retrievedResult">
+		</p>
+		<script>
+			function queryData() {
+				var x = document.getElementById("query");
+				userName = x.elements["name"].value;
+				artistName = x.elements["artist"].value;
+				console.log(userName, artistName);
+				document.getElementById("queryResult").innerHTML =
+					userName + ", you are asking for information about " + artistName
+				queryURL = "http://developer.echonest.com/api/v4/artist/biographies?api_key=&name=" + artistName + "&format=xml&results=10&start=0"
+				retrievedData = httpGet(queryURL)
+				document.getElementById("retrievedResult").innerHTML = retrievedData;
+			}
+		</script>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<h3>In-class exercise</h3>
+		<p> Let's create a form that ask a user for her name and current city of residence.</p>
+		<p> When the user press the submit button, a message with the text
+			<p><b> <em>userName</em>, the weather for <em>cityName</em> is great! </b></p>
+		</p>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<h2>
+			Doing more interesting things with data entered in forms
+		</h2>
+		<p>Can we use data from forms to retrieve information from the Internet?</p>
+
+		<p>SURE!</p>
+		<p>
+			We can create a call to a web service API for accessing part of its data.
+		</p>
+		<p> We need to deal, though, with creating the proper call, and parsing the data</p>
+		<br>
+		<p>
+			Tipically, API calls follow the form
+		</p>
+		<code>http://www.domain.com:1234/path/to/resource?a=b&x=y</code>
+		<p>
+			How can we retrieve the weather for a specific city?
+		</p>
+		<p>
+			Search the web for "weather API"
+		</p>
+
+		<p>
+			<a href="http://openweathermap.org/api" target="new">OpenWeather API!</a>
+		</p>
+
+
+		<p> According to the OpenWeather API, the call for getting the current weather is</p>
+
+		<a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal</a>
+
+		<p> We missed the API key!</p>
+		<a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c</a>
+
+		<p>
+			When querying an API from a webpage, however, we use Javascript to create the query, and we store the response in a variable in order to parse the data, and display it at will
+		</p>
+
+		<form id="city">
+			City?
+			<input type="text" name="city">
+			<input type="button" onclick="queryCity()" value="Weather!">
+		</form>
+		<p id="weather" font-size=50px>
+		</p>
+	
+		<script>
+			function queryCity() {
+				var x = document.getElementById("city");
+				city = x.elements["city"].value;
+				// 				console.log(city);
+				// 				queryURL = "http://api.openweathermap.org/data/2.5/weather?APPID=84333ed1e3b5de0a85ebd078cd8f713c&q=".concat(city);
+				queryURL = "http://api.openweathermap.org/data/2.5/weather?APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml&q=".concat(city);
+				console.log(queryURL);
+
+				retrievedData = httpGet(queryURL);
+				// 				console.log(retrievedData);
+				temperature = retrievedData.getElementsByTagName("temperature")[0];
+				currentTemperature = Math.round((temperature.getAttribute("value") - 273.15) * 10) / 10;
+				retrievedCity = retrievedData.getElementsByTagName("city")[0].getAttribute("name");
+				sky = retrievedData.getElementsByTagName("weather")[0].getAttribute("value");
+				document.getElementById("weather").innerHTML =
+					"Current temperature and conditions for " +
+					retrievedCity + " now are: " +
+					currentTemperature + " celsius degrees with " + sky;
+			}
+
+			function httpGet(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send();
+				return xmlHttp.responseXML;
+			}
+		</script>
+
+
+		<p>
+			<a href="./js_5.html">Go to Javascript class 5 about accessing the Musicbrainz API</a>
+		</p>
+
+	</div>
+
+</body>
+
+
+</html>

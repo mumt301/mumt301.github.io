@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Intro to JavaScript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
+<body id="body">
+    <h1 id="title">Forms and inputs</h1>	
+    <div id="container">
+        <p>
+            HTML forms are used to collect user input. HTML forms can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more.</p> 
+
+        <p>Forms' syntax uses the <code>form</code> tag to create an HTML form, then</p>
+        <ul>
+            <li>the <code>input</code> element is used to select user information,</li>
+            <li>the <code>type</code> attribute to specify the type of data, and</li>
+            <li>the <code>name</code> attribute stores the user-entered data</li>
+        </ul>
+
+        
+          
+        
+        
+        <p>A simple example of an input text field would be:</p>
+
+        <code><pre>
+        &ltform&gt
+            &ltp&gt
+                User name:
+                &ltinput type="text" name="userName"&gt
+            &lt/p&gt
+            &ltp&gt
+                Artist name:
+                &ltinput type="text" name="artistName"&gt
+            &lt/p&gt
+        &lt/form&gt
+        </pre></code>
+        <form>
+            <p>
+                User name:
+                <input type="text" name="userName">
+            </p>
+            <p>
+                Artist name:
+                <input type="text" name="artistName">
+            </p>
+        </form>
+
+
+
+        <p>A form can contain different types of elements (e.g., text, password fields, radio buttons, check buttons, ...)</p>
+
+
+        <code><pre>
+        &ltform&gt
+            User name:
+            &ltinput type="text" name="name"&gt
+            &ltinput type="radio" name="sex" value="male"&gtMale
+            &ltinput type="radio" name="sex" value="female"&gtFemale
+            &ltbr&gtPassword:
+            &ltinput type="password" name="pwd"&gt
+            &ltbr&gtArtist name:
+            &ltinput type="text" name="artist"&gt
+            &ltbr&gt
+            &ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names
+            &ltbr&gt
+            &ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names
+        &lt/form>
+        </pre></code>
+
+
+
+
+        <form>
+            User name:
+            <input type="text" name="name">
+            <input type="radio" name="sex" value="male">Male
+            <input type="radio" name="sex" value="female">Female
+            <br>Password:
+            <input type="password" name="pwd">
+            <br>Artist name:
+            <input type="text" name="artist">
+            <br>
+            <input type="checkbox" name="retrieve" value="discography">Retrieve album names
+            <br>
+            <input type="checkbox" name="retrieve" value="members">Retrieve member names
+        </form>
+
+        
+        <p>
+            <a href="http://www.w3schools.com/html/html_forms.asp">HTML forms and input link in W3 Schoold</a>
+        </p>
+        
+        <h2>
+			Using the data from forms in JavaScript
+		</h2>
+        We usually want to use the data a user entered into a form. To accomplish this, we first create the form:
+
+        <code><pre>
+&ltform id="query"&gt
+	User name: &ltinput type="text" name="userName"&gt
+	&ltinput type="radio" name="sex" value="male"&gt Male
+	&ltinput type="radio" name="sex" value="female"&gt Female&ltbr&gt
+	Password: &ltinput type="password" name="pwd"&gt&ltbr&gt
+	Artist name: &ltinput type="text" name="artistName"&gt&ltbr&gt
+	&ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names&ltbr&gt
+	&ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names&ltbr&gt
+&lt/form&gt
+		</pre></code>
+
+        <p> we add to the form a button that, when clicked, calls a function
+        <code><pre>
+        &ltinput type="button" onclick="queryData()" value="Retrieve"&gt
+        </pre></code>
+
+        <p>and then we call a function which can retrieve the data from within the elements attached to the DOM.
+        </p>
+        <code><pre>
+        var x = document.getElementById("query");
+        userName = x.elements["userName"].value;
+        artistName = x.elements["artistName"].value;
+        </pre></code>
+
+        <p>and then we finally can do something with that data.</p>
+
+        <p>For example, if we want to use the user name and the artist name from the previous form:</p>
+        <p>1. When the user press the "Retrieve" button, the <code>queryData()</code> function is called. 
+        </p>
+
+<!--         <form id="query">
+            User name:
+            <input type="text" name="name">
+            <br>Artist name:
+            <input type="text" name="artist"><br>
+            <input type="button" onclick="queryData()" value="Retrieve">
+        </form> -->
+
+        <p>2. We then get the values from the elements in the DOM</p>
+        <p>3. And we finally do something with those values. For example, we add them as the content of some of element of the DOM or we create a request to another server.</p>
+
+<!--         <code><pre>&ltscript&gt
+	function queryData(){
+		var x = document.getElementById("query");
+		userName = x.elements["name"].value;
+		artistName = x.elements["artist"].value;
+		console.log(userName, artistName);
+		document.getElementById("queryResult").innerHTML = 
+			userName + ", the data you want for " + artistName + " is:"
+		}
+&lt/script&gt
+		</pre></code>
+        This script prints the values of <code>userName</code> and <code>artistName</code> into the HTML element with ID <code>queryResult</code>, and so we create it:
+
+        <code><pre>&ltp id="queryResult"&gt&lt/p&gt
+		</pre></code>
+ -->
+        <br>
+        <p> In-class assignment: create a form for asking the name of a user and the name of an artist for which she or he is looking for information</p>
+        <p>The resulting information should print a message to the user concerning her/his name an the artist she/he is looking information for.</p>
+
+
+<!--         <p>Finally, a working version of the code:</p>
+
+        <form id="query">
+            User name:
+            <input type="text" name="name">
+            <input type="radio" name="sex" value="male">Male
+            <input type="radio" name="sex" value="female">Female
+            <br>Password:
+            <input type="password" name="pwd">
+            <br>Artist name:
+            <input type="text" name="artist">
+            <br>
+            <input type="checkbox" name="retrieve" value="biography">Retrieve biography
+            <input type="button" onclick="queryData()" value="Retrieve">
+        </form>
+
+        <p id="queryResult">
+        </p>
+
+        <p id="retrievedResult">
+        </p> -->
+
+
+        <script>
+
+
+
+
+            function queryData() {
+                var x = document.getElementById("query");
+                userName = x.elements["name"].value;
+                artistName = x.elements["artist"].value;
+                console.log(userName, artistName);
+                document.getElementById("queryResult").innerHTML =
+                    userName + ", the biography you want for " + artistName + " is:"
+                queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=14cf98aa1958c4d8ef3f6bf5509464e8&format=xml"
+                
+                retrievedData = httpGet(queryURL);
+
+                parsedPage = miniPage(retrievedData);
+                
+                document.getElementById('retrievedResult').innerHTML = '';
+                document.getElementById('retrievedResult').appendChild(parsedPage);
+
+            }
+
+            function httpGet(theUrl) {
+                var xmlHttp = null;
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", theUrl, false);
+                xmlHttp.send();
+                return xmlHttp.responseXML;
+            }
+
+
+            function miniPage(retrievedData) {
+                image = document.createElement('img');
+                imageLink = retrievedData.getElementsByTagName('image')[3].innerHTML;
+                image.src = imageLink;
+                image.style = 'float: left;'
+                
+
+                bio = document.createElement('p');
+                bioContent = retrievedData.getElementsByTagName('content')[0].innerHTML;
+                bio.innerHTML = bioContent;
+
+                mp = document.createElement('div');
+                mp.id = 'bioContainer';
+                mp.appendChild(image);
+                mp.appendChild(bio);
+                return mp;
+            }
+
+
+
+        </script>
+
+
+        <div>
+            <a href="js_2_3_inclass.html">In-class assignment</a>
+        </div>
+        <br>
+
+        <div class="center">
+            <a href="../index.html">MUMT301-2016 Home</a> 
+        </div>
+
+    </div>
+
+</body>
+
+
+</html>

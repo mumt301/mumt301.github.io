@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>JavaScript class 7</title>
+	<link rel="stylesheet" href="../css/main.css">
+
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+	<style>
+	</style>
+
+</head>
+
+
+
+<div id="container">
+
+	<body id="body">
+		<h1>JavaScript class 7</h1>
+
+		<h2 id="draggable1">jQuery</h2>
+
+		<p>jQuery is a feature-rich JavaScript library</p>
+		<p>It is aimed to simplify many operations in JS</p>
+		<p>A library is a set of tools, which makes programmer's life easier</p>
+		<p>Libraries must be loaded in order to be used</p>
+
+		
+		<h2 id="draggable2">DOM manipulation</h2>
+
+		<div>
+			Select the <code>button</code> element with the class "continue" and change its HTML to 'Next Step...'
+		</div>
+		<td class="code">
+			<pre><div class="container"><div class="line"><code>$( <span class="string">&quot;button.continue&quot;</span> ).html( <span class="string">&quot;Next Step...&quot;</span> )</code></div></div></pre>
+		</td>
+
+		<button class="continue">Prepare the rocket</button><div id="hoverId"></div>
+
+		<p><a href="http://jqueryui.com/demos/" target="_blank">UI demos and documentation</a></p>
+		<p><a href="http://www.w3schools.com/jquery/default.asp" target="_blank">More examples and documentation</a></p>
+
+		<h2>
+			Event handling
+		</h2>
+		 <p> When any <code>&ltp&gt</code> tag is clicked, we expect to see '<code>&ltp&gt</code> was clicked' in the console.</p>
+		 <code>
+		 		$( "p" ).on( "click", function() {
+		 			<blockquote>console.log( "<code>&ltp&gt</code> was clicked" );</blockquote>
+		 			<blockquote>});</blockquote>
+		</code>
+
+		<p>Many events, but only one event handler</p>
+		<button id="button2"><div id="hover2">This is a button</div></button>
+
+		<h2>
+			Ajax (Asynchronous JavaScript and XML)
+		</h2>
+		<div>
+			Call the OpenWeather service with the query parameter <code>city</code> and replace the element <code>#weatherId</code> with the returned weather conditions for the given city.
+		</div>
+
+
+
+
+		<form id="weatherForm">
+		<p>Enter city name and click over the field</p>
+			<input type="text" name="cityName">
+			<input type="button" value="Weather!" id="weatherButton">
+		</form>
+
+		<div id="weatherId"></div>
+
+
+
+		<div id="check">
+
+			<p>
+				For HTTP calls, check
+				<a href="http://api.jquery.com/jquery.getjson/">http://api.jquery.com/jquery.getjson/</a>
+			</p>
+		</div>
+
+		<p>How can we retrieve images from Flickr by using tags from its community?</p>
+		<p><a href="https://www.flickr.com/services/feeds/docs/photos_public/">Check the Flickr API!</a></p>
+		
+		<form id="imageQuery">Would you like to retrieve images of?
+			<input type="text" name="imageTag">
+			<input type="button" onclick="fetchImages()" value="Go!">
+		</form>	
+		
+		
+		<div id="images"></div>
+
+
+</div>
+</body>
+
+<script>
+
+	// DRAGGABLE ELEMENTS
+	$( "#draggable1" ).draggable();
+	$( "#draggable2" ).draggable();
+
+	// ONE HANDLER, MANY EVENTS
+	$( "#draggable1" ).on({
+	    mouseenter: function() {
+	        $("#draggable1").css( "color", "red" );
+	    },
+	    mouseleave: function() {
+	        $("#draggable1").css( "color", "black" );
+	    }
+	});	
+	
+	// CHANGING ELEMENTS
+	$("button.continue").click(function() {
+		$("button.continue").html("Rocket launched ...");
+		});
+
+
+	// CLICKED PARAGRAPH}
+	$( "p" ).on( "click", function() {
+    console.log( "<p> was clicked" );
+	});
+
+	$( "#button2" ).on({
+	    mouseenter: function() {
+	        $("#hover2").html( "Hovered over the button" );
+	    },
+	    mouseleave: function() {
+	        $("#hover2").html( "Mouse left the button" );
+	    },
+	    click: function() {
+	        $("#hover2").html( "Clicked on the button" );
+	    }
+	});
+
+
+	// WEATHER
+	$( "#weatherButton" ).click(function() {
+		var formData = $("#weatherForm").serializeArray()
+		var city = formData[0]['value']
+		var weatherResponse = fetchWeather(city);
+	})
+	
+	function fetchWeather(city) {
+		var url = "http://api.openweathermap.org/data/2.5/weather";
+		var args = {
+			APPID: "84333ed1e3b5de0a85ebd078cd8f713c",
+			q: city
+		}
+
+		$.getJSON(url, args,
+			function(data) {
+				var weatherDescription = data.weather[0].description;
+				$( "#weatherId" ).html(weatherDescription + ' in ' + city);
+			})
+	};
+
+</script>
+
+</html>

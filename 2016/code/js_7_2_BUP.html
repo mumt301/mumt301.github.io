@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>JavaScript class 7</title>
+	<link rel="stylesheet" href="../css/main.css">
+
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body id="body" class="center">
+	<div id="container">
+		<h2>
+			Exercise: Retrieve genres from Spotify and tags from Last.fm for a given artist
+		</h2>
+
+
+		<form id="artistForm">
+			<input type="text" name="name">
+			<input type="button" onclick="fetchData()" value="Retrieve data!">
+		</form>
+
+		<div id="genres"></div>
+		<div id="pic"></div>
+
+		<script>
+			function artistSpotifyGenres(artistName) {
+				var url = "https://api.spotify.com/v1/search"
+				var args = {
+					type: "artist",
+					q: artistName,
+				};
+
+				$.getJSON(url, args,
+					function(data) {
+						var url = "https://api.spotify.com/v1/artists/"
+						var spotifyId = data.artists.items[0].id;
+						$.getJSON(url.concat(spotifyId), 
+							function(data) {
+								$.each( data.genres, function( i, genre ) {
+								$("<p>").html(genre).appendTo("#genres")
+								})
+						})
+				})
+			}
+
+			function fetchData() {
+				var artistForm = $("#artistForm").serializeArray();
+				var artistName = artistForm[0].value;
+				var spotifyId = artistSpotifyGenres(artistName);
+				// console.log(spotifyId);
+
+			}
+
+
+
+			// function fetchData() {
+			// 	var x = document.getElementById("artist");
+			// 	var artist = x.elements["name"].value;
+			// 	var url = 'http://developer.echonest.com/api/v4/artist/biographies';
+			// 	var args = {
+			// 		format: 'json',
+			// 		api_key: apiKey,
+			// 		name: artist,
+			// 		license: 'cc-by-sa',
+			// 		results: 1
+			// 	};
+
+			// 	// jQuery CALL
+			// 	$.getJSON(url, args,
+			// 		function(data) {
+			// 			$("#results").append("<p align='left'>" + data.response.biographies[0].text + "</p>");
+			// 			$("#results").append("Site: " + data.response.biographies[0].site);
+			// 		}
+			// 	)
+
+			// var lastfmapiKey = '57ee3318536b23ee81d6b27e36997cde'; // USE_YOUR_OWN_LASTFM_API_KEY_HERE';
+
+			// function fetchPicture() {
+			// 	var x = document.getElementById("artist");
+			// 	var artistname = x.elements["name"].value;
+			// 	var url = 'http://ws.audioscrobbler.com/2.0/';
+			// 	var args = {
+			// 		method: 'artist.getinfo',
+			// 		api_key: lastfmapiKey,
+			// 		artist: artistname,
+			// 		format: 'json'
+			// 	};
+
+			// 	$.getJSON(url, args,
+			// 		function(data) {
+			// 			console.log(data);
+			// 			$("#results").empty();
+			// 			imageLink = data.artist.image[3]["#text"]
+			// 			console.log('<img src="' + imageLink + '" align="left">')
+			// 			$("#results").append('<img src="' + imageLink + '" align="left" style="padding:0px 15px 0px 0px"> ')
+			// 			fetchData()
+			// 		})
+			// }
+		</script>
+<!-- 		<div>
+	<a href="http://the.echonest.com/">
+		<img src="./img/echonest.png" width=100px>
+		</a>
+		<a href="http://www.last.fm/">
+		<img src="./img/lastfm.png" width=80px>
+		</a>
+			
+		</div> -->
+	
+	</div>
+</body>
+
+
+</html>
