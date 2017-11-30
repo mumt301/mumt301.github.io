@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Javascript 1</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js></script>
+    <style>
+    #container {
+    width: 600px;
+    height: 300px;
+    border: 1px solid black;}
+    </style>
+</head>
+
+<body>
+	<div id="container" onmousemove="thereminControl(event)" onmouseleave="thereminOff(event)"></div>
+
+	<script>
+	function thereminControl(e) {
+        var x = e.clientX;
+        var y = e.clientY;
+        console.log(x, y);
+        sineWave.volume = 1 - y/309;
+        sineWave.frequency = x*2;
+        sineWave.play();
+    }
+
+    function thereminOff(e) {
+    	sineWave.pause();
+    }
+
+    var sineWave = new Pizzicato.Sound({ 
+        source: 'wave', 
+        options: {frequency: 440, volume: 0.5}
+    });
+
+    var delay = new Pizzicato.Effects.Delay({
+	    feedback: 0.5,
+	    time: 0.4,
+	    mix: 0.5 
+	    });
+    sineWave.addEffect(delay);
+    
+	</script>
+</body>
+</html>
