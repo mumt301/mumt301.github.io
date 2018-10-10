@@ -1,12 +1,11 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
-* {font-family: Georgia;
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -15,11 +14,23 @@ body {
     line-height: 50px;
     text-align: left;
 }
+
 h1 {
+    font-family: Georgia;
     font-size: 100px;
     color: #ffc500;
-
 }
+
+h2 {
+    font-family: Lato;
+    color: #000000;
+}
+
+p {
+  font-family: Lato;
+  color: #ffffff;
+}
+
 .bio {
     position:absolute;
     font-size: 100px;
@@ -38,6 +49,35 @@ h1 {
     top: 60%;
 }
 
+/* Create four equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 200px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Create four equal columns that floats next to each other */
+.columnstudent {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 100px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.rowstudent:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
 
 img {
@@ -48,9 +88,15 @@ img {
     top: 50%;
 }
 
-ul li {
-    font-size: 40px;
-}
+a:link {
+  color: #000000;
+  }
+a:visited {
+  color: #ffffff;
+  }
+a:hover {
+  color: #ff3300;
+  }
 
 
 #highlight1 {
@@ -65,81 +111,3 @@ ul li {
 #highlight4 {
     color: #9f0037;
 }
-
-
-/* html {
-  font-size: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-body {
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 24px;
-  line-height: 1.42857143;
-  color: #333;
-  background-color: #eee;
-}
-
-#container {
-	font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 24px;
-  line-height: 1.42857143;
-  color: #333;
-   width: 85%;
-   margin: auto;
-}
-
-#results {
-	font-size:14px;
-	color: red;
-}
-
-h1 {
-	width: 100%;
-	font-size: 3.5em;
-  text-align: left;
-}
-
-h2 {
-  width: 100%;
-  margin: auto;
-  font-size: 2em;
-}
-
-h6 {
-	font-size: 10px;
-}
-
-
-
-code {
-	color: blue;
-	font-size:20px;
-}
-.center {
-    text-align: center;
-}
-
-#beatles_table
-{
-font-family:"Lato", Arial, Helvetica, sans-serif;
-width:75%;
-border-collapse: collapse;
-margin: auto;
-font-size: 15px;
-padding:3px 7px 2px 7px;
-
-}
-#discography_table td, #discography_table th
-{
-font-size:1.2em;
-border:1px solid #000;
-padding:3px 7px 2px 7px;
-}
-
-.division{
-width:25%;
-height:100px;
-float:left;
-}
- */
