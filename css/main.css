@@ -64,21 +64,6 @@ p {
     clear: both;
 }
 
-/* Create four equal columns that floats next to each other */
-.columnstudent {
-    float: left;
-    width: 25%;
-    padding: 10px;
-    height: 100px; /* Should be removed. Only for demonstration */
-}
-
-/* Clear floats after the columns */
-.rowstudent:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 
 img {
     width: 85%;
