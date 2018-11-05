@@ -65,6 +65,7 @@
 		</p>
 		<p>Steps</p>
 		<ul>
+			<li>Create the HTML skeleton</li>
 			<li>Create the form</li>
 			<li>Create the empty element to render the results</li>
 			<li>Create a function that gets called when submitting data through form</li>
@@ -77,10 +78,49 @@
 
 
 		<!-- The form -->
+		<form id="city">
+			City?
+			<input type="text" name="cityName">
+			<input type="button" onclick="queryCity()" value="Weather!">
+		</form>
 
 		<!-- The empty element to put the results -->
+		<p id="weather"></p>
 
-		<!-- The function -->
+		<script>
+			function queryCity() {
+				// EXTRACTING THE DATA FROM THE FORM
+				var x = document.getElementById("city");
+				city = x.elements["cityName"].value;
+
+				queryURL = "http://api.openweathermap.org/data/2.5/weather?APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml&units=metric&q=".concat(city);
+				console.log(queryURL);
+
+				// MAKING THE QUERY
+				retrievedData = httpGet(queryURL);
+				console.log(retrievedData);
+
+				// DATA PARSING
+				temperature = retrievedData.getElementsByTagName("temperature")[0];
+				currentTemperature = temperature.getAttribute("value");
+				retrievedCity = retrievedData.getElementsByTagName("city")[0].getAttribute("name");
+				sky = retrievedData.getElementsByTagName("weather")[0].getAttribute("value");
+
+				// RENDERING THE DATA
+				document.getElementById("weather").innerHTML =
+					"Current temperature and conditions for " +
+					retrievedCity + " now are: " +
+					currentTemperature + " celsius degrees with " + sky;
+			}
+
+			function httpGet(theUrl) {
+				// FUNCTION TO MAKE THE HTTP REQUEST
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send();
+				return xmlHttp.responseXML;
+			}
+		</script>
 
 
 		<p>
