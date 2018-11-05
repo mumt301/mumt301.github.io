@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>JavaScript class 4</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/main.css">
+	<script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
+<body id="body">
+	<h1 id="title">JavaScript class 4</h1>
+	<div id="container">
+
+
+		<h2>
+			Doing more interesting things with data entered in forms
+		</h2>
+		<p>Can we use data from forms to retrieve information from the Internet?</p>
+
+		<p>SURE!</p>
+		<p>
+			We can create a call to a web service API for retrieving data about some resource that the service may have.
+		</p>
+		<p> We need to deal, though, with creating the proper call and with parsing the response of the service.</p>
+
+		<p>
+			Tipically, API calls follow the form
+		</p>
+		<code>http://www.domain.com:1234/path/to/resource?a=b&x=y</code>
+		<p>
+			How can we retrieve the weather for a specific city?
+		</p>
+		<p>
+			Search the web for "weather API"
+		</p>
+
+		<p>
+			<a href="http://openweathermap.org/api" target="new">OpenWeather API!</a>
+		</p>
+
+
+		<p> According to the OpenWeather API, the call for calling the current weather data for one location by city name is: </p>
+
+		<a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal</a>
+
+		<p> We missed the API key!</p>
+		<a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c</a>
+
+		<p>OpenWeather returns JSON by default, but it can also return other formats (XML and HTML). How? Check their documentation!</p>
+
+		<p>XML</p>
+		<a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml</a>
+
+		<p>HTML</p>
+		<a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=html" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=html</a>
+
+		<p></p>
+
+		<h2>Using the OpenWeather API in our own site</h2>
+		<p>
+			When querying an API from a webpage, however, we use Javascript to create the query, and we store the response in a variable in order to parse the data, and display it at will
+		</p>
+		<p>Steps</p>
+		<ul>
+			<li>Create the form</li>
+			<li>Create the empty element to render the results</li>
+			<li>Create a function that gets called when submitting data through form</li>
+			<li>Extract data from form</li>
+			<li>Create API query</li>
+			<li>How to create HTTP request without a browser? HttpGet!</li>
+			<li>Parse the results!</li>
+			<li>Render the data</li>
+		</ul>
+
+
+		<!-- The form -->
+
+		<!-- The empty element to put the results -->
+
+		<!-- The function -->
+
+
+		<p>
+			<a href="./js_3_MB.html">In-class assignment with the Musicbrainz API</a>
+		</p>
+
+	</div>
+
+</body>
+
+
+</html>
