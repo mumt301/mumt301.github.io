@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>My Funky Theremin</title>
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.js></script>
+    <style>
+    #container {
+    width: 600px;
+    height: 300px;
+    border: 1px solid black;
+    /* width: 100%; */
+    margin: auto;
+    }
+  }
+    </style>
+</head>
+
+<body>
+	<div id="container" onmousemove="thereminControl(event)" onmouseleave="thereminOff(event)"></div>
+
+	<script>
+	function thereminControl(event) {
+        // console.log(event);
+        var x = event.clientX;
+        var y = event.clientY;
+        console.log(x, y);
+        sineWave.volume = 1 - y / 309;
+        sineWave.frequency = x * 2;
+        sineWave.play();
+    }
+
+    function thereminOff(event) {
+    	sineWave.pause();
+    }
+
+    var sineWave = new Pizzicato.Sound({
+        source: 'wave',
+        options: {frequency: 440}
+    });
+
+    var delay = new Pizzicato.Effects.Delay({
+	    feedback: 0.6,
+	    time: 0.4,
+	    mix: 0.5
+	    });
+
+    sineWave.addEffect(delay);
+
+	</script>
+</body>
+</html>
