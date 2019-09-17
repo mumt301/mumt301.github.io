@@ -1,0 +1,18 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    color: white;
+    text-align: center;
+  }
+  .footer {
+    font-size: 20px;
+  }
+  .footer ul {
+    list-style: none;
+  }
+  .footer li {
+    display: inline;
+  }
