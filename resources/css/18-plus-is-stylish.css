@@ -1,0 +1,43 @@
+body {
+    font-family: Georgia;
+    background-color: #dd0000;
+    color: #ffdd11;
+    line-height: 50px;
+}
+
+h1 {
+    font-size: 120px;
+    color: #ffdd00;
+}
+
+h2 {
+    font-size: 50px;
+    color: #ffdd00;
+}
+
+.bio {
+    font-size: 100px;
+}
+
+#highlight1 {
+    color: #ffffff;
+}
+
+#highlight2 {
+    color: #9900ff;
+}
+
+img {
+    width: 90%;
+    opacity: 0.25;
+    position: absolute;
+    left: 5px;
+    top: 55%;
+}
+
+ul li {
+    font-size: 40px;
+    list-style-type: none;
+    color: #ffffff;
+}
+
