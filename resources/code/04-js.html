@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascript 1</title>
+    <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+    <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  </head>
+
+  <body>
+
+      <header class="sticky">
+          <a href="../../index.html" class="logo">MUMT 301</a> 
+          <button><a href="https://mumt301.github.io/mbadea" style="text-decoration: none" target="_blank">Max</a></button>
+          <button><a href="https://mumt301.github.io/mguvendiren" style="text-decoration: none" target="_blank">Merve</a></button>
+          <button><a href="https://mumt301.github.io/jorbach" style="text-decoration: none" target="_blank">Jonah</a></button>
+        </header>        
+
+    <h1 id="title">JavaScript Intro</h1>	
+      <p>All web developers should be proficient in three languages:</p>
+      <ul>
+          <li>HTML to define the content of web pages</li>
+          <li>CSS to specify the layout of web pages</li>
+          <li>JavaScript to program the behavior of web pages</li>
+      </ul>
+
+      <hr>
+      <h2>JavaScript is the programming language of the web
+      <small>All modern HTML pages use JavaScript</small></h2>
+      <p>JavaScript can change HTML elements:
+        <button type="button" onclick="changeTitle()">Change HTML element!</button></p>
+      <p>but it also can change HTML attributes:
+        <a href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_lightbulb" target="_blank"> W3 example</a></p>
+      <p>and HTML styles (CSS):
+        <button type="button" onclick="allRed()">Body in orange</button>
+        <button type="button" onclick="allBlack()">Body in white</button></p>
+        <hr>
+
+      <h2>The JavaScript console<small>A must-use tool!</small></h2>	
+      <ul>
+        <li>Debugging is the process of testing, finding, and reducing bugs (errors) in computer programs. The first known computer bug was a real bug (an insect), stuck in the electronics.</li>
+        <li>If your browser supports debugging (most of them support it), you can use the <code>console.log()</code> from your JavaScript code to display values and messages in the console.</li>
+        <li>Check Chrome's JavaScript console!!!! (CMD+Option+J in Mac OSX)</li>
+      </ul>
+      <hr>
+
+      <h2>JavaScript Syntax</h2>
+        <p>In JavaScript there are variables. These are names to store data values.</p>
+          <pre>
+var x, length;
+x = 5;
+length = 6;</pre>
+          <p>or</p>
+          <pre>
+var x = 5;
+var length = 6;</pre>
+        <p>Arithmetics operations can be performed suing JavaScript variables, as in:</p>
+          <pre>
+var y = 5;
+var x = y + 2;</pre>
+        <hr>
+
+        <h2>JavaScript datatypes<small>Handling different types</small></h2>
+        <h3>Strings</h3>
+        <pre>
+var artistName = "Ratatat ";
+var albumName = "Classics";
+var artistalbumName = artistName + albumName;</pre>
+        <p>or</p>
+        <pre>
+var artistalbumName = artistName.concat(albumName)</pre>
+        <hr>
+  
+        <h3>Numbers</h3>
+        <pre>
+var albumPrice = 17.99;
+var songNumber = 8;</pre>
+        <hr>
+        <h3>Booleans</h3>
+        <pre>
+var listenerHas = true;
+var downloaded = false;</pre>
+        <hr>
+        <h3>Arrays</h3>
+        <p>An array is a special variable that can hold more than one value at a time.</p>
+        <p> Arrays are written in brackets, separated by commas</p>
+        <pre>
+var albums = ["Ratatat", "Classics", "LP3", "LP4"];</pre>
+        <p>You can read or set an array element by referring to its index number.</p>
+        <pre>
+albums[3];
+albums[4] = "Magnifique";</pre>
+  
+        <p>You can read characteristics of the array by looking at its properties. For example, to know the current length of the array:</p>
+        <pre>
+albums.length</pre>
+        <hr>
+
+        <h3>Dictionaries and objects</h3>
+        <p>Dictionary (Key/Value pair collection) is a data type that can be useful. They can contain many values.</p>
+        <pre>
+var release = { albumName: "Classics", 
+              artistName: "Ratatat", 
+              year: 2006, 
+              label: "XL Recordings" };</pre>
+
+
+  
+        <p>New attributes can be easily added</p>
+        <pre>
+release['members'] = "Evan Mast, Mike Stroud"</pre> 
+
+        <p>or</p>
+
+        <pre>
+release.members = "Evan Mast, Mike Stroud"</pre> 
+        <hr>
+
+        <h3>Functions<small>Actions that to perform a particular task</small></h3>
+        
+        <pre>function addition (a, b) {
+          return a + b;
+        }</pre>
+
+        <p>Functions are executed when </p>
+        <ul>
+          <li>are called from JavaScript code</li>
+          <li>triggerd by an event</li>
+          <li>are self-invoked</li>
+        </ul>
+
+        <pre>x = addition(release.artistName, release.albumName)</pre>
+        <hr>
+
+        <h2>JavaScript Events</h2>
+        <p>JavaScript can be used to execute code when events are detected</p>
+        <p>These events are actions that happen to HTML elements. For example:</p>
+        <ul>
+          <li>An HTML element finished loading</li>
+          <a href="https://www.w3schools.com/jsref/event_onload.asp" target="_blank">
+          <code>&ltelement onload="myScript()"&gt</code></a>
+          <li>An HTML input field was changed</li>
+          <a href="https://www.w3schools.com/jsref/event_onchange.asp" target="_blank">
+          <code>&ltselect onchange="myFunction()"&gt</code></a>
+          <li>An HTML button was clicked</li>
+          <a href="https://www.w3schools.com/jsref/event_onclick.asp" target="_blank">
+          <code>&ltbutton type="button" onclick="otherScript()"&gt</code></a>
+        </ul>
+        
+        <p>Click the button to display how many minutes there are left to finish this class</p>
+        <button onclick="displayMinutes()">Minutes to finish this class?</button>
+        <p class="card warning" id="demoMinutes"></p>
+  
+        <script>
+          function displayMinutes() {
+            finishClassUTC = 1569367500;
+            document.getElementById("demoMinutes").innerHTML =  Math.round((finishClassUTC - Date.now() / 1000) / 60) + " minutes to finish. Hurry up!";
+          }
+        </script>
+  
+        <p>The list of possible events can be found <a href="http://www.w3schools.com/jsref/dom_obj_event.asp" target="_blank">here</a>
+        </p>
+        <hr>
+
+
+      <h2>The <code>script</code> tag<small>Your code goes here.</small></h2>
+      <ul>
+        <li>Lines between <code>script</code> tags contain the JavaScript code, and the browser will interpret the code between them as JavaScript.</li>
+        <li>Scripts can be placed in any section of HTML code, however putting scripts at the bottom of the <code>body</code> section of a web page can reduce display time.</li>
+        <li>Separating HTML and JavaScript by putting all the code in one place, is always a good habit.</li>
+        <li>Similarly to CSS files, JavaScript can also be placed in external files. This is practical when reusing the same code.</li>
+        <li>JavaScript files have the file extension <code>.js</code>. To use an external script, put the name of the script file in the source (src) attribute of the <code>script</code> tag:</li> <pre>&ltscript src="myScript.js"&gt&lt/script&gt</pre>
+       </ul>
+
+      <h2>The Document Object Model<small>This is really important!</small></h2>
+      <ul>
+        <li>The Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document</li>
+
+        <li>When a web page is loaded, the browser creates a Document Object Model of the page</li>
+
+        <li>The DOM is constructed as a tree:</li>
+        <div> 
+          <img src="../images/dom.gif" >
+        </div>
+    
+        <li>With the object model, JavaScript gets all the power it needs to create <a href="http://www.w3schools.com/js/js_htmldom_document.asp" target="_blank">dynamic HTML.</a>
+        By doing so, we can select elements from the DOM, change their attributes, and append new elements to it</li>
+        
+      </ul>
+
+
+      <br>
+      <br>
+
+      <h2>JavaScript loops<small>Iterating</small></h2>
+      Loops are good if you want to run the same code over and over again, each time with a different value. For example instead of rendering a list albums for an artist line by line, as in:
+      
+      <pre>&ltp&gtRelease Year Label&lt/p&gt      
+&ltp&gtPlease Please Me 1963 Parlophone&lt/p&gt
+&ltp&gtWith The Beatles 1963 Parlophone&lt/p&gt
+&ltp&gtIntroducing... The Beatles 1964 Vee-Jay Records&lt/p&gt
+&ltp&gtMeet The Beatles! 1964 Capitol Records&lt/p&gt
+&ltp&gtTwist And Shout 1964 Capitol Records&lt/p&gt
+&ltp&gtThe Beatles' Second Album 1964 Capitol Records&lt/p&gt
+&ltp&gtThe Beatles' Long Tall Sally 1964 Capitol Records&lt/p&gt
+...
+      </pre>
+      <p>we could define arrays (or getting them from a database):</p>
+      
+      <pre>var beatles_releases = [{
+        'album': 'Please Please Me',
+        'year': 1963,
+        'label': "Parlophone"
+      }, {
+        'album': 'With the Beatles',
+        'year': 1963,
+        'label': "Parlophone"
+      }, ...]
+    </pre>
+      <br>
+      <p>and then iterate over all elements of the object using a for loop</p>
+      <pre>function discography() {
+        for (row = 0; row < beatles_releases.length; row++) {
+        ... do something ...}
+    </pre>
+
+      <!-- 	Hey MUMT301er! You found where the code where the Beatles' discography function is called -->
+      <button type="button" onclick="discography()">Show me part of The Beatles' discography</button>
+    </div>
+
+    <div id="discography_table">
+      <br>
+    </div>
+
+    <p>But, how to insert images from the record covers?</p>
+    <p><a href="beatles.html">Check the code using div elements instead of table</a><p>
+
+
+
+    <script>
+      function changeTitle() {
+        if (document.getElementById("title").innerHTML != "JavaScript 101") {
+          document.getElementById("title").innerHTML = "JavaScript 101"
+        } else {
+          document.getElementById("title").innerHTML = "JavaScript Intro";
+        }
+
+      }
+
+      function allRed() {
+        var x = document.body;
+        x.style.backgroundColor = "orange";
+      }
+
+      function allBlack() {
+        var x = document.body;
+        x.style.backgroundColor = "white";
+      }
+
+
+      function dateConsole() {
+        console.log(Date());
+      }
+
+      /* You found the arrays that have the data for the discography */
+
+      var beatles_releases = [{
+        'album': 'Please Please Me',
+        'year': 1963,
+        'label': "Parlophone"
+      }, {
+        'album': 'With the Beatles',
+        'year': 1963,
+        'label': "Parlophone"
+      }, {
+        'album': 'Introducing... The Beatles',
+        'year': 1964,
+        'label': "Vee-Jay Records"
+      }, {
+        'album': 'Meet the Beatles',
+        'year': 1964,
+        'label': "Capitol Records"
+      }, {
+        'album': 'Twist and Shout',
+        'year': 1964,
+        'label': "Capitol Records"
+      }, {
+        'album': "The Beatles' Second Album",
+        'year': 1964,
+        'label': "Capitol Records"
+      }, {
+        'album': "The Beatles' Long Tall Sally",
+        'year': 1964,
+        'label': "Capitol Records"
+      }, {
+        'album': "Revolver",
+        'year': 1966,
+        'label': "EMI"
+      }]
+
+      /* Hey MUMT301er! You found the Beatles' discography table! */
+      /*  You can find and check another example at http://jsfiddle.net/aaexj7kt/1/   */
+      /*  You can learn how to style tables at http://www.w3schools.com/css/css_table.asp        */
+      /* Alternatively, you can use <div> instead of <table> to achieve a similar resut */
+
+        function discography() {
+          var table = document.createElement('table');
+          table.id = "beatles_table"
+          for (row = 0; row < beatles_releases.length; row++) {
+            tr = document.createElement('tr');
+            var release_data = Object.keys(beatles_releases[row]);
+            for (col = 0; col < Object.keys(beatles_releases[row]).length; col++) {
+              td = document.createElement('td');
+              tr.appendChild(td);
+              td.innerHTML = beatles_releases[row][release_data[col]];
+            }
+            table.appendChild(tr);
+          }
+          document.getElementById("discography_table").appendChild(table);
+        }
+
+    </script>
+    <div class="center">
+      <a href="../index.html">Home</a> 
+      <a href="js_2.html">DOM Model</a>
+    </div>
+  </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
