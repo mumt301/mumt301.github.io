@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Class 4 | JavaScript 101</title>
+    <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+    <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  </head>
+
+  <body onload=discography()>
+    <header class="sticky">
+        <a href="../../index.html" class="logo">MUMT 301</a> 
+        <button><a href="https://mumt301.github.io/mbadea" style="text-decoration: none" target="_blank">Max</a></button>
+        <button><a href="https://mumt301.github.io/mguvendiren" style="text-decoration: none" target="_blank">Merve</a></button>
+        <button><a href="https://mumt301.github.io/jorbach" style="text-decoration: none" target="_blank">Jonah</a></button>
+    </header>       
+    <h2 style="text-align: center">The Beatles Discography</h2>
+      <div id="discography_table"></div>
+
+        <script>
+        var beatles_releases = [{
+                'album': 'Please Please Me ',
+                'year': 1963,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/8148256/130full.jpg'
+            }, {
+                'album': 'With the Beatles',
+                'year': 1963,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/3412349/130full.jpg '
+            }, {
+                'album ': "A Hard Day's Night",
+                'year': 1964,
+                'label': 'Parlophone',
+                'img': 'http://pthumb.lisimg.com/image/1445276/130full.jpg'
+            }, {
+                'album': "Beatles for Sale",
+                'year': 1964,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/8148261/130full.jpg'
+            }, {
+                'album': "Help!",
+                'year': 1965,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/8148265/130full.jpg'
+            }, {
+                'album': "Rubber Soul",
+                'year': 1965,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/8148303/130full.jpg'
+            }, {
+                'album': "Revolver",
+                'year': 1966,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/8148268/130full.jpg'
+            }, {
+                'album': "Sgt.Pepper's Lonely Hearts Club Band",
+                'year ': 1967,
+                'label ': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/1237587/130full.jpg'
+            }, {
+                'album': "Magical Mistery Tour",
+                'year': 1967,
+                'label': "Parlophone",
+                'img': 'http://pthumb.lisimg.com/image/51302/130full.jpg'
+            }, {
+                'album': "The Beatles",
+                'year': 1968,
+                'label': "Apple",
+                'img': 'http://pthumb.lisimg.com/image/1380089/130full.jpg'
+            }, {
+                'album': "Yellow Submarine",
+                'year': 1969,
+                'label': "Apple",
+                'img': 'https://images-na.ssl-images-amazon.com/images/I/51zCyl5C5QL._SL500_AA130_.jpg'
+            }, {
+                'album': "Abbey Road",
+                'year': 1969,
+                'label': "Apple",
+                'img': 'http://pthumb.lisimg.com/image/8148288/130full.jpg'
+            }, {
+                'album': "Let It Be",
+                'year': 1970,
+                'label': "Apple",
+                'img': 'http://pthumb.lisimg.com/image/8148297/130full.jpg'
+            }];
+        
+            function discography() {
+              container = document.createElement('div');
+              container.className = 'container';
+
+              // Iterate over the rows
+              for ( r = 0; r < beatles_releases.length; r++ ) {
+                column_keys = Object.keys(beatles_releases[r]);
+                row = document.createElement('div');
+                row.className = 'row';
+                // Iterate over the columns
+                for (c = 0; c < Object.keys(column_keys).length; c++) {
+
+                  col = document.createElement('div');
+                  col.className = 'col-sm-12 col-md-3 col-lg-3';
+                  col.innerHTML = beatles_releases[r][column_keys[c]];
+                  // If it is the last column, treat it like an image link
+                  if (c == 3) {
+                    var image = document.createElement('img');
+                    image.setAttribute('src', beatles_releases[r][column_keys[c]]);
+                    row.appendChild(image);
+                  } else {
+                    row.appendChild(col);  
+                  }
+                }
+                container.appendChild(row);
+              }
+              
+              document.getElementById("discography_table").appendChild(container);
+            }
+        </script>
+
+    <footer class="sticky">
+      <div class="container" style="text-align: center">
+        <a href="./04-grids.html">Go to Class 4 home </a>
+      </div>
+    </footer>
+            
+	</body>
+</html>
