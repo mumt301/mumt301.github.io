@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Javascript 1</title>
+    <title>Class 4 | JavaScript 101</title>
     <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
     <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
   </head>
 
   <body>
-
       <header class="sticky">
           <a href="../../index.html" class="logo">MUMT 301</a> 
           <button><a href="https://mumt301.github.io/mbadea" style="text-decoration: none" target="_blank">Max</a></button>
@@ -28,12 +27,14 @@
       <h2>JavaScript is the programming language of the web
       <small>All modern HTML pages use JavaScript</small></h2>
       <p>JavaScript can change HTML elements:
-        <button type="button" onclick="changeTitle()">Change HTML element!</button></p>
+        <button type="button" onclick=changeTitle()>Change HTML element!</button>
+        <button type="button" onclick=changeMode()>Change to Dark side!</button>
+      </p>
       <p>but it also can change HTML attributes:
         <a href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_lightbulb" target="_blank"> W3 example</a></p>
       <p>and HTML styles (CSS):
-        <button type="button" onclick="allRed()">Body in orange</button>
-        <button type="button" onclick="allBlack()">Body in white</button></p>
+        <button type="button" onclick=allRed()>Body in orange</button>
+        <button type="button" onclick=allBlack()>Body in white</button></p>
         <hr>
 
       <h2>The JavaScript console<small>A must-use tool!</small></h2>	
@@ -144,11 +145,11 @@ release.members = "Evan Mast, Mike Stroud"</pre>
           <code>&ltselect onchange="myFunction()"&gt</code></a>
           <li>An HTML button was clicked</li>
           <a href="https://www.w3schools.com/jsref/event_onclick.asp" target="_blank">
-          <code>&ltbutton type="button" onclick="otherScript()"&gt</code></a>
+          <code>&ltbutton type="button" onclick=otherScript()&gt</code></a>
         </ul>
         
         <p>Click the button to display how many minutes there are left to finish this class</p>
-        <button onclick="displayMinutes()">Minutes to finish this class?</button>
+        <button onclick=displayMinutes()>Minutes to finish this class?</button>
         <p class="card warning" id="demoMinutes"></p>
   
         <script>
@@ -205,7 +206,7 @@ release.members = "Evan Mast, Mike Stroud"</pre>
 &ltp&gtThe Beatles' Long Tall Sally 1964 Capitol Records&lt/p&gt
 ...
       </pre>
-      <p>we could define arrays (or getting them from a database):</p>
+      <p>we could a define a data structure like:</p>
       
       <pre>var beatles_releases = [{
         'album': 'Please Please Me',
@@ -217,23 +218,20 @@ release.members = "Evan Mast, Mike Stroud"</pre>
         'label': "Parlophone"
       }, ...]
     </pre>
-      <br>
-      <p>and then iterate over all elements of the object using a for loop</p>
+      <p>and then iterate over all elements of the array using a for loop</p>
       <pre>function discography() {
         for (row = 0; row < beatles_releases.length; row++) {
         ... do something ...}
     </pre>
 
       <!-- 	Hey MUMT301er! You found where the code where the Beatles' discography function is called -->
-      <button type="button" onclick="discography()">Show me part of The Beatles' discography</button>
+      <button type="button" onclick=discography()>Show me part of The Beatles' discography</button>
     </div>
 
-    <div id="discography_table">
-      <br>
-    </div>
+    <div id="discography_table"></div>
 
     <p>But, how to insert images from the record covers?</p>
-    <p><a href="beatles.html">Check the code using div elements instead of table</a><p>
+    <p><a href="./04-beatles.html">Check the code using div elements instead of table</a><p>
 
 
 
@@ -246,6 +244,16 @@ release.members = "Evan Mast, Mike Stroud"</pre>
         }
 
       }
+
+      function changeMode() {
+        var head = document.getElementsByTagName('head')[0];
+        var style = document.createElement('link');
+        style.href = "https://minicss.org/flavorFiles/mini-dark.css";
+        style.type = 'text/css';
+        style.rel = 'stylesheet';
+        head.append(style);
+      }
+
 
       function allRed() {
         var x = document.body;
@@ -299,7 +307,6 @@ release.members = "Evan Mast, Mike Stroud"</pre>
       }]
 
       /* Hey MUMT301er! You found the Beatles' discography table! */
-      /*  You can find and check another example at http://jsfiddle.net/aaexj7kt/1/   */
       /*  You can learn how to style tables at http://www.w3schools.com/css/css_table.asp        */
       /* Alternatively, you can use <div> instead of <table> to achieve a similar resut */
 
@@ -320,10 +327,15 @@ release.members = "Evan Mast, Mike Stroud"</pre>
         }
 
     </script>
-    <div class="center">
-      <a href="../index.html">Home</a> 
-      <a href="js_2.html">DOM Model</a>
+
+
+  <footer class="sticky">
+    <div class="container" style="text-align: center">
+      <a href="./04-grids.html">Go to Class 4 home </a>
     </div>
+  </footer>
+
+
   </body>
 
 </html>
