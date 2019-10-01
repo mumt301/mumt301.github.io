@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>JavaScript and HTML DOM</title>
+      <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+      <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  </head>
+
+  <body>
+    <header class="sticky">
+        <a href="../../index.html" class="logo">MUMT 301</a> 
+        <button><a href="https://mumt301.github.io/mbadea" style="text-decoration: none" target="_blank">Max</a></button>
+        <button><a href="https://mumt301.github.io/mguvendiren" style="text-decoration: none" target="_blank">Merve</a></button>
+        <button><a href="https://mumt301.github.io/jorbach" style="text-decoration: none" target="_blank">Jonah</a></button>
+    </header>     
+
+      <h1>Forms and inputs</h1>
+      <div>
+        <p>HTML forms are used to collect user input. HTML forms can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more.</p>
+        <p>Forms' syntax uses the <code>form</code> tag to create an HTML form, then</p>
+        <ul>
+            <li>the <code>input</code> element is used to select user information,</li>
+            <li>the <code>type</code> attribute to specify the type of data, and</li>
+            <li>the <code>name</code> attribute stores the user-entered data</li>
+        </ul>
+
+        <p>A simple example of an input text field would be:</p>
+
+        <pre>
+&ltform&gt
+  &ltp&gtUser name:
+    &ltinput type="text" name="userName"&gt
+  &lt/p&gt
+  &ltp&gtArtist name:
+    &ltinput type="text" name="artistName"&gt
+  &lt/p&gt
+&lt/form&gt
+        </pre>
+        
+        <form>
+          <p>User name:
+            <input type="text" name="userName">
+          </p>
+          <p>Artist name:
+            <input type="text" name="artistName">
+          </p>
+        </form>
+
+        <p>A form can contain different types of elements (e.g., text, password fields, radio buttons, check buttons, ...)</p>
+
+
+        <pre>
+&ltform&gt
+    User name:
+    &ltinput type="text" name="name"&gt
+    &ltinput type="radio" name="sex" value="male"&gtMale
+    &ltinput type="radio" name="sex" value="female"&gtFemale
+    &ltbr&gtPassword:
+    &ltinput type="password" name="pwd"&gt
+    &ltbr&gtArtist name:
+    &ltinput type="text" name="artist"&gt
+    &ltbr&gt
+    &ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names
+    &ltbr&gt
+    &ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names
+&lt/form>
+        </pre>
+
+
+
+
+        <form id="userdata">User name:
+          <input type="text" name="name">
+          <input type="radio" name="sex" value="male">Male
+          <input type="radio" name="sex" value="female">Female
+          <br>Password:
+          <input type="password" name="pwd">
+          <br>Artist name:
+          <input type="text" name="artist">
+          <br>
+          <input type="checkbox" name="retrieve" value="discography">Retrieve album names
+          <br>
+          <input type="checkbox" name="retrieve" value="members">Retrieve member names
+        </form>
+
+
+        <p>
+          <a href="http://www.w3schools.com/html/html_forms.asp">HTML forms and input link in W3 Schoold</a>
+        </p>
+
+        <h2>Using the data from forms in JavaScript</h2>
+        <p>We usually want to use the data a user entered into a form. In order to accomplish this, we create a form and attach it to the DOM by means of assigning and ID to the <code>form</code> element:</p>
+
+        <pre>
+&ltform id="userdata"&gt
+  User name: &ltinput type="text" name="userName"&gt
+  &ltinput type="radio" name="sex" value="male"&gt Male
+  &ltinput type="radio" name="sex" value="female"&gt Female
+  &ltbr&gt
+  Password: &ltinput type="password" name="pwd"&gt
+  &ltbr&gt
+  Artist name:
+  &ltinput type="text" name="artistName"&gt
+  &ltbr&gt
+  &ltinput type="checkbox" name="retrieve" value="discography"&gtRetrieve album names&ltbr&gt
+  &ltinput type="checkbox" name="retrieve" value="members"&gtRetrieve member names&ltbr&gt
+&lt/form&gt
+        </pre>
+
+        <p> Then, we can access the data within the form. For example, we can add a button that, when clicked, calls a function:
+        <pre>&ltinput type="button" onclick="queryData()" value="Retrieve"&gt</pre>
+
+
+        <p>Once the function is called, we can retrieve the data from the form that is attached to the DOM:</p>
+
+        <pre>
+function queryData() {
+    var x = document.getElementById("userdata");
+    userName = x.elements["userName"].value;
+    artistName = x.elements["artistName"].value;
+}</pre>
+
+        <p>Then, we finally can do something with that data. For example, we use the values entered by the user for <code>userName</code> and <code>artistName</code> for creating a request to another server, or we attach these values to the DOM and display them in the page.</p>
+
+
+        <h2> In-class exercise</h2>
+        <p>Create a form for asking the name of a user and the name of an artist for which the user is interested about, or for which is looking for information.</p>
+        <p>When the user press a button, the name of the user and artist should be printed on the screen.</p>
+
+        <p>Steps</p>
+        <ol>
+            <li>Create the webpage skeleton</li>
+            <li>Create the form</li>
+            <li>Create a button that triggers a function when clicked</li>
+            <li>Create the function</li>
+            <li>The function should read the elements from the form and store the name of the user and the name of the artist in two variables</li>
+            <li>Print the user and artist names into the console</li>
+            <li>Create an HTML element that will act as a placeholder for rendering the user and artist names</li>
+            <li>From within the function, populate the placeholder element</li>
+        </ol>
+
+        <footer class="sticky">
+            <div class="container" style="text-align: center">
+              <a href="./05-dom.html">Go to Class 5 home </a>
+            </div>
+        </footer>
+    
+
+      </div>
+
+  </body>
+
+
+</html>
