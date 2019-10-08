@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Simple API call</title>
+        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    </head>
+
+<body>
+    <header class="sticky">
+            <a href="../../index.html" class="logo">MUMT 301</a> 
+            <button><a href="https://mumt301.github.io/mbadea" style="text-decoration: none" target="_blank">Max</a></button>
+            <button><a href="https://mumt301.github.io/mguvendiren" style="text-decoration: none" target="_blank">Merve</a></button>
+            <button><a href="https://mumt301.github.io/jorbach" style="text-decoration: none" target="_blank">Jonah</a></button>
+        </header>   
+    <h1>JavaScript, HTML forms, and simple API call.<small>Doing more interesting things with data entered in forms</small></h1>
+    <div>
+        <h2></h2>
+        <p>Can we use data from forms to retrieve information from the Internet?</p>
+
+        <p>SURE!</p>
+        <p>We can create a call to a web service API for retrieving data about some resource that the service may have.</p>
+        <p> We need to deal, though, with creating the proper call and with parsing the response of the service.</p>
+
+        <p>Tipically, API calls follow the form</p>
+        <div class="container">
+            <code>http://www.domain.com:1234/path/to/resource?a=b&x=y</code>
+        </div>
+        
+        <p>How can we retrieve the weather for a specific city?</p>
+        <p>Search the web for "Weather API"</p>
+
+        <div class="container">
+            <a href="http://openweathermap.org/api" target="new">OpenWeather API!</a>
+        </div>
+
+
+        <p> According to the OpenWeather API, the call for calling the current weather data for one location by city name is: </p>
+
+        <div class="container">
+            <a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal</a>
+        </div>
+        
+
+        <p> We missed the API key!</p>
+        <div class="container">
+                <a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c</a>
+        </div>
+        
+        <p>OpenWeather returns JSON by default, but it can also return other formats (XML and HTML). How? Check their documentation!</p>
+
+        <p>XML</p>
+        <div class="container">
+            <a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml</a>
+        </div>
+        
+
+        <p>HTML</p>
+        <div class="container">
+            <a href="http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=html" target="new">http://api.openweathermap.org/data/2.5/weather?q=Montreal&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=html</a>
+        </div>
+  
+
+
+        <h2>In-class exercise<small>Using the OpenWeather API in our own site</small></h2>
+        <p>You are going to provide the current weather for a user-entered city. Any city! For doing that, you are going to create a form and ask the visitor of your site for the name of a city. Then, you are going to use the OpenWeather API to retrieve the information, JS to parse the information, and HTML to render the results.
+        </p>
+        <p>Steps</p>
+        <ul>
+            <li>Create the HTML skeleton</li>
+            <li>Create the form</li>
+            <li>Create the empty element to render the results</li>
+            <li>Create a function that gets called when submitting data through form</li>
+            <li>Extract data from form</li>
+            <li>Create API query</li>
+            <li>How to create HTTP request without a browser? HttpGet!</li>
+            <li>Parse the results!</li>
+            <li>Render the data</li>
+        </ul>
+        <footer class="sticky">
+                <div class="container" style="text-align: center">
+                  <a href="./05-dom.html">Go to Class 5 home </a>
+                </div>
+            </footer>
+
+    </div>
+</body>
+</html>
