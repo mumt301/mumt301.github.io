@@ -79,6 +79,57 @@
             <li>Parse the results!</li>
             <li>Render the data</li>
         </ul>
+
+        <div>
+            <h2>Provide the name of a city you want to know the weather</h2>
+    
+            <!-- The form -->
+            <form id="city">
+                City?
+                <input type="text" name="cityName">
+                <input type="button" onclick="queryCity()" value="Weather!">
+            </form>
+    
+            <!-- The empty element to put the results -->
+            <p id="weather"></p>
+    
+            <script>
+                function queryCity() {
+                    // EXTRACTING THE DATA FROM THE FORM
+                    var x = document.getElementById("city");
+                    city = x.elements["cityName"].value;
+    
+                    queryURL = "https://api.openweathermap.org/data/2.5/weather?APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml&units=metric&q=".concat(city);
+                    console.log(queryURL);
+    
+                    // MAKING THE QUERY
+                    retrievedData = httpGet(queryURL);
+                    console.log(retrievedData);
+    
+                    // DATA PARSING
+                    temperature = retrievedData.getElementsByTagName("temperature")[0];
+                    currentTemperature = temperature.getAttribute("value");
+                    retrievedCity = retrievedData.getElementsByTagName("city")[0].getAttribute("name");
+                    sky = retrievedData.getElementsByTagName("weather")[0].getAttribute("value");
+    
+                    // RENDERING THE DATA
+                    document.getElementById("weather").innerHTML =
+                        "Current temperature and conditions for " +
+                        retrievedCity + " now are: " +
+                        currentTemperature + " celsius degrees with " + sky;
+                }
+    
+                function httpGet(theUrl) {
+                    // FUNCTION TO MAKE THE HTTP REQUEST
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", theUrl, false);
+                    xmlHttp.send();
+                    return xmlHttp.responseXML;
+                }
+            </script>
+        </div>
+        
+        
         <footer class="sticky">
                 <div class="container" style="text-align: center">
                   <a href="./05-dom.html">Go to Class 5 home </a>
