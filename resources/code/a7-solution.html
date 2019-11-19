@@ -1,0 +1,106 @@
+
+<html>
+	<head>
+		<title>Assignment 7</title>
+        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <link rel="stylesheet" href="a7-solution.css">
+	</head>
+	<body>
+		<form id="artist">
+			<label>
+				<input type="text" name="artist" required>
+				<div class="label-text">Enter Artist Name</div>
+			</label>
+			<input type="button" onclick="queryArtist()" value="Get Recommendations" class="clickme">
+		</form>
+		<div id="artistReleases">	
+		</div>
+		<script>
+			
+			function httpGet(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send();
+				return xmlHttp.responseXML;
+			}
+
+            function imageURLretriever(artistMBID) {
+                // Return URL of album cover for given artist MBID
+                queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=4d33f33e040ed32486d12d93658710f7&format=xml"
+                retrievedData = httpGet(queryURL);
+                imageURL = retrievedData.getElementsByTagName("image")[3].innerHTML;
+                return imageURL
+            }
+
+			function queryArtist() {
+
+				artistParent = document.getElementById('artistReleases');
+				artistChild = document.getElementById('artistInfo');
+
+				//clear the data on the page if it's not empty
+				if(artistChild != null){
+					artistParent.removeChild(artistChild);
+				}
+
+				// getting the data from the form
+				var artistNameUser = document.getElementById("artist");
+				artistName = artistNameUser.elements["artist"].value;
+
+				//store my API key
+				API_key = "4d33f33e040ed32486d12d93658710f7";
+
+				// Create the MB call to retrieve the MBID
+				lfmBaseURL = "http://ws.audioscrobbler.com/2.0/";
+				lfmMethod = "?method=";
+				artistInfoUrl = "artist.getinfo&artist=";
+				artistSimilarUrl = "artist.getsimilar&artist=";
+				apiKeyUrl = "&api_key="
+				queryURL_similar = lfmBaseURL + lfmMethod + artistSimilarUrl + artistName + apiKeyUrl + API_key;
+				console.log(queryURL_similar);
+
+				// create HTTP request for similar artists
+				retrievedData_similar = httpGet(queryURL_similar);
+				console.log(retrievedData_similar);
+
+				var divArtist = document.createElement('div');
+				divArtist.id = "artistInfo";
+
+				var originalArtistName = document.createElement('h2');
+				originalArtistName.innerHTML = "Similar artists to: " + artistName;
+
+				divArtist.appendChild(originalArtistName);
+
+				for (x = 0; x < 4; x++) {
+					similarArtistName = retrievedData_similar.getElementsByTagName("name")[x].innerHTML;
+					similarArtistMBID = retrievedData_similar.getElementsByTagName("mbid")[x].innerHTML;
+					// console.log(similarArtistName);
+
+					queryURL_info = lfmBaseURL + lfmMethod + "artist.getInfo&mbid=" + similarArtistMBID + apiKeyUrl + API_key;
+					retrievedData_info = httpGet(queryURL_info);
+					// console.log(retrievedData_info);
+
+					var simArtistName = document.createElement('h1');
+					simArtistName.innerHTML = similarArtistName;
+
+					var artistBio = document.createElement('p');
+					artistBio.innerHTML = retrievedData_info.getElementsByTagName("summary")[0].childNodes[0].data;
+
+					var artistImg = document.createElement('img');
+					artistImg.src = imageURLretriever(similarArtistMBID);
+
+					divArtist.appendChild(simArtistName);
+					divArtist.appendChild(artistImg);
+					divArtist.appendChild(artistBio);
+				}
+
+				// Render artist form on top after rendering results
+                document.getElementById("artist").setAttribute("style", "position:initial; padding-top:0; height:auto;");
+                
+                document.getElementById("artistReleases").append(divArtist)
+			}
+		</script>
+	</body>
+	<footer>
+		<p>All data was fetched using <a href="https://www.last.fm/">Last.FM API</a> <img src="https://freeiconshop.com/wp-content/uploads/edd/lastfm-flat.png" width="30px"></p>
+	</footer>
+</html>

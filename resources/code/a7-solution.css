@@ -1,0 +1,231 @@
+
+@import url('https://fonts.googleapis.com/css?family=Poiret+One|Montserrat');
+
+html body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	background-color: white;
+	text-align: center;
+	font-family: 'Poiret One', sans-serif;
+	color: black;
+}
+
+/* #artistReleases {
+	width: 100%;
+	padding-top: 5%;
+	margin: 0 auto;
+} */
+
+
+#artist p {
+	font-size: 30px;
+	color: black;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+#artist {
+	text-align: center;
+	position: absolute;
+	margin: 0 auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 500px;
+	width: 500px;
+	padding-top: 250px;
+}
+
+label {
+	display: block;
+	letter-spacing: 5px;
+	padding-top: 30px;
+	text-align: center;
+}
+
+label .label-text {
+	color: burlywood;
+    cursor: text;
+    font-size: 30px;
+    line-height: 20px;
+    text-transform: uppercase;
+    -moz-transform: translateY(-40px);
+    -ms-transform: translateY(-40px);
+    -webkit-transform: translateY(-40px);
+    transform: translateY(-40px);
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+label input {
+  	background-color: transparent;
+  	border: 0;
+  	border-bottom: 1px solid #4A4A4A;
+ 	color: black
+  	margin-top: 18px;
+  	font-size: 25px;
+  	letter-spacing: -1px;
+  	outline: 0;
+  	padding: 5px 20px;
+  	text-align: center;
+  	transition: all 0.3s;
+  	width: 400px;
+  	text-transform: uppercase;
+  	font-family: 'Montserrat', sans-serif;
+}
+
+label input:focus {
+  	max-width: 100%;
+  	width: 300px;
+  	border-bottom: 1px solid maroon;
+  	color: maroon;
+}
+
+label input:focus + .label-text {
+  	color: #F0F0F0;
+  	font-size: 10px;
+  	-moz-transform: translateY(-74px);
+  	-ms-transform: translateY(-74px);
+  	-webkit-transform: translateY(-74px);
+  	transform: translateY(-74px);
+}
+
+label input:valid + .label-text {
+  	font-size: 8px;
+  	-moz-transform: translateY(-74px);
+  	-ms-transform: translateY(-74px);
+  	-webkit-transform: translateY(-74px);
+  	transform: translateY(-74px);
+}
+
+.clickme {
+	margin-top: 0px;
+	padding: 10px;
+	text-transform: uppercase;
+	font-size: 15px;
+	transition: all 0.5s ease-in-out;
+	background-color: maroon;
+	border: none;
+	color: chocolate;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.clickme:hover {
+	border-radius: 50px;
+}
+
+table {
+	min-width: 40%;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5%;
+	font-size: 18px;
+}
+
+th, td {
+   border: 1px solid #8cc0dc;
+   color: white;
+}
+
+td {
+    height: 50px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.artist_releases {
+	padding: 10px;
+	text-align: center;
+}
+
+#artistInfo {
+  	max-width: 70%;
+  	margin: 0 auto;
+  	margin-top: 5%;
+  	margin-bottom: 5%;
+  	padding: 4% 5% 4% 5%;
+  	background-color: white;
+  	/*box-shadow: 0 0 10px 5px rgb(136, 180, 216);*/
+  	overflow: auto;
+  	text-align: center;
+  	position: relative;
+}
+
+#artistInfo a {
+	text-decoration: none;
+	color: pink;
+	transition: all 0.3s;
+}
+
+#artistInfo a:hover {
+	color: maroon;
+}
+
+#artistInfo h2 {
+	color: black;
+	text-transform: uppercase;
+	font-size: 18px;
+}
+
+#artistInfo h1 {
+	border-bottom: 1px solid black;
+    	width: 81%;
+    	margin: 20px auto;
+	padding: 10px;
+}
+
+#artistInfo p {
+	padding-left: 50px;
+	width: 50%;
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 600;
+	font-style: italic;
+	font-size: 17px;
+}
+
+#artistInfo img {
+	display: inline-block;
+	vertical-align: middle;
+	width: 25%;
+	border: 1px solid maroon;
+	padding: 5px;
+}
+
+footer {
+	color: white;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	color: maroon;
+	font-weight: 800;
+	font-size: 20px;
+}
+
+footer a {
+	color: burlywood;
+	text-decoration: none;
+	margin: 0 auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+footer p {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+footer img {
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 5px;
+}
