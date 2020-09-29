@@ -669,11 +669,11 @@ console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
       table.id = "beatles_table"
       for (row = 0; row < beatles_releases.length; row++) {
         tr = document.createElement('tr');
-        let release_data = Object.keys(beatles_releases[row]);
-        for (col = 0; col < Object.keys(beatles_releases[row]).length; col++) {
+        let columns = Object.keys(beatles_releases[row]);
+        for (col = 0; col < columns.length; col++) {
           td = document.createElement('td');
           tr.appendChild(td);
-          td.innerHTML = beatles_releases[row][release_data[col]];
+          td.innerHTML = beatles_releases[row][columns[col]];
         }
         table.appendChild(tr);
       }
