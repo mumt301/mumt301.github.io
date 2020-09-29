@@ -379,7 +379,7 @@ noteSpelling(note);</pre>
       Some of them are simply more convenient in certain scenarios.
     </p>
     <p>
-      Let's use <code>while</code> loops, because they are very simple.
+      Here is a <code>while</code> loop:
     </p>
     <pre>const ageLimit = 18;
       
@@ -391,6 +391,18 @@ while (myAge < ageLimit) {
 }
 
 console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
+    <p>
+      This is the equivalent code using a <code>for</code> loop:
+    </p>
+    <pre>const ageLimit = 18;
+
+for (var myAge = 0; myAge < ageLimit; myAge++) {
+  console.log(`You are ${myAge} years old. You can't drink.`);
+}
+
+console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
+    <p>You can read more about <code>for</code> loops <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for">here</a>.</p>
   </div>
 
   <hr>
@@ -493,7 +505,7 @@ console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
     <pre>&lt;button id="domButton" class="button" onclick="domExample()"&gt;Example&lt;/button&gt;</pre>
     </p>
     <!-- This script tag is in the middle of the HTML to demonstrate that this is possible.
-    Although it is always better to clearly organize and separate your code. 
+    Although it is always better to clearly organize and separate your code from the content and style. 
     The rest of the JavaScript code in this file is at the end of the document-->
     <script>
       function domExample() {
@@ -515,37 +527,80 @@ console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
       </small>
     </h2>
     <p>
-      Loops are good if you want to run the same code over and over again, each time with a different value. For example
-      instead of rendering a list albums for an artist line by line, as in:
-    <pre>&ltp&gtRelease Year Label&lt/p&gt      
-&ltp&gtPlease Please Me 1963 Parlophone&lt/p&gt
-&ltp&gtWith The Beatles 1963 Parlophone&lt/p&gt
-&ltp&gtIntroducing... The Beatles 1964 Vee-Jay Records&lt/p&gt
-&ltp&gtMeet The Beatles! 1964 Capitol Records&lt/p&gt
-&ltp&gtTwist And Shout 1964 Capitol Records&lt/p&gt
-&ltp&gtThe Beatles' Second Album 1964 Capitol Records&lt/p&gt
-&ltp&gtThe Beatles' Long Tall Sally 1964 Capitol Records&lt/p&gt
-...</pre>
+      Let's apply the concepts we learned to create a table at the end of this document.
     </p>
-    <p>We could use <code>Arrays</code> and <code>Objects</code> to store the information:</p>
-    <pre>var beatles_releases = [{
-        'album': 'Please Please Me',
-        'year': 1963,
-        'label': "Parlophone"
-      }, {
-        'album': 'With the Beatles',
-        'year': 1963,
-        'label': "Parlophone"
-      }, ...]
-    </pre>
-    <p>and then iterate over all elements of the array using a for loop</p>
+    <p>
+      We will use an <code>Array</code> of <code>Objects</code> to store (a portion of) the discography of The Beatles.
+    </p>
+    <p>The fields of each <code>Object</code> contain either <code>String</code> or <code>Number</code> values.</p>
+    <p>Each <code>Object</code> will be a row in the table, and all the rows (<code>Objects</code>) live
+      inside an <code>Array</code>.</p>
+    <p>In JavaScript, the data looks like this:</p>
+    <pre>let beatles_releases = [{
+  'album': 'Please Please Me',
+  'year': 1963,
+  'label': "Parlophone"
+}, {
+  'album': 'With the Beatles',
+  'year': 1963,
+  'label': "Parlophone"
+}, {
+  'album': 'Introducing... The Beatles',
+  'year': 1964,
+  'label': "Vee-Jay Records"
+}, {
+  'album': 'Meet the Beatles',
+  'year': 1964,
+  'label': "Capitol Records"
+}, {
+  'album': 'Twist and Shout',
+  'year': 1964,
+  'label': "Capitol Records"
+}, {
+  'album': "The Beatles' Second Album",
+  'year': 1964,
+  'label': "Capitol Records"
+}, {
+  'album': "The Beatles' Long Tall Sally",
+  'year': 1964,
+  'label': "Capitol Records"
+}, {
+  'album': "Revolver",
+  'year': 1966,
+  'label': "EMI"
+}]</pre>
+    <p>We will iterate through them using a <code>for</code> loop to generate the rows of a <code>table</code> element
+      in HTML.</p>
+    <p>The <code>table</code> element does not exist yet!</p>
+    <p>We will attach it to a container element with an <code>id="discography_table"</code>.</p>
+    <p>The container element is the last html element of this file, before the <code>script</code> tag
+      with all the JavaScript code that we have been using so far.</p>
+    <p>
+      You cannot see the container element, however, after you press the button,
+      our loop will populate it with our new table.
+    </p>
+    <p>
+      Here is the code responsible for creating and filling up the table.
+    </p>
     <pre>function discography() {
-        for (row = 0; row < beatles_releases.length; row++) {
-        ... do something ...}
+  let table = document.createElement('table');
+  table.id = "beatles_table"
+  for (row = 0; row < beatles_releases.length; row++) {
+    tr = document.createElement('tr');
+    let release_data = Object.keys(beatles_releases[row]);
+    for (col = 0; col < Object.keys(beatles_releases[row]).length; col++) {
+      td = document.createElement('td');
+      tr.appendChild(td);
+      td.innerHTML = beatles_releases[row][release_data[col]];
+    }
+    table.appendChild(tr);
+  }
+  document.getElementById("discography_table").appendChild(table);
+}
     </pre>
     <button type="button" onclick=discography()>Show me part of The Beatles' discography</button>
-    <div id="discography_table"></div>
   </div>
+  <div id="discography_table" class="container"></div>
 
   <!-- The JavaScript code of this file (most of it) -->
   <script>
