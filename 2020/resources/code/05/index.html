@@ -16,13 +16,20 @@
             <img alt="Logo of the course" src="/2020/resources/images/music_and_internet.png">
             <figcaption>Logo of the course</figcaption>
         </figure>
+        <p>The ranking of the results is done through string similarity.</p>
+        <p>
+            The string similarity algorithm used is 
+            <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">
+                Levenshtein distance.
+            </a>
+        </p>
     </section>
     <section class="container" id="theform">
         <form method="get">
             <fieldset>
                 <legend>Music technologies</legend>
                 <label for="name"><span class="icon-search"></span></label>
-                <input type="search" name="q" id="query" required>
+                <input type="search" name="q" id="query" placeholder="Spotify">
                 <input type="submit" value="Search">
             </fieldset>
         </form>
