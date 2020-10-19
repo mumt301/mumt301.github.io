@@ -171,16 +171,16 @@
         <ol>
             <li>Create the webpage skeleton</li>
             <li>Create the form
-                <br>Include a submit button. After clicking it, the values sent through the form should be sown as parameters in the URL.
+                <br><small>Include a submit button. After clicking it, the values sent through the form should be sown as parameters in the URL.</small>
             </li>
             <li>Create an HTML element that will act as a placeholder for rendering the results
-                <br>You will need to asign it an <code>id</code> to identify this element later and populate it with the resulting data.
+                <br><small>You will need to asign it an <code>id</code> to identify this element later and populate it with the resulting data.</small>
             </li>
-            <li>Create a function that gets called when submitting data through the form.
-                <br>We will use the <code>window.onload</code> event (seen in class 05) to call the function.
+            <li>Create a function that gets called when submitting data through the form
+                <br><small>We will use the <code>window.onload</code> event (seen in class 05) to call the function.</small>
             </li>
             <li>The function should read the data submitted in the form and store the city name in a variable
-                <br>We will parse the parameters contained in the URL using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"><code>(new URL(document.location)).searchParams</code> property and its <code>get</code> method</a> (also seen in class 05).
+                <br><small>We will parse the parameters contained in the URL using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"><code>(new URL(document.location)).searchParams</code> property and its <code>get</code> method</a> (also seen in class 05).</small>
             </li>
             <li>Print the user-entered city in the console</li>
             <li>From within the function, populate the placeholder element (to display the city name in the browser)</li>
