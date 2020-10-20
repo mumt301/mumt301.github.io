@@ -51,7 +51,8 @@
                             
                             // 2. Data parsing
                             // (can try this in the console, the retrievedData XML document object has similar
-                            // methods as an HTML document object: 'getElementById', 'getElementsByTagName')
+                            // methods as an HTML document object: 'getElementById', 'getElementsByTagName', etc.
+                            // https://www.w3schools.com/xml/xml_dom.asp)
                             temperature = retrievedData.getElementsByTagName("temperature")[0];
                             currentTemperature = temperature.getAttribute("value");
                             scaleTemperature = temperature.getAttribute("unit");
