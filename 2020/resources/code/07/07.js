@@ -11,7 +11,7 @@ function generate_results() {
         //placeholder.innerHTML = `The city you are searching for is: ${city}`;
         
         // Exercise # 2 - Beginning
-        let queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml`;
+        let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=84333ed1e3b5de0a85ebd078cd8f713c&mode=xml`;
         console.log(queryURL);
 
         // 1. Making the query (https://www.w3schools.com/js/js_ajax_http.asp - last two tables)
