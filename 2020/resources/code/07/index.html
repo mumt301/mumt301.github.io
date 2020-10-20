@@ -10,15 +10,15 @@
   <body>
       <h1>Forms and inputs<small>Basic elements for defining a form</small></h1>
       <div>
-        <p>HTML forms are used to collect user input. HTML forms can contain input elements like text fields, checkboxes, radio-buttons, submit buttons and more.</p>
+        <p>HTML forms are used to collect user input. HTML forms can contain input elements like text fields, checkboxes, radio-buttons, submit buttons, and more.</p>
         <p>Forms' syntax uses the <code>form</code> tag to create an HTML form. Within the <code>form</code>, the <code>input</code> element is used to select user information. The <code>input</code> element has the following attributes:</p>
         <ul>
-            <li>The <code>type</code> attribute is used specify the type of data (text field, radio button, checkbox, submit button, etc.). <a href="https://www.w3schools.com/html/html_form_input_types.asp">HTML input types link in W3 School</a></li>
+            <li>The <code>type</code> attribute is used to specify the type of data (text field, radio button, checkbox, submit button, etc.). <a href="https://www.w3schools.com/html/html_form_input_types.asp">HTML Input Types link in W3 Schools</a></li>
             <li>The <code>name</code> attribute stores the user-entered data.</li>
             <li>The <code>id</code> attribute, useful when using the <code>label</code> element (as will be explained later).</li>
         </ul>
         <p>
-          <a href="http://www.w3schools.com/html/html_forms.asp">HTML forms and input link in W3 School</a>
+          <a href="http://www.w3schools.com/html/html_forms.asp">HTML Forms and Input link in W3 Schools</a>
         </p>
 
         <h4>A simple example of an input text field would be:</h4>
@@ -39,7 +39,7 @@
           <input type="submit">
         </form>
 
-        <p>A form can contain different types of <code>input</code> elements (e.g., text, password fields, radio buttons, check buttons, ...)</p>
+        <p>A form can contain different types of <code>input</code> elements (e.g., text, password fields, radio-buttons, checkboxes, ...)</p>
 
         <h4>Example of radio buttons</h4>
 
@@ -86,7 +86,7 @@
         </ul>
         <p>Label elements are useful for screen-reader users and users that have trouble clicking on very small regions (e.g., radio buttons and checkboxes). The user can toggle the radio button or checkbox by clicking on the text corresponding to the label.</p>
 
-        <h4>Here it is a example including everything seen before, plus the <code>label</code> element <small>notice how easy it is to select any option?</small></h4>
+        <h4>Here it is an example including everything seen before, plus the <code>label</code> element <small>notice how easy it is to select any option?</small></h4>
 
         <pre>
 &ltform method="get"&gt
@@ -155,26 +155,37 @@
             <br>
             <input type="submit">
         </form>
-
+        <p>Ups! Your password is now visible in the URL!
+         Don't use HTTP GET with sensible information
+         (see <a href="https://www.w3schools.com/html/html_forms_attributes.asp">
+          "The Method Attribute" section from HTML Forms Attributes link at W3 Schools
+        </a>).</p>
         
         <h2>The HTTP GET method and using the data from forms in JavaScript</h2>
         
-        <p>The <code>method</code> attribute of the <code>form</code> element specifies the HTTP method used when submitting the form data. When <code>method="get"</code>, the form data is sent as URL variables. GET is the default HTTP method when submitting form data. <a href="https://www.w3schools.com/html/html_forms_attributes.asp">"The Method Attribute" section from HTML forms attributes link from W3 School</a></p>
+        <p>The <code>method</code> attribute of the <code>form</code> element
+         specifies the HTTP method used when submitting the form data.
+         When <code>method="get"</code>, the form data is sent as URL variables.
+         GET is the default HTTP method when submitting form data.
+         <a href="https://www.w3schools.com/html/html_forms_attributes.asp">
+          "The Method Attribute" section from HTML Forms Attributes link at W3 Schools
+        </a>
+      </p>
         <p>We usually want to use the data a user entered into a form. In order to accomplish this, we parse the values of the parameters in the URL.</p>
 
         <h3 id="Ex1">In-class Exercise # 1</h3>
-        <p>Create a form where the user can enter the name of a city. For now, when submitting the form, the only thing returned to the user will be their own input (the name of the city entered). In <a href="./simple_api_call.html#Ex2">Exercise # 2</a>, we will return the curent weather of the user-entered city using an API. Let's focus for now on the first part of this exercise.</p>
-        <p>Create a form for asking the name of a city for which the user is interested about, or for which is looking for information.</p>
-        <p>When the user press the submit button, the name of the city should be printed on the screen.</p>
+        <p>Create a form where the user can enter the name of a city. For now, when submitting the form, the only thing returned to the user will be their own input (the name of the city entered). In <a href="./simple_api_call.html#Ex2">Exercise # 2</a>, we will return the current weather of the user-entered city using an API. Let's focus for now on the first part of this exercise.</p>
+        <p>Create a form for asking the name of a city for which the user is interested.</p>
+        <p>When the user presses the submit button, the name of the city should be printed on the screen.</p>
 
         <h4>Steps</h4>
         <ol>
             <li>Create the webpage skeleton</li>
             <li>Create the form
-                <br><small>Include a submit button. After clicking it, the values sent through the form should be sown as parameters in the URL.</small>
+                <br><small>Include a submit button. After clicking it, the values sent through the form should be shown as parameters in the URL.</small>
             </li>
             <li>Create an HTML element that will act as a placeholder for rendering the results
-                <br><small>You will need to asign it an <code>id</code> to identify this element later and populate it with the resulting data.</small>
+                <br><small>You will need to assign it an <code>id</code> to identify this element later and populate it with the resulting data.</small>
             </li>
             <li>Create a function that gets called when submitting data through the form
                 <br><small>We will use the <code>window.onload</code> event (seen in class 05) to call the function.</small>
