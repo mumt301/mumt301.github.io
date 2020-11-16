@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>Last.FM API call</title>
+        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <style>
+            .image-pad {
+                float: left;
+                padding-top: 5px;
+                padding-right: 50px;
+                padding-bottom: 30px;
+                padding-left: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Type the name of an artist you love.</h1>
+        <form id="queryForm">
+            <h2>Artist name:
+                <input type="text" name="artistName">
+                <input type="button" onclick="queryCall()" value="submit">
+            </h2>
+        </form>
+    
+        <!-- Placeholder -->
+        <h2 id="retrievedBio"></h2>
+
+    <script>
+        function queryCall() {
+            // Getting artist name from form
+            x = document.getElementById("queryForm");
+            artName = x.elements["artistName"].value;
+
+            // Creating the API call
+            //apiKey = "4d33f33e040ed32486d12d93658710f7";  // Gabriel's
+            apiKey = "1dc26bf16ff2c65243d5092a16042679";    // Martha's
+            queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artName + "&api_key=" + apiKey;
+            //queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artName;
+            retrievedData = httpGet(queryURL);
+
+            // Parsing the response
+            artistMBID = retrievedData.getElementsByTagName("mbid")[0].innerHTML;
+
+            bioContent = retrievedData.getElementsByTagName("content")[0].innerHTML;
+
+            queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
+            retrievedData = httpGet(queryURL);
+
+            imageURL = retrievedData.getElementsByTagName("image")[3].innerHTML;
+
+            // Append the results to the DOM
+            bio = document.createElement("p");
+            bio.innerHTML = bioContent;
+
+            image = document.createElement("img");
+            image.src = imageURL;
+            image.classList.add("image-pad"); // Text around image
+
+            infobox = document.createElement("div");
+            infobox.id = "bioContainer";
+            infobox.appendChild(image);
+            infobox.appendChild(bio);
+
+            document.getElementById("retrievedBio").innerHTML = "";
+            document.getElementById("retrievedBio").appendChild(infobox);
+
+
+
+        }
+    
+        function httpGet(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", theUrl, false);
+            xmlHttp.send();
+            return xmlHttp.responseXML;
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>    
+
+
+    </body>
+</html>
