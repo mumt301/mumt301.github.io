@@ -22,28 +22,29 @@
 	</ul>
 	<p><b>3. Retrieve the artist name data from the form</b></p>
 	  <ul>
-      <li>A JS function should be called when the user press the submit button</li>
-      <li>Create a variable with the form's data</li>
-      <li>Retrieve the artist name and store it into a variable</li>
+      <li>A JS function should be called when the window loads</li>
+      <li>Retrieve all the parameters from the URL</li>
+      <li>Check if the artist name has been submitted (i.e., check if the artist name is within the parameters of the URL)</li>
+      <li>If true, retrieve the artist name and store it in a variable</li>
     </ul>
 
 	<p><b>4. Check the Last.fm API call and response to get information about an Artist</b></p>
 	<ul>
     <li>You may need a Last.fm API key, create one!</li>
     <li>Create variables for the web service root and the resource access</li>
-    <li>Create the text string with all elements of the query (use .join(""), or '+', or .concat())</li>
+    <li>Create the text string with all elements of the query (use <code>+</code>, or <code>.join("")</code>, or <code>.concat()</code>)</li>
   </ul>
 
   <p><b>5. Use the httpGet() function to create the query and get the resources from Last.fm</b></p>
 	<ul>
-    <li>Try it first in the JS console</li>
+    <!-- <li>Try it first in the JS console</li> -->
     <li>Use it in your code. Create a variable to store the response of the query</li>
     <li>Print the query response to the console</li>
     <li>Examine the response in the console. Assuming the first artist is the one the user is looking for, how to access its MBID?</li>
     <li>Retrieve the artist's MBID, store it into a variable, and print it to the console</li>
   </ul>
 	<p><b>6. Parse the results from Last.fm</b></p>
-	<p><b>7.  Display the results </b></p>
+	<p><b>7. Display the results </b></p>
 
 
 	<h2><a href="./11-Ex_Solution.html">Solution here!</a></h2>

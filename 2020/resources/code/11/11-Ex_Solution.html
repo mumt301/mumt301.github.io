@@ -17,77 +17,95 @@
     <body>
         <h1>Type the name of an artist you love.</h1>
         <form id="queryForm">
-            <h2>Artist name:
-                <input type="text" name="artistName">
-                <input type="button" onclick="queryCall()" value="submit">
-            </h2>
+            <label for="artist">Artist name:</label>
+            <input type="text" name="artistName" id="artist">
+            <input type="submit">
         </form>
-    
+
         <!-- Placeholder -->
-        <h2 id="retrievedBio"></h2>
+        <div id="bioContainer"></div>
 
-    <script>
-        function queryCall() {
-            // Getting artist name from form
-            x = document.getElementById("queryForm");
-            artName = x.elements["artistName"].value;
-
-            // Creating the API call
+        <script>
+            const apiKey = "1dc26bf16ff2c65243d5092a16042679";    // Martha's key
             //apiKey = "4d33f33e040ed32486d12d93658710f7";  // Gabriel's
-            apiKey = "1dc26bf16ff2c65243d5092a16042679";    // Martha's
-            queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artName + "&api_key=" + apiKey;
-            //queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artName;
-            retrievedData = httpGet(queryURL);
 
-            // Parsing the response
-            artistMBID = retrievedData.getElementsByTagName("mbid")[0].innerHTML;
+            function queryCall() {
+                // Getting artist name from form
+                let params = (new URL(document.location)).searchParams;
+                    if (params.has('artistName')) {
+                        let artistName = params.get('artistName');
+                        console.log(artistName);
 
-            bioContent = retrievedData.getElementsByTagName("content")[0].innerHTML;
+                        // Creating the API call
 
-            queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
-            retrievedData = httpGet(queryURL);
+                        // A. Crafting the message
+                        queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=" + apiKey;
+                        console.log(queryURL);
+                        
+                        // B. Sending the request
+                        retrievedData = httpGet(queryURL, getBioAndImage);
+                    }
+            }
+        
+            function httpGet(theUrl, cbFunction, parameters) {
+                // Creates a new XMLHttpRequest object
+                var xmlHttp = new XMLHttpRequest();
+                // Specifies the request method and URL, and sends the request to the server
+                xmlHttp.open("GET", theUrl);
+                xmlHttp.send();
 
-            imageURL = retrievedData.getElementsByTagName("image")[3].innerHTML;
+                // Wait for response to be ready and store it in a variable
+                xmlHttp.onreadystatechange = function() {
+                    // Defines a function to be called when the readyState property changes
+                    if (this.readyState == 4 && this.status == 200) {
+                        // when the response is ready, then call the callback function to parse the response and render the corresponding results
+                        cbFunction(this, parameters);
+                    };
+                }
+            }
 
-            // Append the results to the DOM
-            bio = document.createElement("p");
-            bio.innerHTML = bioContent;
+            function getBioAndImage(xhttp) {
 
-            image = document.createElement("img");
-            image.src = imageURL;
-            image.classList.add("image-pad"); // Text around image
+                // Store response in a variable
+                let retrievedData = xhttp.responseXML;
 
-            infobox = document.createElement("div");
-            infobox.id = "bioContainer";
-            infobox.appendChild(image);
-            infobox.appendChild(bio);
+                // Parse the response
+                let artistMBID = retrievedData.getElementsByTagName("mbid")[0].innerHTML;
 
-            document.getElementById("retrievedBio").innerHTML = "";
-            document.getElementById("retrievedBio").appendChild(infobox);
+                let bioContent = retrievedData.getElementsByTagName("content")[0].innerHTML;
 
+                // Creating the API call
 
+                // A. Crafting the message
+                queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
+                retrievedData = console.log(queryURL);
 
-        }
-    
-        function httpGet(theUrl) {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET", theUrl, false);
-            xmlHttp.send();
-            return xmlHttp.responseXML;
-        }
+                // B. Sending the request
+                retrievedData = httpGet(queryURL, getImage, bioContent);
+            }
 
+            function getImage(xhttp, bioContent) {
 
+                // Store response in a variable
+                let retrievedData = xhttp.responseXML;
 
+                // Parse the response
+                imageURL = retrievedData.getElementsByTagName("image")[3].innerHTML;
 
+                // Append the results to the DOM
+                bio = document.createElement("p");
+                bio.innerHTML = bioContent;
 
+                image = document.createElement("img");
+                image.src = imageURL;
+                image.classList.add("image-pad"); // Text around image
 
+                infobox = document.getElementById("bioContainer");
+                infobox.appendChild(image);
+                infobox.appendChild(bio);
+            }
 
-
-
-
-
-    </script>    
-
-
+            window.onload = queryCall;
+        </script>
     </body>
 </html>
