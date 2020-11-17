@@ -39,17 +39,17 @@
                         // Creating the API call
 
                         // A. Crafting the message
-                        queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=" + apiKey;
+                        let queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=" + apiKey;
                         console.log(queryURL);
                         
                         // B. Sending the request
-                        retrievedData = httpGet(queryURL, getBioAndImage);
+                        httpGet(queryURL, getBioAndImage);
                     }
             }
         
             function httpGet(theUrl, cbFunction, parameters) {
                 // Creates a new XMLHttpRequest object
-                var xmlHttp = new XMLHttpRequest();
+                let xmlHttp = new XMLHttpRequest();
                 // Specifies the request method and URL, and sends the request to the server
                 xmlHttp.open("GET", theUrl);
                 xmlHttp.send();
@@ -77,30 +77,30 @@
                 // Creating the API call
 
                 // A. Crafting the message
-                queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
-                retrievedData = console.log(queryURL);
+                let queryURL2 = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
+                console.log(queryURL2);
 
                 // B. Sending the request
-                retrievedData = httpGet(queryURL, getImage, bioContent);
+                httpGet(queryURL2, getImage, bioContent);
             }
 
             function getImage(xhttp, bioContent) {
 
                 // Store response in a variable
-                let retrievedData = xhttp.responseXML;
+                let retrievedData2 = xhttp.responseXML;
 
                 // Parse the response
-                imageURL = retrievedData.getElementsByTagName("image")[3].innerHTML;
+                let imageURL = retrievedData2.getElementsByTagName("image")[3].innerHTML;
 
                 // Append the results to the DOM
-                bio = document.createElement("p");
+                let bio = document.createElement("p");
                 bio.innerHTML = bioContent;
 
-                image = document.createElement("img");
+                let image = document.createElement("img");
                 image.src = imageURL;
                 image.classList.add("image-pad"); // Text around image
 
-                infobox = document.getElementById("bioContainer");
+                let infobox = document.getElementById("bioContainer");
                 infobox.appendChild(image);
                 infobox.appendChild(bio);
             }
