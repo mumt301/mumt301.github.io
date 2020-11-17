@@ -1,111 +1,113 @@
 <html>
     <head>
-        <title>Last.FM API call</title>
+        <title>Last.fm API Call</title>
         <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
-        <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
-        <style>
-            .image-pad {
-                float: left;
-                padding-top: 5px;
-                padding-right: 50px;
-                padding-bottom: 30px;
-                padding-left: 0px;
-            }
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <h1>Type the name of an artist you love.</h1>
-        <form id="queryForm">
+        <h1>Type the nanme of an artist you love</h1>
+
+        <!-- Step 2: Create a form to enter the artist name -->
+        <form>
             <label for="artist">Artist name:</label>
             <input type="text" name="artistName" id="artist">
+            <br>
             <input type="submit">
         </form>
 
-        <!-- Placeholder -->
+        <!-- placeholder for results to be rendered in step 7 -->
         <div id="bioContainer"></div>
 
-        <script>
-            const apiKey = "1dc26bf16ff2c65243d5092a16042679";    // Martha's key
-            //apiKey = "4d33f33e040ed32486d12d93658710f7";  // Gabriel's
 
-            function queryCall() {
-                // Getting artist name from form
+        <script type="text/JavaScript">
+        	
+        	const apiKey = "1dc26bf16ff2c65243d5092a16042679"; // Use your own API Key
+        	// This variable has been defined globally rather than within a function, since more than one function uses it
+
+            function queryArtist() {
+            	// Step 3: Retrieve the data submitted through the form
                 let params = (new URL(document.location)).searchParams;
-                    if (params.has('artistName')) {
-                        let artistName = params.get('artistName');
-                        console.log(artistName);
+                if (params.has('artistName')) {
+                    let artistName = params.get('artistName');
+                    console.log(artistName);
 
-                        // Creating the API call
+                    // Step 4: Check the Last.fm API call and response to get information about an 'artist'
+                    // Crafting the API call/message
+                    let queryURL = "https://ws.audioscrobbler.com/2.0/" + "?method=artist.getInfo&artist=" + artistName + "&api_key=" + apiKey;
+                    console.log(queryURL);
 
-                        // A. Crafting the message
-                        let queryURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artistName + "&api_key=" + apiKey;
-                        console.log(queryURL);
-                        
-                        // B. Sending the request
-                        httpGet(queryURL, getBioAndImage);
-                    }
-            }
-        
-            function httpGet(theUrl, cbFunction, parameters) {
-                // Creates a new XMLHttpRequest object
-                let xmlHttp = new XMLHttpRequest();
-                // Specifies the request method and URL, and sends the request to the server
-                xmlHttp.open("GET", theUrl);
-                xmlHttp.send();
-
-                // Wait for response to be ready and store it in a variable
-                xmlHttp.onreadystatechange = function() {
-                    // Defines a function to be called when the readyState property changes
-                    if (this.readyState == 4 && this.status == 200) {
-                        // when the response is ready, then call the callback function to parse the response and render the corresponding results
-                        cbFunction(this, parameters);
-                    };
+                    // Step 5: Make the request 
+                    // (Use last class's httpGet function with the given URL and a callback function for processig the response)
+                    httpGet(queryURL, getBioAndImage);
                 }
             }
 
+            // Step 5: Make the request 
+            function httpGet(theURL, cbFunction) {
+                // Create a new XMLHttpRequest object
+                let xmlHttp = new XMLHttpRequest();
+                // Specify the request method and URL, and send the request to the server
+                xmlHttp.open("GET", theURL);
+                xmlHttp.send();
+
+                // Wait for the response to be ready
+                xmlHttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // when the response is ready, call the callback function
+                        // to parse the response and render the coresponding results
+                        cbFunction(this); 
+                    }
+                };
+            }
+
+            // Step 6: Parse the results in the callback function
             function getBioAndImage(xhttp) {
 
-                // Store response in a variable
+                // Get the response and store it in a variable
                 let retrievedData = xhttp.responseXML;
+                console.log(retrievedData);
 
                 // Parse the response
                 let artistMBID = retrievedData.getElementsByTagName("mbid")[0].innerHTML;
+                console.log(artistMBID); // We will use the MBID to retrieve an image from the artist
 
                 let bioContent = retrievedData.getElementsByTagName("content")[0].innerHTML;
+                console.log(bioContent);
 
-                // Creating the API call
+                // Step 7: Display the results 
+                // (add a placeholder element in the HTML code and append the results to the DOM)
+                let infobox = document.getElementById("bioContainer");
+                let bio = document.createElement("p");
+                bio.innerHTML = bioContent;
+                infobox.appendChild(bio);
 
-                // A. Crafting the message
-                let queryURL2 = "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
+                // Make a query for the image:
+                // (Step 4 - for the image)
+                let queryURL2 = "https://ws.audioscrobbler.com/2.0/" + "?method=artist.gettopalbums&mbid=" + artistMBID + "&api_key=" + apiKey;
                 console.log(queryURL2);
-
-                // B. Sending the request
-                httpGet(queryURL2, getImage, bioContent);
+                // (Step 5 - for the image)
+                httpGet(queryURL2, getImage);
             }
 
-            function getImage(xhttp, bioContent) {
+            // (Step 6 - for the image)
+            function getImage(xhttp) {
 
-                // Store response in a variable
+                // Get the response and store it in a variable
                 let retrievedData2 = xhttp.responseXML;
+                console.log(retrievedData2);
 
                 // Parse the response
                 let imageURL = retrievedData2.getElementsByTagName("image")[3].innerHTML;
+                console.log(imageURL);
 
-                // Append the results to the DOM
-                let bio = document.createElement("p");
-                bio.innerHTML = bioContent;
-
+                // (Step 7 - Append the results to the DOM for the image)
+                let infobox = document.getElementById("bioContainer");
                 let image = document.createElement("img");
                 image.src = imageURL;
-                image.classList.add("image-pad"); // Text around image
-
-                let infobox = document.getElementById("bioContainer");
                 infobox.appendChild(image);
-                infobox.appendChild(bio);
             }
 
-            window.onload = queryCall;
+            window.onload = queryArtist;
         </script>
     </body>
 </html>
