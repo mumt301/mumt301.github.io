@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>JS libraries - In Class Exercise</title>
-    <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js></script> -->
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.js></script>
-    <style>
-        #thereminZone {
-            background-color: aqua;
-            height: 200px;
-            width: 400px;
-            margin-left: 50px;
-            margin-top: 50px;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <title>JS libraries - In Class Exercise</title>
+        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src=https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.js></script>
+        <style>
+            #thereminZone {
+                background-color: aqua;
+                height: 200px;
+                width: 400px;
+                margin-left: 50px;
+                margin-top: 50px;
+                border: solid;
+            }
+        </style>
+    </head>
 
-<body id="body">
+    <body id="body">
 
-    <div id="thereminZone" onmousemove="thereminControl(event)" onmouseleave="thereminOff()"></div>
+        <div id="thereminZone" onmousemove="thereminControl(event)" onmouseleave="thereminOff()"></div>
 
-    <script>
+        <script>
 
-        let sineWave = new Pizzicato.Sound({
-            source: 'wave',
-            options: {frequency: 220}
-        });
+            // Instantiate a sine wave
+            let sineWave = new Pizzicato.Sound({
+                source: 'wave',
+                options: {frequency: 220}
+            });
 
-        function thereminControl(e) {
+            // Control sound level and frequency based on the coordinates
+            // of the mouse within the <div> element
+            function thereminControl(e) {
+                let x = e.clientX;
+                let y = e.clientY;
+                console.log(x, y);
 
-            let x = e.clientX;
-            let y = e.clientY;
-            console.log(x, y);
+                // bottom-left corner coordinates:  (50, 250)
+                // top-right corner coordinates: (450,  50)
+                let coordX = (x-40) / 400; // From a bit greater than 0 to 1
+                let coordY = (y-40) / 200; // From a bit greater than 0 to 1
 
-            // bl:  50, 250
-            // tr: 450,  50
-            let coordX = (x-40) / 400;
-            let coordY = (y-40) / 200;
-            
-            sineWave.frequency = 880 * coordX;
-            console.log("Frequency: ", sineWave.frequency);
-            sineWave.volume = coordY;
-            console.log("Loudness: ", sineWave.volume);
+                sineWave.frequency = 880 * coordX; // from a bit greater than 0 to 880
+                console.log("Frequency: ", sineWave.frequency);
+                sineWave.volume = coordY; // from a bit greater than 0 to 1
+                console.log("Loudness: ", sineWave.volume);
 
-            sineWave.play();
-        }
+                sineWave.play();
+            }
 
-        function thereminOff() {
-            sineWave.stop();
-        }
-    </script>
-</body>
+            // Turn theremin off
+            function thereminOff() {
+                sineWave.stop();
+            }
+
+            /*let delay = new Pizzicato.Effects.Delay({
+                feedback: 0.6,
+                time: 0.4,
+                mix: 0.5
+            });
+
+            sineWave.addEffect(delay);*/
+        </script>
+    </body>
 </html>
