@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>JavaScript and HTML Forms</title>
+    <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <section class="container">
+        <h1>MUMT301 Topics Search</h1>
+        <p>This is a demo page where you can search for music technologies.</p>
+        <figure>
+            <img alt="Logo of the course" src="/2020/resources/images/music_and_internet.png">
+            <figcaption>Logo of the course</figcaption>
+        </figure>
+        <p>The ranking of the results is done through string similarity.</p>
+        <p>
+            The string similarity algorithm used is 
+            <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">
+                Levenshtein distance.
+            </a>
+        </p>
+    </section>
+    <section class="container" id="theform">
+        <form method="get">
+            <fieldset>
+                <legend>Music technologies</legend>
+                <label for="name"><span class="icon-search"></span></label>
+                <input type="search" name="q" id="query" placeholder="Spotify">
+                <input type="submit" value="Search">
+            </fieldset>
+        </form>
+    </section>
+    <section class="container" id="theresult" hidden>
+        <h2>Results</h2>
+        <ol id="results"></ol>
+    </section>
+    <script type="text/JavaScript" src="05.js"></script>
+</body>
+
+</html>
