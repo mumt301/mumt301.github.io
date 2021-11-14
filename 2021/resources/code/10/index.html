@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Simple API call - MusicBrainz</title>
+        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    </head>
+
+    <body>    
+        <h1 id="title">Music APIs</h1>
+        <div id="container">
+            <h2>In-class exercise</h2>
+            <p>Create a webpage to return the MusicBrainz ID (MBID) and country for a given user-entered artist. A MBID is a unique identifier for each music entity in the MusicBrainz database.</p>
+
+            <p>Steps:</p>
+            <ol>
+                <li>Create form to retrieve user's data</li>
+                <li>Parse the data submitted through the form to extract the name of the artist
+                    <br><small>Remember the documentation about 
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams">
+                            the <code>searchParams</code> property
+                        </a>
+                        for parsing the parameters of the URL.</small>
+                </li>
+                <li>Determine the MusicBrainz call you have to make to retrieve artists MBIDs.
+                    <br><small>Check <a href="https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2">https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2</a></small>
+                </li>
+                <li>Make the HTTP request call.
+                    <br><small>Remember the documentation about the <a href="https://www.w3schools.com/js/js_ajax_http.asp">XMLHttpRequest</a> object.</small>
+                    <br><small>You can use of the httpGet function used in the solution.</small>
+                </li>
+                <li>Parse the response from the server </li>
+                <li>Render the data in the browser
+                    <br><small>Need a 'placeholder' element for the results</small>
+                </li>
+            </ol>
+            <h4><a href="10Ex_Solution.html">Solution</a></h4>
+        </div>
+    </body>
+</html>
+
