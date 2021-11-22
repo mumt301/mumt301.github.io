@@ -4,14 +4,14 @@
     <head>
         <title>MusicBrainz API Call</title>
         <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
-    <body>            
+    <body>
         <div>
             <h2>Basic call to the MusicBrainz API</h2>
             <p>Retrieve MBID and country for a given user-entered artist</p>
-            
+
             <!-- Step 1: create the form -->
             <form id="artist" method="GET">
                 <label for="name">Artist name?</label>
@@ -25,12 +25,12 @@
 
         <script type="text/JavaScript">
 
-            /* 
+            /*
                 Main function
                 calls the auxiliary functions needed
             */
             function queryArtist() {
-                // Step 2: Parse the data submitted through the form 
+                // Step 2: Parse the data submitted through the form
                 // In other words, get the parameters from the URL (@name = 'artist')
                 let params = (new URL(document.location)).searchParams;
                 if (params.has('artist')) {
@@ -59,14 +59,14 @@
             */
             function httpGet(theURL, cbFunction) {
                 // Step 4: Make the HTTP request call to MusicBrainz
-                
+
                 // Creates a new XMLHttpRequest object
                 let xmlHttp = new XMLHttpRequest();
-                
+
                 // Specify the request method and URL of the request, and send the request to the server
                 xmlHttp.open("GET", theURL);
                 xmlHttp.send();
-                
+
                 // Wait for the response to be ready and store it in a variable
                 xmlHttp.onreadystatechange = function () {
                     // Define a function to be called when the readyState property changes
@@ -82,8 +82,8 @@
 
             A "callback function" is a function passed as a parameters to another function.
 
-            If you have more than one AJAX task in a website, 
-            you should create one function for executing the XMLHttpRequest object, 
+            If you have more than one AJAX task in a website,
+            you should create one function for executing the XMLHttpRequest object,
             and one callback function for each AJAX task.
 
             The function call should contain the URL and what function to call when the response is ready.
@@ -99,15 +99,18 @@
                 console.log(artistName);
                 let artistMBID = artistData.id;
                 console.log(artistMBID);
-                let artistCountry = artistData.getElementsByTagName("country")[0].innerHTML; // => Construct this in parts: ('country'), [0], innerHTML
-                console.log(artistCountry);
+                let areaData = artistData.getElementsByTagName("area")[0];
+                let areaType = areaData.attributes.type.value;
+                let areaName = areaData.getElementsByTagName("name")[0].innerHTML;
+                let artistArea = `${areaType}: ${areaName}`;
+                console.log(artistArea);
 
                 // Step 6: Render the data in the browser as bullet points
                 let placeholder = document.getElementById('placeholder');
                 placeholder.innerHTML = `The data for <b>${artistName}</b> is:
                 <ul>
                     <li><b>MusicBrainz ID</b> is <i>${artistMBID}</i></li>
-                    <li><b>Country</b> is <i>${artistCountry}</i></li>
+                    <li><b>${areaType}</b> is <i>${areaName}</i></li>
                 </ul>
                 `
                 //console.log(document);
