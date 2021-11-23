@@ -42,7 +42,7 @@ function runAfterLoadingPage() {
     const theremin = document.getElementById("thereminZone");
 
     // Theremin plays when the mouse enters the theremin div
-    theremin.addEventListener("mouseenter", function (e) {
+    theremin.addEventListener("mouseenter", function () {
         thereminOn(oscillator);
     });
 
