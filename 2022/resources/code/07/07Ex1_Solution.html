@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>In-class Exercise 1</title>
+        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    </head>
+    <body>
+        <h1>In-class Exercise 1</h1>
+
+        <!-- The form -->
+        <form>
+            <label for="n1">City:</label>
+            <input type="text" name="city" id="n1">
+            <input type="submit"><!--Add @valu="Go!"-->
+        </form>
+
+        <!-- The empty element to put the results -->
+        <p id="theresult"></p>
+
+        <!-- Disclaimer:
+            For convenience, we have the JavaScript contained in the HTML file.
+            However, it is always better to separate the two, having two files 
+            (e.g. '07Ex1_Solution.html' and '07Ex1.js') and use the @src attribute in 
+            <script> tag to refer to the JavaScript file within the HTML, like this:
+            <script type="text/JavaScript" src="07Ex1.js"></script> -->
+        <script>
+            function generate_results() {
+                // Extracting the data from the form
+                let params = (new URL(document.location)).searchParams;
+                if (params.has("city")){
+                    let city = params.get("city");
+                    console.log(city);
+                    // Filling-in the placeholder element
+                    let placeholder = document.getElementById('theresult');
+                    placeholder.innerHTML = `The city you are searching for is: ${city}`;
+                }
+            }
+            window.onload = generate_results();
+        </script>
+
+    </body>
+</html>

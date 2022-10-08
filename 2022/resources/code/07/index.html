@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Forms and APIs</title>
+      <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+      <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-dark.css"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  </head>
+
+  <body>
+      <h1>Forms and inputs<small>Basic elements for defining a form</small></h1>
+      <div>
+        <p>HTML forms are used to collect user input. HTML forms can contain input elements like text fields, checkboxes, radio-buttons, submit buttons, and more.</p>
+        <p>Forms' syntax uses the <code>form</code> tag to create an HTML form. Within the <code>form</code>, the <code>input</code> element is used to select user information. The <code>input</code> element has the following attributes:</p>
+        <ul>
+            <li>The <code>type</code> attribute is used to specify the type of data (text field, radio button, checkbox, submit button, etc.). <a href="https://www.w3schools.com/html/html_form_input_types.asp">HTML Input Types link in W3 Schools</a></li>
+            <li>The <code>name</code> attribute stores the user-entered data.</li>
+            <li>The <code>id</code> attribute, useful when using the <code>label</code> element (as will be explained later).</li>
+        </ul>
+        <p>
+          <a href="http://www.w3schools.com/html/html_forms.asp">HTML Forms and Input link in W3 Schools</a>
+        </p>
+
+        <h4>A simple example of an input text field would be:</h4>
+
+        <pre>
+&ltform method="get"&gt
+  &ltp&gtUser name:
+    &ltinput type="text" name="userName"&gt
+  &ltbr&gt
+  &ltinput type="submit"&gt
+&lt/form&gt
+        </pre>
+        
+        <form method="get">
+          <p>User name:
+            <input type="text" name="userName">
+          </p>
+          <input type="submit">
+        </form>
+
+        <p>A form can contain different types of <code>input</code> elements (e.g., text, password fields, radio-buttons, checkboxes, ...)</p>
+
+        <h4>Example of radio buttons</h4>
+
+        <pre>
+&ltform method="get"&gt
+    &ltinput type="radio" name="gender" value="male"&gtMale
+    &ltinput type="radio" name="gender" value="female"&gtFemale
+    &ltinput type="radio" name="gender" value="other"&gtOther
+    &ltinput type="submit"&gt
+&lt/form>
+        </pre>
+
+        <form method="get">
+          <input type="radio" name="gender" value="male">Male
+          <input type="radio" name="gender" value="female">Female
+          <input type="radio" name="gender" value="other">Other
+          <input type="submit">
+        </form>
+
+		<h4>Example of checkboxes</h4>
+
+        <pre>
+&ltform method="get"&gt
+    &ltinput type="checkbox" name="retrieve1" value="discography"&gtRetrieve album names
+    &ltbr&gt
+    &ltinput type="checkbox" name="retrieve2" value="members"&gtRetrieve member names
+    &ltbr&gt
+    &ltinput type="submit"&gt
+&lt/form>
+        </pre>
+
+        <form method="get">
+          <input type="checkbox" name="retrieve1" value="discography">Retrieve album names
+          <br>
+          <input type="checkbox" name="retrieve2" value="members">Retrieve member names
+          <br>
+          <input type="submit">
+        </form>
+
+        <h3>The <code>label</code> element</h3>
+        <p>The <code>label</code> element is useful to provide a label for the input elements of the form. Regarding its attributes:</p>
+        <ul>
+            <li>To connect the <code>input</code> element to its label, the <code>for</code> attribute of the <code>label</code> element should be equal to the <code>id</code> attribute of the <code>input</code> element.</li>
+        </ul>
+        <p>Label elements are useful for screen-reader users and users that have trouble clicking on very small regions (e.g., radio buttons and checkboxes). The user can toggle the radio button or checkbox by clicking on the text corresponding to the label.</p>
+
+        <h4>Here it is an example including everything seen before, plus the <code>label</code> element <small>notice how easy it is to select any option?</small></h4>
+
+        <pre>
+&ltform method="get"&gt
+    &ltlabel for="text_username"&gtUsername:&lt/label&gt
+    &ltinput type="text" name="username" id="text_username"&gt
+
+    &ltinput type="radio" name="gender" value="male" id="radio_male"&gt
+    &ltlabel for="radio_male"&gtMale&lt/label&gt
+
+    &ltinput type="radio" name="gender" value="female" id="radio_female"&gt
+    &ltlabel for="radio_female"&gtFemale&lt/label&gt
+
+    &ltinput type="radio" name="gender" value="other" id="radio_other"&gt
+    &ltlabel for="radio_other"&gtOther&lt/label&gt
+
+    &ltbr&gt
+    &ltlabel for="text_password"&gtPassword:&lt/label&gt
+    &ltinput type="password" name="psswd" id="text_password"&gt
+
+    &ltbr&gt
+    &ltlabel for="text_artist"&gtArtist name:&lt/label&gt
+    &ltinput type="text" name="artist" id="text_artist"&gt
+
+    &ltbr&gt
+    &ltinput type="checkbox" name="retrieve1" value="discography" id="check_disc"&gt
+    &ltlabel for="check_disc"&gtRetrieve album names&lt/label&gt
+
+    &ltbr&gt
+    &ltinput type="checkbox" name="retrieve2" value="members" id="check_members"&gt
+    &ltlabel for="check_members"&gtRetrieve member names&lt/label&gt
+
+    &ltbr&gt
+    &ltinput type="submit"&gt
+&lt/form>
+        </pre>
+
+        <form method="get">
+            <label for="text_username">Username:</label>
+            <input type="text" name="username" id="text_username">
+
+            <input type="radio" name="gender" value="male" id="radio_male">
+            <label for="radio_male">Male</label>
+
+            <input type="radio" name="gender" value="female" id="radio_female">
+            <label for="radio_female">Female</label>
+
+            <input type="radio" name="gender" value="female" id="radio_other">
+            <label for="radio_other">Other</label>
+
+            <br>
+            <label for="text_password">Password:</label>
+            <input type="password" name="psswd" id="text_password">
+
+            <br>
+            <label for="text_artist">Artist name:</label>
+            <input type="text" name="artist" id="text_artist">
+
+            <br>
+            <input type="checkbox" name="retrieve" value="discography" id="check_disc">
+            <label for="check_disc">Retrieve album names</label>
+
+            <br>
+            <input type="checkbox" name="retrieve" value="members" id="check_members">
+            <label for="check_members">Retrieve member names</label>
+
+            <br>
+            <input type="submit">
+        </form>
+        <p>Oops! Your password is now visible in the URL!
+         Don't use HTTP GET with sensitive information
+         (see <a href="https://www.w3schools.com/html/html_forms_attributes.asp">
+          "The Method Attribute" section from HTML Forms Attributes link at W3 Schools
+        </a>).</p>
+        
+        <h2>The HTTP GET method and using the data from forms in JavaScript</h2>
+        
+        <p>The <code>method</code> attribute of the <code>form</code> element
+         specifies the HTTP method used when submitting the form data.
+         When <code>method="get"</code>, the form data is sent as URL variables.
+         GET is the default HTTP method when submitting form data.
+         <a href="https://www.w3schools.com/html/html_forms_attributes.asp">
+          "The Method Attribute" section from HTML Forms Attributes link at W3 Schools
+        </a>
+      </p>
+        <p>We usually want to use the data a user entered into a form. In order to accomplish this, we parse the values of the parameters in the URL.</p>
+
+        <h3 id="Ex1">In-class Exercise # 1</h3>
+        <p>Create a form where the user can enter the name of a city. For now, when submitting the form, the only thing returned to the user will be their own input (the name of the city entered). In <a href="./simple_api_call.html#Ex2">Exercise # 2</a>, we will return the current weather of the user-entered city using an API. Let's focus for now on the first part of this exercise.</p>
+        <p>Create a form for asking the name of a city for which the user is interested.</p>
+        <p>When the user presses the submit button, the name of the city should be printed on the screen.</p>
+
+        <h4>Steps</h4>
+        <ol>
+            <li>Create the webpage skeleton</li>
+            <li>Create the form
+                <br><small>Include a submit button. After clicking it, the values sent through the form should be shown as parameters in the URL.</small>
+            </li>
+            <li>Create an HTML element that will act as a placeholder for rendering the results
+                <br><small>You will need to assign it an <code>id</code> to identify this element later and populate it with the resulting data.</small>
+            </li>
+            <li>Create a function that gets called when submitting data through the form
+                <br><small>We will use the <code>window.onload</code> event (seen in class 05) to call the function.</small>
+            </li>
+            <li>The function should read the data submitted in the form and store the city name in a variable
+                <br><small>We will parse the parameters contained in the URL using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"><code>(new URL(document.location)).searchParams</code> property and its <code>get</code> method</a> (also seen in class 05).</small>
+            </li>
+            <li>Print the user-entered city in the console</li>
+            <li>From within the function, populate the placeholder element (to display the city name in the browser)</li>
+        </ol>
+        <h5>Remember to use the JavaScript console to check your variables and debug your code!</h5>
+        <h4><a href="07Ex1_Solution.html">Solution</a></h4>
+        <h3><a href="simple_api_call.html">Next Part: Simple API Call</a></h3>
+      </div>
+  </body>
+</html>

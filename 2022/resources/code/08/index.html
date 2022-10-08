@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>JavaScript and HTML Forms</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-wasm.js" defer></script>
+    <script src="08.js" type="text/JavaScript"></script>
+</head>
+
+<body>
+    <h1>Importing a library to render music notation</h1>
+    <p>This demo uses <a href="https://book.verovio.org/first-steps/getting-started.html">Verovio</a> to display some
+        notation in your browser.</p>
+    <p>The music notation should follow the <a href="https://abcnotation.com/">ABC format</a>.</p>
+    <p id="loadingmsg">Loading...</p>
+    <form method="get" id="theform" hidden>
+        <fieldset>
+            <legend>Music notation</legend>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="Untitled">
+            <label for="composer">Composer</label>
+            <input type="text" name="composer" id="composer" value="Jane Doe">
+            <label for="timesig">Time Signature</label>
+            <input type="text" name="timesig" id="timesig" value="4/4">
+            <label for="keysig">Key Signature</label>
+            <input type="text" name="keysig" id="keysig" value="G">
+            <label for="notes">ABC data</label>
+            <input type="text" name="notes" id="notes" value="D|G>ABG|A>BAD|G>ABA|G3|]">
+            <input type="submit" value="Engrave">
+        </fieldset>
+    </form>
+    <div id="notation"></div>
+</body>
+
+</html>

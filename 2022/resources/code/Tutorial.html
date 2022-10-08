@@ -1,0 +1,80 @@
+<h1 id="tutorial-part-1-values">Tutorial, Part 1: Values</h1>
+<p>Time to fire up your JavaScript interpreter.</p>
+<p>You can (luckily) access one <a
+        href="https://webmasters.stackexchange.com/questions/8525/how-do-i-open-the-javascript-console-in-different-browsers">from
+        your favorite web browser</a>.</p>
+<p>Most languages have a set of supported <code>data types</code>. JavaScript supports the following ones:</p>
+<ul>
+    <li><code>Number</code></li>
+    <li><code>String</code></li>
+    <li><code>Boolean</code></li>
+    <li><code>Object</code>
+        <ul>
+            <li><code>Function</code></li>
+            <li><code>Array</code></li>
+            <li><code>Date</code></li>
+            <li><code>RegExp</code></li>
+        </ul>
+    </li>
+    <li><code>null</code></li>
+    <li><code>undefined</code></li>
+</ul>
+<p>Let&#39;s do some basic operations. Remember, in the end, computers are simply blazing fast calculators.</p>
+<h2 id="number-values">Number values</h2>
+<p>Let&#39;s start with numbers.</p>
+<pre><code class="lang-javascript"><span class="hljs-symbol">2 </span>+ <span class="hljs-number">2</span>;
+</code></pre>
+<p>Some languages distinguish between <code>integer</code> and real numbers (real numbers are often called
+    <code>floats</code>, due to the <em>floating point</em> technique used to represent them). For JavaScript,
+    everything is a <code>real</code> number (or simply <code>Number</code>), even when it looks like an integer.</p>
+<p>It has some implications for precision. Try to work with integers as much as you can, especially when you make
+    decisions (<code>if</code> something, <code>while</code> something, etc.)</p>
+<pre><code class="lang-javascript">0<span class="hljs-selector-class">.1</span> + 0<span class="hljs-selector-class">.2</span>;
+</code></pre>
+<h2 id="string-values">String values</h2>
+<p>Strings are simply, an entry of text. However, <code>string</code> is a well-established term in Computer Science
+    that appears in almost every programming language nowadays. So we will be using the term <code>string</code> a lot.
+</p>
+<p>We have three ways for describing strings in JavaScript</p>
+<pre><code class="lang-javascript">`Using backticks`;
+<span class="hljs-string">"Using doublequotes"</span><span class="hljs-comment">;</span>
+'<span class="hljs-literal">Or</span> using singlequotes'<span class="hljs-comment">;</span>
+</code></pre>
+<p>All of them describe a <code>string</code> value. They have slight differences but nothing to worry about for now.
+    Use the one you prefer.</p>
+<h3 id="escaping-characters">Escaping characters</h3>
+<p>Some characters are difficult to write in a string, for one reason or another. These characters are often
+    <em>escaped</em> with a backslash <code>\</code>. A <em>tab</em> is encoded as <code>\t</code>. A newline is encoded
+    as <code>\n</code>. In some instances (e.g., in the terminal), a space is escaped as <code>\</code> (backslash
+    followed by a space). You will almost never need to escape a space in JavaScript, but you will need to escape
+    <em>tabs</em> and <em>newlines</em>.</p>
+<h2 id="boolean-values">Boolean values</h2>
+<p>1 or 0. Yes or no. Used a lot in conditions:</p>
+<pre><code class="lang-javascript"><span class="hljs-number">3</span> &gt; <span class="hljs-number">2</span>;
+
+<span class="hljs-keyword">if</span> (<span class="hljs-number">301</span> &gt; <span class="hljs-number">201</span>) 
+{
+    console.<span class="hljs-built_in">log</span>(<span class="hljs-string">"MUMT 201 is a requirement for MUMT 301"</span>);
+}
+<span class="hljs-keyword">else</span> 
+{
+    console.<span class="hljs-built_in">log</span>(<span class="hljs-string">"MUMT 301 is a requirement for MUMT 201"</span>);
+}
+</code></pre>
+<h1 id="tutorial-part-2-variables-bindings-">Tutorial, Part 2: Variables (Bindings)</h1>
+<p>We store values in variables.</p>
+<pre><code class="lang-javascript">let <span class="hljs-keyword">mouse</span> = <span class="hljs-string">"mickey"</span>;
+
+console.<span class="hljs-keyword">log</span>(<span class="hljs-keyword">mouse</span>);
+</code></pre>
+<p>We can reassign the variable to a different value</p>
+<pre><code class="lang-javascript"><span class="hljs-attribute">mouse</span> = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+
+console.log(mouse)<span class="hljs-comment">;</span>
+</code></pre>
+<p>Notice that</p>
+<pre><code class="lang-javascript">console.<span class="hljs-keyword">log</span>(<span class="hljs-keyword">mouse</span>);
+</code></pre>
+<p>is very different than</p>
+<pre><code class="lang-javascript">console.log(<span class="hljs-string">"mouse"</span>)<span class="hljs-comment">;</span>
+</code></pre>
