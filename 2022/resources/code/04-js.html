@@ -4,7 +4,7 @@
 <head>
   <title>Class 4 | JavaScript 101</title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+  <link id="cssframework" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -133,6 +133,10 @@ else {
   console.log("Oh no, precision issues!");
 }
 </pre>
+<p>
+  Make note of the triple equals sign ! Check out this lnk -> 
+  <a href="https://codeburst.io/javascript-double-equals-vs-triple-equals-61d4ce5a121a"> == vs === in js</a> 
+</p>
     <h3>String values</h3>
     <p>
       Strings are simply, a <strong>text</strong> value.
@@ -610,13 +614,15 @@ console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
     }
 
     function toggleTheme() {
-      const themes = ["default.css", "dark.css"];
+      const themes = ["light.css", "dark.css"];
       const buttonContent = ["Go to the dark side!", "Show me the light!"];
-      const prefix = "https://minicss.org/flavorFiles/mini";
+      const prefix = "https://cdn.jsdelivr.net/npm/water.css@2/out";
+      // const prefix = "https://minicss.org/flavorFiles/mini";
       let css = document.getElementById('cssframework');
-      let currentTheme = css.href.split("-")[1];
+      let currentTheme = css.href.split("/").pop();
+      console.log(currentTheme);
       const newThemeIndex = (themes.indexOf(currentTheme) + 1) % 2;
-      css.href = `${prefix}-${themes[newThemeIndex]}`;
+      css.href = `${prefix}/${themes[newThemeIndex]}`;
       let themeButton = document.getElementById("themeButton");
       themeButton.textContent = buttonContent[newThemeIndex];
     }
@@ -679,6 +685,12 @@ console.log(`You are ${myAge} years old. You can drink now. Welcome.`);</pre>
       document.getElementById("discography_table").appendChild(table);
     }
   </script>
+
+<script> 
+console.log(" This should be printed !") 
+</script>
+
 </body>
 
 </html>
+
