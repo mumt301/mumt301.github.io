@@ -3,7 +3,8 @@
 
     <head>
         <title>MusicBrainz API Call</title>
-        <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+        <!-- <link rel="stylesheet" href="https://minicss.org/flavorFiles/mini-default.css"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
@@ -65,16 +66,19 @@
 
                 // Specify the request method and URL of the request, and send the request to the server
                 xmlHttp.open("GET", theURL);
-                xmlHttp.send();
 
                 // Wait for the response to be ready and store it in a variable
                 xmlHttp.onreadystatechange = function () {
-                    // Define a function to be called when the readyState property changes
-                    if (this.readyState == 4 && this.status == 200) {
-                        // when readyState is 4 and status is 200, the response is ready
-                        cbFunction(this); // Then, we call the callback function to parse the response and render the appropriate results
-                    }
+                // Define a function to be called when the readyState property changes
+                if (this.readyState == 4 && this.status == 200) {
+                    // when readyState is 4 and status is 200, the response is ready
+                    cbFunction(this); // Then, we call the callback function to parse the response and render the appropriate results
+                }
                 };
+
+                xmlHttp.send();
+
+
             }
 
             /* Callback Function
