@@ -38,10 +38,10 @@ function frequencyToMidi(frequency){
 
 function noteFromFrequency(frequency, withOctave=false) {
     // converts a frequency into its closest human-readable note name.
-    const midinumber = midiFromFrequency(frequency);
+    const midinumber = frequencyToMidi(frequency);
     const pitchclass = midinumber % 12;
     let octave = (midinumber - pitchclass) / 12;
-    let notename = notenames[pitchclass];
+    let notename = notenames[Math.round(pitchclass)];
     if (withOctave) {
         octave--;
         notename += octave;
