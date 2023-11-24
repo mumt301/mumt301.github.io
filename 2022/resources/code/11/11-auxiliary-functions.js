@@ -32,7 +32,7 @@ function midiToFrequency(midinumber, concertA = 440) {
 
 function frequencyToMidi(frequency){
     // converts a frequency into its equivalent MIDI note number.
-    midinumber = (( 12 * Math.log(frequency / 220.0) / Math.log(2.0)) + 57.001 );
+    let midinumber = (( 12 * Math.log(frequency / 220.0) / Math.log(2.0)) + 57.001 );
     return midinumber
 }
 
